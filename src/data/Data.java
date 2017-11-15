@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 public class Data {
     private ArrayList<User> allUsers;
-    private ArrayList<Contestant> contestants;
-    private ArrayList<Team> teams;
-    private ArrayList<Company> allCompanies;
+
 
     public Data(){
         this.allUsers = new ArrayList<>();
@@ -20,12 +18,12 @@ public class Data {
     public void generateData(){
 
         //Seks testdeltagere bliver oprettet
-        Contestant contestant1 = new Contestant("emil", "1234", "1000001", "Emil Sørensen", "emil.soerensen@hotmail.com", "BEGYNDER");
-        Contestant contestant2 = new Contestant("rasmus", "1234", "2000002", "Rasmus Pold", "emil.soerensen@hotmail.com", "BEGYNDER");
-        Contestant contestant3 = new Contestant("william", "1234", "1000003", "William Sørensen", "emil.soerensen@hotmail.com", "ØVET");
-        Contestant contestant4 = new Contestant("kesia", "1234", "2000004", "Kesia Heiberg", "emil.soerensen@hotmail.com", "ØVET");
-        Contestant contestant5 = new Contestant("donald", "1234", "1000005", "Donald Trump", "emil.soerensen@hotmail.com", "PROFESSIONEL");
-        Contestant contestant6 = new Contestant("heino", "1234", "1000006", "Heino Hansen", "emil.soerensen@hotmail.com", "PROFESSIONEL");
+        Contestant contestant1 = new Contestant("emil", "1234", "1010101", "Emil Sørensen", "emil.soerensen@hotmail.com", "BEGYNDER");
+        Contestant contestant2 = new Contestant("rasmus", "1234", "1010102", "Rasmus Pold", "emil.soerensen@hotmail.com", "BEGYNDER");
+        Contestant contestant3 = new Contestant("william", "1234", "1010203", "William Sørensen", "emil.soerensen@hotmail.com", "ØVET");
+        Contestant contestant4 = new Contestant("kesia", "1234", "1010201", "Kesia Heiberg", "emil.soerensen@hotmail.com", "ØVET");
+        Contestant contestant5 = new Contestant("donald", "1234", "1010202", "Donald Trump", "emil.soerensen@hotmail.com", "PROFESSIONEL");
+        Contestant contestant6 = new Contestant("heino", "1234", "1010203", "Heino Hansen", "emil.soerensen@hotmail.com", "PROFESSIONEL");
 
         //To testhold bliver oprettet og der lægges tre testdeltagere ind på hvert hold
         Team team1 = new Team("team1", "0001", "1000100","SuperCyklerne", "Rasmus Pold");
