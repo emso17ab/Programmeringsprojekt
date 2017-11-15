@@ -6,6 +6,8 @@ import models.Contestant;
 import models.Team;
 import models.User;
 
+//Denne controllerklasse skal styre Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
+
 public class MainController {
     private User currentUser;
     private Team currentTeam;
@@ -156,8 +158,8 @@ public class MainController {
                 ContestantController contestantController = new ContestantController(data);
                 contestantController.contestantRun();
             }else if(Character.toString(loginType).matches("2")){
-                AdminController adminController = new AdminController(data);
-                adminController.adminRun();
+                CompanyController companyController = new CompanyController(data);
+                companyController.adminRun();
             }
 
         } else if (currentUser instanceof Team) {
@@ -167,8 +169,8 @@ public class MainController {
 
         } else if (currentUser instanceof Company) {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
-            AdminController adminController = new AdminController(data);
-            adminController.adminRun();
+            CompanyController companyController = new CompanyController(data);
+            companyController.adminRun();
 
         } else System.out.println("Forkert brugernavn eller adgangskode!");
     }  //Sender brugeren videre til den korrekte hovedmenu alt efter logintype

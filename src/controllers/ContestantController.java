@@ -4,6 +4,32 @@ import java.util.Scanner;
 
 //Contestantcontrolleren styrer menuerne for deltageren,
 
+/*
+VELKOMMEN TIL HOLDSIDEN FOR "Team Superyklerne"
+HOVEDMENU
+
+1) createTeamToBeApproved
+
+2) createContestant
+
+3) displayData
+
+4) goToCurrentContestant (Denne funktion går til den aktuelle deltagers egen menu)
+
+    Velkommen til menuen for cykelrytter: "Hans Hansen"
+    DELTAGER MENU
+    1) editCurrentContestantUsername
+    2) editCurrentContestantPassword
+    3) editCurrentContestantName
+    4) editCurrentContestantEmail
+    5) editCurrentContestantType
+
+    OBS! Hvis der logges ind med et holdID og ikke et deltagerId skal menuen goToCurrentContestant IKKE vises!
+    Istedet skal man lave en ny deltager (createContestant) og derigennem få oprettet et personlig deltagerId og login
+
+
+ */
+
 public class ContestantController {
     Data data;
     Scanner input = new Scanner(System.in);

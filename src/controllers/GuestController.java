@@ -4,6 +4,8 @@ import models.Company;
 
 import java.util.Scanner;
 
+//Vi skal slet ikke have en GuestController!
+
 public class GuestController {
     Data data;
     Scanner input = new Scanner(System.in);
