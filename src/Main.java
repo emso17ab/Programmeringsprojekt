@@ -5,5 +5,7 @@ public class Main {
 
         MainController mainController = new MainController();
         mainController.run();
+
+        System.out.println("Hello World");
     }
 }
