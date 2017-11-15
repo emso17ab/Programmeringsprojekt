@@ -133,6 +133,7 @@ public class MainController {
         System.out.println("Velkommen til Vi Cykler På Arbejde!");
         System.out.println("Log ind:");
         System.out.print("\nBrugernavn: ");
+        input.nextLine(); // den printer fra linje 133 til 138,, så derfor indsættes dette.
         username = input.nextLine();
         System.out.print("\nPassword: ");
         password = input.nextLine();
