@@ -12,7 +12,8 @@ public abstract class User {
         this.userId = userId;
     }
 
-    //Methods
+    //Abstract methods
+    public abstract void displayData();
 
 
     //Getter and Setter Methods
