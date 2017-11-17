@@ -13,7 +13,12 @@ public class Team extends User {
         this.contestants = new ArrayList<>();
     }
 
-//Methods
+//Abstract methods
+    @Override
+    public void displayData() {
+    }
+
+    //Methods
     public void addContestantToTeam(Contestant newContestant){
         this.contestants.add(newContestant);
     }

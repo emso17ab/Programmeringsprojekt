@@ -13,7 +13,12 @@ public class Company extends User {
         this.teams = new ArrayList<>();
     }
 
-//Methods
+//Abstract methods
+    @Override
+    public void displayData() {
+    }
+
+    //Methods
     public void addTeamToCompany(Team newTeam){
         this.teams.add(newTeam);
     }
