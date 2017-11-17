@@ -40,6 +40,7 @@ public class MainController {
     public void authUser() {
         String username;
         String password;
+
         input.nextLine();
 
         System.out.print("\nIndtast Brugernavn: ");
@@ -50,11 +51,7 @@ public class MainController {
         for (User user : data.getAllUsers()) {
             if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                 currentUser = user;
-            } else {
-                System.out.println("Forkert Brugernavn eller Password\n\n" +
-                        "Tryk Enter for at prøve igen");
             }
-            authUser();
         }
     }  //Login siden
 
@@ -134,10 +131,8 @@ public class MainController {
             System.out.println("Indtast dit ønsket brugernavn: ");
             username = validateUsername(input.nextLine());
 
-                if(username != null && username.equals("0")){
+                if(username != null && username.equals("0"))
                     status = false;
-                    run();}
-
 
                 if (username != null && status)
                 {
@@ -153,8 +148,6 @@ public class MainController {
                                 currentTeam.addContestantToTeam(contestant);
                                 System.out.println("Din bruger blev oprettet!");
                                 status = false;
-
-                                run();
 
                             } else System.out.println("Din indtastning matchede ikke prøv igen");
 
