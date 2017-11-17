@@ -1,5 +1,7 @@
 package controllers;
 import data.Data;
+import models.User;
+
 import java.util.Scanner;
 
 //Contestantcontrolleren styrer menuerne for deltageren,
@@ -39,11 +41,7 @@ public class ContestantController {
     }
 
 
-    public void contestantRun() {
-        System.out.println("DU ER LOGGET IND SOM DELTAGER");
-        printContestantMenu();
-    }
-    public void printContestantMenu(){
+    public void contestantRun(User currentUser){
     int choice;
     boolean status = true;
 

@@ -1,5 +1,6 @@
 package controllers;
 import data.Data;
+import models.User;
 
 //Admincontrolleren styrer menuer for Virksomhederne, som agerer som administrator for deres hold og holdenes deltagere
 
@@ -10,7 +11,7 @@ public class CompanyController {
         this.data = data;
     }
 
-    public void adminRun() {
+    public void adminRun(User currentUser) {
         System.out.println("DU ER LOGGET IND SOM ADMINISTRATOR");
     }
 
