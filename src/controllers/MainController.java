@@ -18,7 +18,6 @@ public class MainController {
         this.data = new Data();
     }
 
-
     public void run() {
         openMainMenu();
     }
@@ -42,7 +41,6 @@ public class MainController {
             default:
         }
     }
-
     private void authTeam() {
         String teamId, teamPassword;
         boolean validationStatus;
@@ -63,7 +61,6 @@ public class MainController {
             System.out.println("Du har indtastet fokert holdId eller nøgleord, prøv igen!");
         }
     }
-
     public void generateUser(){
         String username, password, userId;
         String contestantName, contestantEmail, contestantType;
@@ -87,7 +84,6 @@ public class MainController {
             } else System.out.println("Fejl i indtastning. Prøv igen");
         }else System.out.println("Fejl i indtastning. Prøv igen");
     }
-
     private boolean validateTeam(String teamId, String teamPassword) {
         for (User user : data.getAllUsers()){
             if (teamId.equals(user.getUserId()) && teamPassword.equals(user.getPassword())){
@@ -98,7 +94,6 @@ public class MainController {
             }
         } return false;
     }
-
     private String generateUserId() {
         String newUserId;
         int companies = 0, teams = 0, contestants = 0;
@@ -115,21 +110,18 @@ public class MainController {
         System.out.println(newUserId);
         return newUserId;
     }
-
     private String validatePassword(String password) {
         if(password.length()>6 && password.matches(".*\\d.*"))
             return password;
 
         return null;
     }
-
     public String validateUsername(String username){
         if(username.length()>5 && username.matches(".*\\d.*"))
         return username;
 
         return null;
     }
-
     public void authUser() {
         String username;
         String password;
@@ -148,7 +140,6 @@ public class MainController {
             }
         }
     }  //Login siden
-
     public void openUserMenu(User currentUser) {
 
         if (currentUser instanceof Contestant) {

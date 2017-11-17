@@ -12,7 +12,6 @@ public class Data {
     public Data(){
         this.allUsers = new ArrayList<>();
         generateData();
-
     }
 
     public void generateData(){

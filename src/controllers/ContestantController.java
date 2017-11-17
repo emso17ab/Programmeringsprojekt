@@ -43,7 +43,6 @@ public class ContestantController {
         System.out.println("DU ER LOGGET IND SOM DELTAGER");
         printContestantMenu();
     }
-
     public void printContestantMenu(){
     int choice;
     boolean status = true;
@@ -74,19 +73,15 @@ public class ContestantController {
             }
         }while(status);
     }
-
     private void printTeamData() {
 
     }
-
     private void printContestantData() {
 
     }
-
     private void changeContestant() {
 
     }
-
     private void changeTeam() {
 
     }

@@ -10,7 +10,6 @@ public class CompanyController {
         this.data = data;
     }
 
-
     public void adminRun() {
         System.out.println("DU ER LOGGET IND SOM ADMINISTRATOR");
     }
