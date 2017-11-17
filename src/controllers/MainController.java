@@ -74,8 +74,6 @@ public class MainController {
         }
     }  //Sender brugeren videre til den korrekte hovedmenu alt efter logintype
 
-
-
     private void authTeam() {
         String teamId, teamPassword;
         boolean validationStatus;
