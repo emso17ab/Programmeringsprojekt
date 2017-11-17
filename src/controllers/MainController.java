@@ -68,6 +68,8 @@ public class MainController {
         String username, password, userId;
         String contestantName, contestantEmail, contestantType;
 
+        input.nextLine();
+
         System.out.println("Du er ved at oprette dig som ny deltager på holdet");
         System.out.println("Indtast venligst dit navn: ");
         contestantName = input.nextLine();
@@ -164,8 +166,7 @@ public class MainController {
 
         } else if (currentUser instanceof Team) {
             System.out.println("Velkommen til programmet hold: " + ((Team) currentUser).getTeamName() + "!");
-            GuestController guestController = new GuestController(data);
-            guestController.run();
+
 
         } else if (currentUser instanceof Company) {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
