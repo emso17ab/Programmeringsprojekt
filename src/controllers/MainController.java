@@ -18,16 +18,10 @@ public class MainController {
         this.data = new Data();
     }
 
-    public void run() {
-        openMainMenu();
-    }
-
-
     //METHODS
-
-    private void openMainMenu() {
-        System.out.println("Velkommen til --> VI CYKLER PÅ ARBEJDE <--- programmet!");
-        System.out.println("1) Log ind som eksisterende bruger");
+    public void run() {
+        System.out.println("Velkommen til --> VI CYKLER PÅ ARBEJDE <--- programmet!\n");
+        System.out.println("1) Log ind");
         System.out.println("2) Opret ny bruger");
         System.out.println("Valg: ");
 
@@ -126,12 +120,11 @@ public class MainController {
         String username;
         String password;
 
-        System.out.println("Velkommen til Vi Cykler På Arbejde!");
-        System.out.println("Log ind:");
-        System.out.print("\nBrugernavn: ");
-        input.nextLine(); // den printer fra linje 133 til 138,, så derfor indsættes dette.
+        input.nextLine();
+
+        System.out.print("\nIndtast Brugernavn: ");
         username = input.nextLine();
-        System.out.print("\nPassword: ");
+        System.out.print("\nIndtast Password: ");
         password = input.nextLine();
 
         for (User user : data.getAllUsers()) {
@@ -142,22 +135,10 @@ public class MainController {
     }  //Login siden
     public void openUserMenu(User currentUser) {
 
-        if (currentUser instanceof Contestant) {
+        if (currentUser instanceof Contestant || currentUser instanceof Team) {
             System.out.println("Velkommen til programmet " + ((Contestant) currentUser).getContestantName() + "!");
-            char loginType = currentUser.getUserId().charAt(0);
-
-            if(Character.toString(loginType).matches("1")) {
-                System.out.println(currentUser.getUserId().charAt(0));
-                ContestantController contestantController = new ContestantController(data);
-                contestantController.contestantRun();
-            }else if(Character.toString(loginType).matches("2")){
-                CompanyController companyController = new CompanyController(data);
-                companyController.adminRun();
-            }
-
-        } else if (currentUser instanceof Team) {
-            System.out.println("Velkommen til programmet hold: " + ((Team) currentUser).getTeamName() + "!");
-
+            ContestantController contestantController = new ContestantController(data);
+            contestantController.contestantRun();
 
         } else if (currentUser instanceof Company) {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
