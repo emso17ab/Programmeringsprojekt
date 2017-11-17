@@ -1,5 +1,6 @@
 package controllers;
 import data.Data;
+import models.Company;
 import models.Contestant;
 import models.Team;
 import models.User;
@@ -50,6 +51,9 @@ public class ContestantController {
     }
 
     public void contestantRun(Contestant currentUser) {
+
+        Team currentTeam = currentUser.findTeamFromUser(currentUser); //Denne metode skal kunne finde hvilket team currentUser af typen Contestant er
+
         boolean status = true;
 
         do {

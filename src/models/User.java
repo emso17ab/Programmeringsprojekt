@@ -15,6 +15,11 @@ public abstract class User {
     //Abstract methods
     public abstract void displayData();
 
+    //METHODS
+
+    public Team findTeamFromUser(User user){
+        return null;
+    }
 
     //Getter and Setter Methods
     public String getUsername() {
