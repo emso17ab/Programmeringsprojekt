@@ -11,7 +11,6 @@ import models.User;
 public class MainController {
     private User currentUser;
     private Team currentTeam;
-    private Contestant currentContestant;
     private Data data;
     Scanner input = new Scanner(System.in);
 
@@ -40,19 +39,27 @@ public class MainController {
     public void authUser() {
         String username;
         String password;
+        boolean status = true;
 
         input.nextLine();
 
-        System.out.print("\nIndtast Brugernavn: ");
-        username = input.nextLine();
-        System.out.print("\nIndtast Password: ");
-        password = input.nextLine();
+        do { /* HER har jeg lavet et do-while loop, der sørger for at koden kører så længe
+                boolean "status" er true.
+            */
 
-        for (User user : data.getAllUsers()) {
-            if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-                currentUser = user;
+            System.out.print("\nIndtast Brugernavn: ");
+            username = input.nextLine();
+            System.out.print("\nIndtast Password: ");
+            password = input.nextLine();
+
+            for (User user : data.getAllUsers()) {
+                if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                    currentUser = user;
+                    status = false; //Her sættes status til false, således at løkken ikke kører længere
+                }
             }
-        }
+        }while(status);
+
     }  //Login siden
 
     public void openUserMenu(User currentUser) {
