@@ -11,6 +11,7 @@ import models.User;
 public class MainController {
     private User currentUser;
     private Team currentTeam;
+    private Contestant currentContestant;
     private Data data;
     Scanner input = new Scanner(System.in);
 
@@ -59,18 +60,21 @@ public class MainController {
         if (currentUser instanceof Contestant) {
             System.out.println("Velkommen til programmet " + ((Contestant) currentUser).getContestantName() + "!");
             ContestantController contestantController = new ContestantController(data);
-            contestantController.contestantRun(currentUser);
+            contestantController.contestantRun((Contestant) currentUser);
+
         }else if (currentUser instanceof Team){
             System.out.println("Velkommen til programmet hold: " + ((Team) currentUser).getTeamName() + "!");
             ContestantController contestantController = new ContestantController(data);
-            contestantController.contestantRun(currentUser);
+            contestantController.teamRun((Team)currentUser);
 
         } else if (currentUser instanceof Company) {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
             CompanyController companyController = new CompanyController(data);
-            companyController.adminRun(currentUser);
+            companyController.adminRun((Company)currentUser);
         }
     }  //Sender brugeren videre til den korrekte hovedmenu alt efter logintype
+
+
 
     private void authTeam() {
         String teamId, teamPassword;
@@ -107,6 +111,21 @@ public class MainController {
         System.out.println("Indtast venligst din email: ");
         contestantEmail = input.nextLine();
 
+        System.out.println("Vælg hvilken cykeltype der passer bedst til dig!");
+        System.out.println("1) BEGYNDER");
+        System.out.println("2) ØVET");
+        System.out.println("3) PROFESSIONEL");
+
+        switch (input.nextInt()) {
+            case 1: contestantType = "BEGYNDER";
+                break;
+            case 2: contestantType = "ØVET";
+                break;
+            case 3: contestantType = "PROFESSIONEL";
+                break;
+            default: contestantType = "BEGYNDER";
+        }
+
         do
         {
             System.out.println("Du skal nu vælge et brugernavn\nBrugernavnet skal bestå af mindst 6 karakterer og indeholde bogstaver og tal ");
@@ -127,6 +146,8 @@ public class MainController {
                         if (password != null) {
                             System.out.println("Indtast ønsket kodeord igen: ");
                             if (password.equals(input.nextLine())) {
+                                Contestant contestant = new Contestant(username, password, "00", contestantName, contestantEmail, contestantType);
+                                currentTeam.addContestantToTeam(contestant);
                                 System.out.println("Din bruger blev oprettet!");
                                 status = false;
 

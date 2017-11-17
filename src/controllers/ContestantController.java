@@ -1,86 +1,147 @@
 package controllers;
 import data.Data;
+import models.Contestant;
+import models.Team;
 import models.User;
 
 import java.util.Scanner;
 
-//Contestantcontrolleren styrer menuerne for deltageren,
-
-/*
-VELKOMMEN TIL HOLDSIDEN FOR "Team Superyklerne"
-HOVEDMENU
-
-1) createTeamToBeApproved
-
-2) createContestant
-
-3) displayData
-
-4) goToCurrentContestant (Denne funktion går til den aktuelle deltagers egen menu)
-
-    Velkommen til menuen for cykelrytter: "Hans Hansen"
-    DELTAGER MENU
-    1) editCurrentContestantUsername
-    2) editCurrentContestantPassword
-    3) editCurrentContestantName
-    4) editCurrentContestantEmail
-    5) editCurrentContestantType
-
-    OBS! Hvis der logges ind med et holdID og ikke et deltagerId skal menuen goToCurrentContestant IKKE vises!
-    Istedet skal man lave en ny deltager (createContestant) og derigennem få oprettet et personlig deltagerId og login
-
-
- */
+//Contestantcontrolleren styrer menuerne for deltageren
 
 public class ContestantController {
     Data data;
     Scanner input = new Scanner(System.in);
 
-    public ContestantController(Data data){
+    public ContestantController(Data data) {
         this.data = data;
     }
 
 
-    public void contestantRun(User currentUser){
-    int choice;
-    boolean status = true;
+
+
+    public void teamRun(Team currentUser) {
+        boolean status = true;
 
         do {
-        System.out.println("\n\tDELTAGER MENU");
-        System.out.println("\t1) Ændr Hold");
-        System.out.println("\t2) Ændr Deltager");
-        System.out.println("\t3) Vis Deltageroplysninger");
-        System.out.println("\t4) Vis Holdoplysninger");
-        System.out.println("\t0) Log af");
-        System.out.print("\n\tIndtast valg: ");
-        choice = input.nextInt();
+            System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentUser.getTeamName());
+            System.out.println("\t1) Nyt Hold");
+            System.out.println("\t2) Ny Deltager");
+            System.out.println("\t3) Vis Data");
+            System.out.println("\t0) Log af");
+            System.out.print("\n\tIndtast valg: ");
 
-        switch (choice) {
-            case 0:
-                status = false;
+            switch (input.nextInt()) {
+                case 0:
+                    status = false;
+                    break;
+                case 1:
+                    createTeamToBeApproved();
+                    break;
+                case 2:
+                    createContestant();
+                    break;
+                case 3:
+                    displayData();
+                    break;
+                default:
+                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
+            }
+        } while (status);
+    }
+
+    public void contestantRun(Contestant currentUser) {
+        boolean status = true;
+
+        do {
+            System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentUser.getContestantName()); //TODO getTeamName i stedet for Contestant!
+            System.out.println("\t1) Nyt Hold");
+            System.out.println("\t2) Ny Deltager");
+            System.out.println("\t3) Vis Data");
+            System.out.println("\t4) Min side");
+            System.out.println("\t0) Log af");
+            System.out.print("\n\tIndtast valg: ");
+
+            switch (input.nextInt()) {
+                case 0:
+                    status = false;
+                    break;
+                case 1:
+                    createTeamToBeApproved();
+                    break;
+                case 2:
+                    createContestant();
+                    break;
+                case 3:
+                    displayData();
+                    break;
+                case 4:
+                    goToCurrentContestant(currentUser);
+                    break;
+                default:
+                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
+            }
+        } while (status);
+    }
+
+    private void createTeamToBeApproved() {
+    }
+
+    private void createContestant() {
+    }
+
+    private void displayData() { //Abstrakt metode fra superklassen User
+    }
+
+    private void goToCurrentContestant(Contestant currentUser) {
+        boolean status = true;
+
+        do{
+        System.out.println("\n\tVelkommen til menuen for cykelrytter: " + currentUser.getContestantName());
+        System.out.println("DELTAGER MENU");
+        System.out.println("1) Ændr Brugernavn");
+        System.out.println("2) Ændr Kodeord");
+        System.out.println("3) Ændr Navn");
+        System.out.println("4) Ændr Email");
+        System.out.println("5) Skift Cyklist type");
+        System.out.println("0) Tilbage til Holdmenu ");
+
+        switch (input.nextInt()){
+            case 0: status = false;
                 break;
-            case 1: changeTeam();
+            case 1: editCurrentContestantUsername();
                 break;
-            case 2: changeContestant();
+            case 2: editCurrentContestantPassword();
                 break;
-            case 3: printContestantData();
+            case 3: editCurrentContestantName();
                 break;
-            case 4: printTeamData();
+            case 4: editCurrentContestantEmail();
                 break;
-            default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
+            case 5: editCurrentContestantType();
+                break;
+            default:
             }
         }while(status);
     }
-    private void printTeamData() {
+
+        private void editCurrentContestantType() {
 
     }
-    private void printContestantData() {
+
+        private void editCurrentContestantEmail() {
 
     }
-    private void changeContestant() {
+
+        private void editCurrentContestantName() {
 
     }
-    private void changeTeam() {
+
+        private void editCurrentContestantPassword() {
+
+    }
+
+        private void editCurrentContestantUsername() {
 
     }
 }
+
+
