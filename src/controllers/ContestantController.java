@@ -18,85 +18,7 @@ public class ContestantController {
     }
 
 
-
-
-    public void teamRun(Team currentUser) {
-        boolean status = true;
-
-        do {
-            System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentUser.getTeamName());
-            System.out.println("\t1) Nyt Hold");
-            System.out.println("\t2) Ny Deltager");
-            System.out.println("\t3) Vis Data");
-            System.out.println("\t0) Log af");
-            System.out.print("\n\tIndtast valg: ");
-
-            switch (input.nextInt()) {
-                case 0:
-                    status = false;
-                    break;
-                case 1:
-                    createTeamToBeApproved();
-                    break;
-                case 2:
-                    createContestant();
-                    break;
-                case 3:
-                    displayData();
-                    break;
-                default:
-                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
-            }
-        } while (status);
-    }
-
     public void contestantRun(Contestant currentUser) {
-
-        Team currentTeam = currentUser.findTeamFromUser(currentUser); //Denne metode skal kunne finde hvilket team currentUser af typen Contestant er
-
-        boolean status = true;
-
-        do {
-            System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentUser.getContestantName()); //TODO getTeamName i stedet for Contestant!
-            System.out.println("\t1) Nyt Hold");
-            System.out.println("\t2) Ny Deltager");
-            System.out.println("\t3) Vis Data");
-            System.out.println("\t4) Min side");
-            System.out.println("\t0) Log af");
-            System.out.print("\n\tIndtast valg: ");
-
-            switch (input.nextInt()) {
-                case 0:
-                    status = false;
-                    break;
-                case 1:
-                    createTeamToBeApproved();
-                    break;
-                case 2:
-                    createContestant();
-                    break;
-                case 3:
-                    displayData();
-                    break;
-                case 4:
-                    goToCurrentContestant(currentUser);
-                    break;
-                default:
-                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
-            }
-        } while (status);
-    }
-
-    private void createTeamToBeApproved() {
-    }
-
-    private void createContestant() {
-    }
-
-    private void displayData() { //Abstrakt metode fra superklassen User
-    }
-
-    private void goToCurrentContestant(Contestant currentUser) {
         boolean status = true;
 
         do{
@@ -128,23 +50,23 @@ public class ContestantController {
     }
 
         private void editCurrentContestantType() {
-
+//TODO metode
     }
 
         private void editCurrentContestantEmail() {
-
+//TODO metode
     }
 
         private void editCurrentContestantName() {
-
+//TODO metode
     }
 
         private void editCurrentContestantPassword() {
-
+//TODO metode
     }
 
         private void editCurrentContestantUsername() {
-
+//TODO metode
     }
 }
 

@@ -20,20 +20,29 @@ public class MainController {
 
     //METHODS
     public void run() {
+        boolean runStatus = true;
         System.out.println("Velkommen til --> VI CYKLER PÅ ARBEJDE <--- programmet!\n");
-        System.out.println("1) Log ind");
-        System.out.println("2) Jeg er ny deltager");
-        System.out.println("Valg: ");
+        do {
+            System.out.println("1) Log ind");
+            System.out.println("2) Jeg er ny deltager");
+            System.out.println("0) Luk program");
+            System.out.println("Valg: ");
 
-        switch (input.nextInt()){
-            case 1:
-                authUser();
-                openUserMenu(currentUser);
-                break;
-            case 2: authTeam();
-                break;
-            default:
-        }
+            switch (input.nextInt()) {
+                case 0:
+                    System.out.println("Programmet lukker ned...");
+                    runStatus = false;
+                    break;
+                case 1:
+                    authUser();
+                    openUserMenu(currentUser);
+                    break;
+                case 2:
+                    authTeam();
+                    break;
+                default:
+            }
+        }while(runStatus);
     }
 
     public void authUser() {
@@ -66,13 +75,13 @@ public class MainController {
 
         if (currentUser instanceof Contestant) {
             System.out.println("Velkommen til programmet " + ((Contestant) currentUser).getContestantName() + "!");
-            ContestantController contestantController = new ContestantController(data);
-            contestantController.contestantRun((Contestant) currentUser);
+            TeamController teamController = new TeamController(data);
+            teamController.contestantRun((Contestant)currentUser);
 
         }else if (currentUser instanceof Team){
             System.out.println("Velkommen til programmet hold: " + ((Team) currentUser).getTeamName() + "!");
-            ContestantController contestantController = new ContestantController(data);
-            contestantController.teamRun((Team)currentUser);
+            TeamController teamController = new TeamController(data);
+            teamController.teamRun((Team)currentUser);
 
         } else if (currentUser instanceof Company) {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
@@ -84,23 +93,27 @@ public class MainController {
     private void authTeam() {
         String teamId, teamPassword;
         boolean validationStatus;
+        boolean authTeamStatus = true;
 
         input.nextLine();
 
         System.out.println("For at oprette dig som bruger i systemet kræver det at din organisation/virksomhed har oprettet et hold til dig");
-        System.out.println("\nIndtast det 7-cifret holdId: ");
-        teamId = input.next();
-        System.out.println("Indtast nøgleord: ");
-        teamPassword = input.next();
-        validationStatus = validateTeam(teamId, teamPassword);
+        do {
+            System.out.println("\nIndtast det 7-cifret holdId: ");
+            teamId = input.next();
+            System.out.println("Indtast nøgleord: ");
+            teamPassword = input.next();
+            validationStatus = validateTeam(teamId, teamPassword);
 
-        if (validationStatus) {
-            System.out.println("Velkommen til hold " + currentTeam.getTeamName());
-            generateUser();
+            if (validationStatus) {
+                System.out.println("Velkommen til hold " + currentTeam.getTeamName());
+                generateUser();
+                authTeamStatus = false;
 
-        } else {
-            System.out.println("Du har indtastet fokert holdId eller nøgleord, prøv igen!");
-        }
+            } else {
+                System.out.println("Du har indtastet fokert holdId eller nøgleord, prøv igen!");
+            }
+        }while(authTeamStatus);
     }
 
     public void generateUser() {
@@ -131,11 +144,14 @@ public class MainController {
             default: contestantType = "BEGYNDER";
         }
 
+        input.nextLine();
+
+            System.out.println("Du skal nu vælge et brugernavn");
         do
         {
-            System.out.println("Du skal nu vælge et brugernavn\nBrugernavnet skal bestå af mindst 6 karakterer og indeholde bogstaver og tal ");
+            System.out.println("\nBrugernavnet skal bestå af mindst 6 karakterer og indeholde bogstaver og tal ");
             System.out.println("Hvis du ønsker at annullere oprettelsen TAST 0 som brugernavn");
-            System.out.println("Indtast dit ønsket brugernavn: ");
+            System.out.println("\nIndtast dit ønsket brugernavn: ");
             username = validateUsername(input.nextLine());
 
                 if(username != null && username.equals("0"))
@@ -145,15 +161,16 @@ public class MainController {
                 {
                     System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
 
-                        System.out.println("Indtast ønsket kodeord: ");
+                        System.out.println("\nIndtast ønsket kodeord: ");
                         password = validatePassword(input.nextLine());
 
                         if (password != null) {
                             System.out.println("Indtast ønsket kodeord igen: ");
                             if (password.equals(input.nextLine())) {
-                                Contestant contestant = new Contestant(username, password, "00", contestantName, contestantEmail, contestantType);
+                                Contestant contestant = new Contestant(username, password, generateUserId(), contestantName, contestantEmail, contestantType);
                                 currentTeam.addContestantToTeam(contestant);
-                                System.out.println("Din bruger blev oprettet!");
+                                data.addUserToList(contestant);
+                                System.out.println("Din bruger blev oprettet!\n");
                                 status = false;
 
                             } else System.out.println("Din indtastning matchede ikke prøv igen");
@@ -195,7 +212,7 @@ public class MainController {
         newUserId = String.valueOf(String.valueOf(companies) + String.valueOf(teams) + String.valueOf(contestants));
         System.out.println(newUserId);
         return newUserId;
-    } //Virker ikke endnu!
+    } //Virker ikke endnu! TODO Denne metode skal fikses asap!
 
     private String validatePassword(String password) {
         if(password.length()>7 && password.matches(".*\\d.*"))

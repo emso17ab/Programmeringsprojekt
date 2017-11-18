@@ -25,8 +25,8 @@ public class Data {
         Contestant contestant6 = new Contestant("heino", "1234", "010203", "Heino Hansen", "emil.soerensen@hotmail.com", "PROFESSIONEL");
 
         //To testhold bliver oprettet og der lægges tre testdeltagere ind på hvert hold
-        Team team1 = new Team("team1", "0001", "1010100","SuperCyklerne", "Rasmus Pold");
-        Team team2 = new Team("team2", "0002", "1010200", "PowerBikers", "Kesia Heiberg");
+        Team team1 = new Team("team1", "0001", "010100","SuperCyklerne", "Rasmus Pold");
+        Team team2 = new Team("team2", "0002", "010200", "PowerBikers", "Kesia Heiberg");
 
         team1.addContestantToTeam(contestant1);
         team1.addContestantToTeam(contestant2);
@@ -62,4 +62,11 @@ public class Data {
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
+
+    public void addUserToList(User user){
+        this.allUsers.add(user);
+    }
 }
+
+
+
