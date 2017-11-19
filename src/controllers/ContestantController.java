@@ -30,6 +30,7 @@ public class ContestantController {
         System.out.println("4) Ændr Email");
         System.out.println("5) Skift Cyklist type");
         System.out.println("0) Tilbage til Holdmenu ");
+        System.out.println("Valg: ");
 
         switch (input.nextInt()){
             case 0: status = false;

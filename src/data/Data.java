@@ -1,8 +1,6 @@
 package data;
-import models.Company;
-import models.Contestant;
-import models.Team;
-import models.User;
+import models.*;
+
 import java.util.ArrayList;
 
 public class Data {
@@ -15,6 +13,9 @@ public class Data {
     }
 
     public void generateData(){
+
+        //Masteradministratoren oprettes af typen company. Denne er unik og der kan ikke oprettes andre mastere når programmet kører
+        Master adminMaster = new Master("admin","admin","000000","VCPA");
 
         //Seks testdeltagere bliver oprettet
         Contestant contestant1 = new Contestant("emil", "1234", "010101", "Emil Sørensen", "emil.soerensen@hotmail.com", "BEGYNDER");
@@ -36,13 +37,14 @@ public class Data {
         team2.addContestantToTeam(contestant6);
 
         //En testvirksomhed bliver oprettet og de to hold bliver lagt ind på denne
-        Company company1 = new Company("company1", "001", "1010000", "Copenhagen Business School");
+        Company company1 = new Company("company1", "001", "010000", "Copenhagen Business School");
 
         company1.addTeamToCompany(team1);
         company1.addTeamToCompany(team2);
 
         //Til sidst bliver alle deltagerne, hold og virksomhed lagt ind på Masterlisten allUsers som alle har fælles superklasse af typen User.
 
+        allUsers.add(adminMaster);
         allUsers.add(company1);
 
         allUsers.add(team1);

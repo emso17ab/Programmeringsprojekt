@@ -33,6 +33,7 @@ public class CompanyController {
             System.out.println("5) Afmeld en deltager");
             System.out.println("6) Gå til Holdmenu");
             System.out.println("0) Log af ");
+            System.out.println("Valg: ");
 
             switch (input.nextInt()){
                 case 0: status = false;

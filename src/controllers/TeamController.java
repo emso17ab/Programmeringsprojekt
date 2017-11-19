@@ -39,7 +39,7 @@ public class TeamController {
             if(currentContestant != null)
             System.out.println("\t4) Min side");
             System.out.println("\t0) Log af");
-            System.out.print("\n\tIndtast valg: ");
+            System.out.print("\n\tValg: ");
 
             switch (input.nextInt()) {
                 case 0:

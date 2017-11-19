@@ -1,10 +1,7 @@
 package controllers;
 import java.util.Scanner;
 import data.Data;
-import models.Company;
-import models.Contestant;
-import models.Team;
-import models.User;
+import models.*;
 
 //Denne controllerklasse skal styre Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
 
@@ -87,6 +84,10 @@ public class MainController {
             System.out.println("Velkommen til programmet! Du er logget ind som virksomhed: " + ((Company) currentUser).getCompanyName());
             CompanyController companyController = new CompanyController(data);
             companyController.adminRun((Company)currentUser);
+
+        } else if (currentUser instanceof Master) {
+            MasterController masterController = new MasterController(data);
+            masterController.masterRun((Master) currentUser);
         }
     }  //Sender brugeren videre til den korrekte hovedmenu alt efter logintype
 
