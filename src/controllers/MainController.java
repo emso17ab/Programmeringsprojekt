@@ -166,7 +166,7 @@ public class MainController {
                         password = validatePassword(input.nextLine());
 
                         if (password != null) {
-                            System.out.println("Indtast ønsket kodeord igen: ");
+                            System.out.println("Bekræft kodeord: ");
                             if (password.equals(input.nextLine())) {
                                 Contestant contestant = new Contestant(username, password, generateUserId(currentTeam), contestantName, contestantEmail, contestantType);
                                 currentTeam.addContestantToTeam(contestant);
