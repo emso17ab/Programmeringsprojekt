@@ -22,11 +22,11 @@ public class TeamController {
         currentContestant = contestant;
         String testString = currentContestant.getUserId().substring(0,4) + "00";
         for (User user : data.getAllUsers()) {
-            String test = (user.getUserId().substring(0,6));
+            String test = (user.getUserId());
             if(test.equals(testString))
                teamRun((Team)user);
         }
-    }
+    } //Denne metode
 
     public void teamRun(Team currentTeam) {
         boolean status = true;

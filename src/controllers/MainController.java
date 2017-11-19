@@ -99,7 +99,7 @@ public class MainController {
 
         System.out.println("For at oprette dig som bruger i systemet kræver det at din organisation/virksomhed har oprettet et hold til dig");
         do {
-            System.out.println("\nIndtast det 7-cifret holdId: ");
+            System.out.println("\nIndtast det 6-cifret holdId: ");
             teamId = input.next();
             System.out.println("Indtast nøgleord: ");
             teamPassword = input.next();
@@ -167,7 +167,7 @@ public class MainController {
                         if (password != null) {
                             System.out.println("Indtast ønsket kodeord igen: ");
                             if (password.equals(input.nextLine())) {
-                                Contestant contestant = new Contestant(username, password, generateUserId(), contestantName, contestantEmail, contestantType);
+                                Contestant contestant = new Contestant(username, password, generateUserId(currentTeam), contestantName, contestantEmail, contestantType);
                                 currentTeam.addContestantToTeam(contestant);
                                 data.addUserToList(contestant);
                                 System.out.println("Din bruger blev oprettet!\n");
@@ -197,22 +197,24 @@ public class MainController {
         } return false;
     }
 
-    private String generateUserId() {
-        String newUserId;
-        int companies = 0, teams = 0, contestants = 0;
+    private String generateUserId(Team currentTeam) {
+        int newContestant;
+        String contestantNo = "##";
 
-        for (User user : data.getAllUsers()) {
-            if (user instanceof Company)
-                companies++;
-            else if (user instanceof Team)
-                teams++;
-            else if (user instanceof Contestant)
-                contestants++;
-        }
-        newUserId = String.valueOf(String.valueOf(companies) + String.valueOf(teams) + String.valueOf(contestants));
-        System.out.println(newUserId);
-        return newUserId;
-    } //Virker ikke endnu! TODO Denne metode skal fikses asap!
+        newContestant = currentTeam.getContestants().size() + 1;
+
+        //Konverterer integer til String og holder det i korrekt format for et userId på 6 cifre
+        if(newContestant < 10)
+            contestantNo = "0" + String.valueOf(newContestant);
+        else if(newContestant < 100)
+            contestantNo = String.valueOf(newContestant);
+
+        //Genererer userID'et, printer og returnerer.
+        System.out.println(currentTeam.getUserId().substring(0,4) + contestantNo);
+        return currentTeam.getUserId().substring(0,4) + contestantNo;
+
+
+    } //Genererer et unikt UserId til brugeren
 
     private String validatePassword(String password) {
         if(password.length()>7 && password.matches(".*\\d.*"))
@@ -221,13 +223,17 @@ public class MainController {
         return null;
     }
 
-    public String validateUsername(String username){
-        if(username.length()>5 && username.matches(".*\\d.*"))
-        return username;
+    public String validateUsername(String username) {
+        boolean status = true;
 
-        if(username.equals("0"))
-            return username;
+        for (User user : data.getAllUsers()) {
+            if (username.equals(user.getUsername()))
+                status = false;
+        }
+            if (status && username.length() > 5 && username.matches(".*\\d.*") || status && username.equals("0"))
+                return username;
+            else System.out.println("Brugernavn er ikke ledigt, prøv igen!");
 
-        else return null;
+        return null;
     }
 }
