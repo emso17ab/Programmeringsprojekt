@@ -46,24 +46,35 @@ public class MainController {
         String username;
         String password;
         boolean status = true;
+        int i = 3;
 
         input.nextLine();
 
         do { /* HER har jeg lavet et do-while loop, der sørger for at koden kører så længe
                 boolean "status" er true.
             */
+            if(i > 0) {
+                System.out.print("\nIndtast Brugernavn: ");
+                username = input.nextLine();
+                System.out.print("\nIndtast Password: ");
+                password = input.nextLine();
 
-            System.out.print("\nIndtast Brugernavn: ");
-            username = input.nextLine();
-            System.out.print("\nIndtast Password: ");
-            password = input.nextLine();
+                currentUser = null;
 
-            for (User user : data.getAllUsers()) {
-                if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-                    currentUser = user;
-                    status = false; //Her sættes status til false, således at løkken ikke kører længere
+                for (User user : data.getAllUsers()) {
+                    if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                        currentUser = user;
+                        status = false; //Her sættes status til false, således at løkken ikke kører længere
+                    }
+                }
+                if (currentUser == null && i > 1)
+                    System.out.println("\nForkert indtastet brugernavn eller adgangskode!\n" + --i + " Forsøg tilbage - Prøv igen");
+                else if(i == 1) {
+                    System.out.println("\nForkert indtastet brugernavn eller adgangskode!\nDu har ikke flere forsøg!\n");
+                    status = false;
                 }
             }
+            else status = false;
         }while(status);
 
     }  //Login siden
@@ -136,15 +147,18 @@ public class MainController {
         System.out.println("3) PROFESSIONEL");
 
         switch (input.nextInt()) {
-            case 1: contestantType = "BEGYNDER";
+            case 1:
+                contestantType = "BEGYNDER";
                 break;
-            case 2: contestantType = "ØVET";
+            case 2:
+                contestantType = "ØVET";
                 break;
-            case 3: contestantType = "PROFESSIONEL";
+            case 3:
+                contestantType = "PROFESSIONEL";
                 break;
-            default: contestantType = "BEGYNDER";
+            default:
+                contestantType = "BEGYNDER";
         }
-
         input.nextLine();
 
             System.out.println("Du skal nu vælge et brugernavn");
@@ -171,7 +185,7 @@ public class MainController {
                                 Contestant contestant = new Contestant(username, password, generateUserId(currentTeam), contestantName, contestantEmail, contestantType);
                                 currentTeam.addContestantToTeam(contestant);
                                 data.addUserToList(contestant);
-                                System.out.println("Din bruger blev oprettet!\n");
+                                System.out.println("Din bruger blev oprettet! - Dit personlige ID-nummer er: " + contestant.getUserId() + "\n");
                                 status = false;
 
                             } else System.out.println("Din indtastning matchede ikke prøv igen");
@@ -211,13 +225,12 @@ public class MainController {
             contestantNo = String.valueOf(newContestant);
 
         //Genererer userID'et, printer og returnerer.
-        System.out.println(currentTeam.getUserId().substring(0,4) + contestantNo);
         return currentTeam.getUserId().substring(0,4) + contestantNo;
 
 
     } //Genererer et unikt UserId til brugeren
 
-    private String validatePassword(String password) {
+    public String validatePassword(String password) {
         if(password.length()>7 && password.matches(".*\\d.*"))
             return password;
 

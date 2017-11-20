@@ -68,27 +68,67 @@ public class CompanyController {
     }
 
     private void displayData() {
-//TODO metode
-    }
+
+        System.out.println("\nHvad vil du have vist?");
+        System.out.println("1) Oversigt over alle deltagende virksomheder");
+        System.out.println("2) Dine hold");
+        System.out.println("3) Information om et hold (Kræver holdID)");
+        System.out.println("4) Information om en deltager (Kræver deltagerID)");
+        System.out.println("5) Udskriv alle deltagere");
+
+        switch (input.nextInt()) {
+
+            case 1: {
+                int i = 0;
+                System.out.println("Liste over alle virksomheder der deltager i kampagnen");
+                System.out.printf("%-5s %-40s %5s", "Nr", "Navn", "Antal Hold");
+                for (User user : data.getAllUsers()) {
+                    if (user instanceof Company) {
+                        System.out.printf("\n%-5d %-40s %5d", i, ((Company) user).getCompanyName(), ((Company) user).getTeams().size());
+                        i++;
+                    }
+                }
+                System.out.println("");
+            } break;
+            case 2: System.out.println("Denne funktion er ikke oprette endnu");
+                break;
+            case 3: System.out.println("Denne funktion er ikke oprette endnu");
+                break;
+            case 4: System.out.println("Denne funktion er ikke oprette endnu");
+                break;
+            case 5: System.out.println("Denne funktion er ikke oprette endnu");
+                break;
+
+        }
+    } //TODO Find en måde at kalde abstrakt metoden fra et userobjekt som så skriver data ud på baggrund af objektets type
 
     private void deleteContestant() {
 //TODO metode
     }
 
     private void goToTeam(Company currentUser) {
-        int i = 1, c = 1, valg;
-        for (Team team : currentUser.getTeams()) {
-            System.out.println(i + ")" + team.getTeamName());
-            i++;
+        input.nextLine();
+        if (currentUser.getTeams().size() < 1) {
+            System.out.println("Du har ingen tilmeldte hold endnu!\nGå tilbage til hovedmenuen og opret dit første hold");
+            System.out.println("Tilbage til hovedmenu (TRYK ENTER)");
+            input.nextLine(); //Dette input har ingen funktion andet end at gå tilbage til hovedmenuen når brugeren trykker enter
         }
-        System.out.println("\nVælg hold:");
-        valg = input.nextInt();
-        for (Team team : currentUser.getTeams()) {
-            if(valg == c) {
-                TeamController teamController = new TeamController(data);
-                teamController.teamRun(team);
-                break;
-            }else c++;
+        else {
+            int i = 1, c = 1, valg;
+            for (Team team : currentUser.getTeams()) {
+                System.out.println(i + ")" + team.getTeamName());
+                i++;
+            }
+            System.out.println("Gå tilbage (TAST 0)");
+            System.out.println("\nVælg hold:");
+            valg = input.nextInt();
+                        for (Team team : currentUser.getTeams()) {
+                if (valg == c) {
+                    TeamController teamController = new TeamController(data);
+                    teamController.teamRun(team);
+                    break;
+                } else c++;
+            }
         }
     }
 }
