@@ -29,6 +29,7 @@ public class ContestantController {
         System.out.println("3) Ændr Navn");
         System.out.println("4) Ændr Email");
         System.out.println("5) Skift Cyklist type");
+        System.out.println("6) Afmeld din bruger");
         System.out.println("0) Tilbage til Holdmenu ");
         System.out.println("Valg: ");
 
@@ -45,12 +46,18 @@ public class ContestantController {
                 break;
             case 5: editCurrentContestantType();
                 break;
+            case 6: deleteCurrentContestant();
+                break;
             default:
             }
         }while(status);
     }
 
-        private void editCurrentContestantType() {
+    private void deleteCurrentContestant() {
+
+    }
+
+    private void editCurrentContestantType() {
 //TODO metode
     }
 

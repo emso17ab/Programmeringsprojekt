@@ -28,7 +28,8 @@ public class TeamController {
         }
     } //Denne metode
 
-    public void teamRun(Team currentTeam) {
+    public void teamRun(Team currentTeam)
+    {
         boolean status = true;
 
         do {
