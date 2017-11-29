@@ -36,46 +36,84 @@ public class ContestantController {
         switch (input.nextInt()){
             case 0: status = false;
                 break;
-            case 1: editCurrentContestantUsername();
+            case 1: editCurrentContestantUsername(currentUser);
+                    printContestantInfo(currentUser);
                 break;
-            case 2: editCurrentContestantPassword();
+            case 2: editCurrentContestantPassword(currentUser);
+                    printContestantInfo(currentUser);
                 break;
-            case 3: editCurrentContestantName();
+            case 3: editCurrentContestantName(currentUser);
+                    printContestantInfo(currentUser);
                 break;
-            case 4: editCurrentContestantEmail();
+            case 4: editCurrentContestantEmail(currentUser);
+                    printContestantInfo(currentUser);
                 break;
-            case 5: editCurrentContestantType();
+            case 5: editCurrentContestantType(currentUser);
+                    printContestantInfo(currentUser);
                 break;
-            case 6: deleteCurrentContestant();
+            case 6: deleteCurrentContestant(currentUser);
+                    printContestantInfo(currentUser);
                 break;
             default:
             }
         }while(status);
     }
 
-    private void deleteCurrentContestant() {
-
+    private void deleteCurrentContestant(Contestant contestant) {
     }
 
-    private void editCurrentContestantType() {
+    private void editCurrentContestantType(Contestant contestant) {
+        String newType;
+        System.out.println("Du har valgt at ænder deltagetype");
+        System.out.println("Din nuværende type er: " + contestant.getContestantType());
+        System.out.println("Vælg ny type fra listen:\n");
+        System.out.println("1) BEGYNDER");
+        System.out.println("2) ØVET");
+        System.out.println("3) PROFESSIONEL");
+        switch (input.nextInt()) {
+            case 1:
+                 newType = "BEGYNDER";
+                break;
+            case 2:
+                newType = "ØVET";
+                break;
+            case 3:
+                newType = "PROFESSIONEL";
+                break;
+            default: newType = contestant.getContestantType();
+        }
+        contestant.setContestantType(newType);
+        System.out.println("Din type er blevet ændret!\nNy type: " + contestant.getContestantType());
+        System.out.println("Tilbage til Min Side (TAST ENTER)");
+        input.nextLine();
+        input.nextLine(); //Denne linje kode er så ovenstående besked passer og brugeren skal trykke ENTER
+    }
+
+        private void editCurrentContestantEmail(Contestant contestant) {
 //TODO metode
     }
 
-        private void editCurrentContestantEmail() {
+        private void editCurrentContestantName(Contestant contestant) {
 //TODO metode
     }
 
-        private void editCurrentContestantName() {
+        private void editCurrentContestantPassword(Contestant contestant) {
 //TODO metode
     }
 
-        private void editCurrentContestantPassword() {
+        private void editCurrentContestantUsername(Contestant contestant) {
 //TODO metode
     }
 
-        private void editCurrentContestantUsername() {
-//TODO metode
+    private void printContestantInfo(Contestant contestant){
+        System.out.println("*****************************************************************************");
+        System.out.println("Viser information om bruger " + contestant.getUserId() + ": ");
+        System.out.println("------------------------------------------------");
+        System.out.println("Navn: " + contestant.getContestantName());
+        System.out.println("Email: " + contestant.getContestantEmail());
+        System.out.println("Type: " + contestant.getContestantType());
+        System.out.println("Brugernavn: " + contestant.getUsername());
+        System.out.println("Kodeord: " + contestant.getPassword());
+        System.out.println("*****************************************************************************");
     }
 }
-
-
