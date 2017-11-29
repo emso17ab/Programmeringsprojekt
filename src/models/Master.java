@@ -8,11 +8,12 @@ public class Master extends User {
         this.masterName = masterName;
     }
 
-//Abstract methods
+//Abstract Method
     @Override
     public void displayData() {
     }
 
+//Getter and Setter Methods
     public String getMasterName() {
         return masterName;
     }

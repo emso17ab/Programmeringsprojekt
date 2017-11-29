@@ -12,16 +12,15 @@ public abstract class User {
         this.userId = userId;
     }
 
-    //Abstract methods
+//Abstract Method
     public abstract void displayData();
 
-    //METHODS
-
+//Methods
     public Team findTeamFromUser(User user){
         return null;
     }
 
-    //Getter and Setter Methods
+//Getter and Setter Methods
     public String getUsername() {
         return username;
     }

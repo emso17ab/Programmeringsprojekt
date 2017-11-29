@@ -12,13 +12,12 @@ public class Contestant extends User {
         this.contestantType = contestantType;
     }
 
-
-//Methods
+//Abstract Method
     @Override
     public void displayData() {
     }
 
-    //Getter and Setter Methods
+//Getter and Setter Methods
     public String getContestantName() {
         return contestantName;
     }

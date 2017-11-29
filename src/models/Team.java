@@ -13,16 +13,15 @@ public class Team extends User {
         this.contestants = new ArrayList<>();
     }
 
-//Abstract methods
+//Abstract Method
     @Override
     public void displayData() {
     }
 
-    //Methods
+//Methods
     public void addContestantToTeam(Contestant newContestant){
         this.contestants.add(newContestant);
     }
-
 
 //Getter and Setter Methods
     public String getTeamName() {

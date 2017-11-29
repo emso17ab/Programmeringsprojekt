@@ -1,5 +1,4 @@
 package models;
-
 import java.util.ArrayList;
 
 public class Company extends User {
@@ -13,16 +12,15 @@ public class Company extends User {
         this.teams = new ArrayList<>();
     }
 
-//Abstract methods
+//Abstract Method
     @Override
     public void displayData() {
     }
 
-    //Methods
+//Methods
     public void addTeamToCompany(Team newTeam){
         this.teams.add(newTeam);
     }
-
 
 //Getter and Setter Methods
     public String getCompanyName() {
