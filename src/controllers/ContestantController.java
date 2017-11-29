@@ -11,7 +11,10 @@ import java.util.Scanner;
 
 public class ContestantController {
     Data data;
+    MainController mainController = new MainController();
     Scanner input = new Scanner(System.in);
+
+
 
     public ContestantController(Data data) {
         this.data = data;
@@ -130,9 +133,12 @@ public class ContestantController {
         }
 
         private void editCurrentContestantUsername(User contestant) {
+            String newUsername;
             System.out.println("Du er ved at ændre brugernavn:");
             System.out.println("Skriv dit nye brugernavn");
             input.nextLine();
+            newUsername=input.nextLine();
+            mainController.validateUsername(newUsername);
             contestant.setUsername(input.nextLine());
             System.out.println("Du har ændret brugernavn til:" +contestant.getUsername());
 
@@ -149,4 +155,5 @@ public class ContestantController {
         System.out.println("Kodeord: " + contestant.getPassword());
         System.out.println("*****************************************************************************");
     }
-}
+
+    }
