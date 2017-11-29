@@ -13,7 +13,7 @@ public abstract class User {
     }
 
 //Abstract Method
-    public abstract void displayData();
+    public abstract void displayData(); //Det er User-klassens krav at denne metode kaldes i alle sub-klasserne som arver fra denne superklasse.
 
 //Methods
     public Team findTeamFromUser(User user){

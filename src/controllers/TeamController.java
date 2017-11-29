@@ -21,13 +21,12 @@ public class TeamController {
 
     public void contestantRun(Contestant contestant){
         currentContestant = contestant;
-        String testString = currentContestant.getUserId().substring(0,4) + "00";
         for (User user : data.getAllUsers()) {
-            String test = (user.getUserId());
-            if(test.equals(testString))
+            String userTest = (user.getUserId());
+            if(userTest.equals(contestant.getContestantTeamId()))
                teamRun((Team)user);
         }
-    } //Denne metode
+    }
 
     public void teamRun(Team currentTeam) {
         boolean status = true;
@@ -76,13 +75,12 @@ public class TeamController {
     }
 
     private void displayAllTeams(Team team){
-        String currentCompanyId = team.getUserId().substring(0,2) + "0000";
         System.out.println("**********************************************************************************");
         System.out.println("Liste over alle hold der er oprettet under samme organisation som dig");
         System.out.println("-----------------------------------------------------------------------");
         System.out.printf("%-12s %-40s %-40s %5s", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
         for (User user : data.getAllUsers())
-            if (user.getUserId().equals(currentCompanyId) && user instanceof Company)
+            if (user.getUserId().equals(team.getTeamCompanyId()) && user instanceof Company)
                 for (Team team1 : ((Company) user).getTeams())
                     System.out.printf("\n%-12s %-40s %-40s %5d", team1.getUserId(), team1.getTeamName(), team1.getTeamLeader(), team1.getContestants().size());
         System.out.println("\n**********************************************************************************");

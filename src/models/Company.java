@@ -15,6 +15,11 @@ public class Company extends User {
 //Abstract Method
     @Override
     public void displayData() {
+        System.out.println("#" + userId + "_************************************************************************");
+        System.out.println("<---------------VIRKSOMHED--------------->");
+        System.out.println("Navn: " + companyName);
+        System.out.println("Antal hold: " + teams.size() + "\n");
+        System.out.println("");
     }
 
 //Methods

@@ -11,6 +11,11 @@ public class Master extends User {
 //Abstract Method
     @Override
     public void displayData() {
+        System.out.println("\n");
+        System.out.println("#" + userId + "_************************************************************************");
+        System.out.println("<---------------MASTER ADMIN--------------->");
+        System.out.println("PROGRAMMETS UDVIKLERE: Team XB22 Ft. Kesia Heiberg, Rasmus Pold, William Kaspersen & Emil Sørensen");
+        System.out.println("\n\n\n");
     }
 
 //Getter and Setter Methods

@@ -22,6 +22,7 @@ public class MainController {
         do {
             System.out.println("1) Log ind");
             System.out.println("2) Jeg er ny deltager");
+            System.out.println("3) PRINT DATABASE");
             System.out.println("0) Luk program");
             System.out.println("Valg: ");
 
@@ -36,6 +37,9 @@ public class MainController {
                     break;
                 case 2:
                     authTeam();
+                    break;
+                case 3:
+                    printDatabase();
                     break;
                 default:
             }
@@ -249,5 +253,11 @@ public class MainController {
             else System.out.println("Brugernavn er ikke ledigt, prøv igen!");
 
         return null;
+    }
+
+    private void printDatabase() {
+        for (User user : data.getAllUsers()) {
+            user.displayData();
+        }
     }
 }
