@@ -1,5 +1,6 @@
 package controllers;
 import data.Data;
+import models.Company;
 import models.Contestant;
 import models.Team;
 import models.User;
@@ -35,10 +36,9 @@ public class TeamController {
         do {
             System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentTeam.getTeamName());
             System.out.println("\t1) Nyt Hold");
-            System.out.println("\t2) Ny Deltager");
-            System.out.println("\t3) Vis Data");
+            System.out.println("\t2) Vis Data");
             if(currentContestant != null)
-            System.out.println("\t4) Min side");
+            System.out.println("\t3) Min side");
             System.out.println("\t0) Log af");
             System.out.print("\n\tValg: ");
 
@@ -50,12 +50,9 @@ public class TeamController {
                     createTeamToBeApproved();
                     break;
                 case 2:
-                    createContestant();
+                    displayData(currentTeam);
                     break;
                 case 3:
-                    displayData();
-                    break;
-                case 4:
                     if(currentContestant != null)
                     goToCurrentContestant(currentContestant);
                     else System.out.println("\nFejl i indtastningen, prøv igen!\n");
@@ -71,12 +68,38 @@ public class TeamController {
         contestantController.contestantRun(currentContestant);
     }
 
-    private void displayData() {
-//TODO metode
-    }
+    private void displayData(Team team) {
+        String currentCompanyId = team.getUserId().substring(0,2) + "0000";
+        System.out.println("\nHvad vil du have vist?");
+        System.out.println("1) Oversigt over alle hold i din organisation");
+        System.out.println("2) Udskriv alle deltagere på dit hold");
 
-    private void createContestant() {
-//TODO metode
+        switch (input.nextInt()) {
+
+            case 1: {
+                System.out.println("**********************************************************************************");
+                System.out.println("Liste over alle hold der er oprettet under samme organisation som dig");
+                System.out.println("-----------------------------------------------------------------------");
+                System.out.printf("%-12s %-40s %-40s %5s", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+                for (User user : data.getAllUsers())
+                    if (user.getUserId().equals(currentCompanyId) && user instanceof Company)
+                        for (Team team1 : ((Company) user).getTeams())
+                            System.out.printf("\n%-12s %-40s %-40s %5d", team1.getUserId(), team1.getTeamName(), team1.getTeamLeader(), team1.getContestants().size());
+                System.out.println("\n**********************************************************************************");
+                System.out.println("");
+            }
+            break;
+            case 2: {
+                System.out.println("**********************************************************************************");
+                System.out.println("Liste over alle deltagere på dit hold");
+                System.out.println("-----------------------------------------------------------------------");
+                System.out.printf("%-12s %-25s %-30s %-15s", "DeltagerID", "Navn", "Email", "Type");
+                for (Contestant contestant : team.getContestants())
+                    System.out.printf("\n%-12s %-25s %-30s %-15s", contestant.getUserId(), contestant.getContestantName(), contestant.getContestantEmail(), contestant.getContestantType());
+                System.out.println("\n**********************************************************************************");
+                System.out.println("");
+            } break;
+        }
     }
 
     private void createTeamToBeApproved() {
