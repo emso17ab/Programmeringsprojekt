@@ -100,7 +100,7 @@ public class CompanyController {
                 break;
 
         }
-    } //TODO Find en måde at kalde abstrakt metoden fra et userobjekt som så skriver data ud på baggrund af objektets type
+    }
 
     private void deleteContestant() {
 //TODO metode

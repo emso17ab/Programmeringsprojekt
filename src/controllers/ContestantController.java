@@ -20,7 +20,6 @@ public class ContestantController {
         this.data = data;
     }
 
-
     public void contestantRun(Contestant currentUser) {
         boolean status = true;
 
@@ -89,7 +88,7 @@ public class ContestantController {
         input.nextLine(); //Denne linje kode er så ovenstående besked passer og brugeren skal trykke ENTER
     }
 
-        private void editCurrentContestantEmail(Contestant contestant) {
+    private void editCurrentContestantEmail(Contestant contestant) {
 
             System.out.println("du har valgt at ændre email");
             System.out.println("Skriv ny email:");
@@ -97,7 +96,7 @@ public class ContestantController {
             System.out.println("du har ændret din mail til:"+contestant.getContestantEmail());
     }
 
-        private void editCurrentContestantName(Contestant contestant) {
+    private void editCurrentContestantName(Contestant contestant) {
 
             System.out.println("Du har valgt at ændre dit navn:");
             System.out.println("Skriv dit nye navn:");
@@ -106,7 +105,7 @@ public class ContestantController {
             System.out.println("du har ændret dit navn til:" + contestant.getContestantName());
     }
 
-        private void editCurrentContestantPassword(User contestant) {
+    private void editCurrentContestantPassword(User contestant) {
 
             boolean status;
             String password;
@@ -132,7 +131,7 @@ public class ContestantController {
             } while (status);
         }
 
-        private void editCurrentContestantUsername(User contestant) {
+    private void editCurrentContestantUsername(User contestant) {
             String newUsername;
             System.out.println("Du er ved at ændre brugernavn:");
             System.out.println("Skriv dit nye brugernavn");
