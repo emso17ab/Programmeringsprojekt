@@ -80,6 +80,11 @@ public class TeamController {
     }
 
     private void createTeamToBeApproved() {
-//TODO metode
+        String teamName, teamLeader;
+        System.out.println("Indtast navnet på det nye hold: ");
+        teamName = input.nextLine();
+        System.out.println("Indtast navnet på holdkaptajnen på det nye hold: ");
+        teamLeader = input.nextLine();
+        Team team = new Team("")
     }
 }

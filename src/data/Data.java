@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public class Data {
     private ArrayList<User> allUsers;
+    private ArrayList<Team> teamsToBeApproved;
 
 
     public Data(){
         this.allUsers = new ArrayList<>();
+        this.teamsToBeApproved = new ArrayList<>();
         generateData();
     }
 
@@ -59,6 +61,7 @@ public class Data {
 
     }
 
+
 //Methods
 
     public ArrayList<User> getAllUsers() {
@@ -68,6 +71,11 @@ public class Data {
     public void addUserToList(User user){
         this.allUsers.add(user);
     }
+
+    public void addTeamToList (Team team){
+        this.teamsToBeApproved.add(team);
+    }
+
 }
 
 
