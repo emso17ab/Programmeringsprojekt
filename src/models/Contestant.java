@@ -37,4 +37,5 @@ public class Contestant extends User {
     public void setContestantType(String contestantType) {
         this.contestantType = contestantType;
     }
+
 }

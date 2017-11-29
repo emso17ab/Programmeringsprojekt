@@ -30,6 +30,7 @@ public class ContestantController {
         System.out.println("4) Ændr Email");
         System.out.println("5) Skift Cyklist type");
         System.out.println("6) Afmeld din bruger");
+        System.out.println("7) Se Fuld Profil");
         System.out.println("0) Tilbage til Holdmenu ");
         System.out.println("Valg: ");
 
@@ -37,22 +38,18 @@ public class ContestantController {
             case 0: status = false;
                 break;
             case 1: editCurrentContestantUsername(currentUser);
-                    printContestantInfo(currentUser);
                 break;
             case 2: editCurrentContestantPassword(currentUser);
-                    printContestantInfo(currentUser);
                 break;
             case 3: editCurrentContestantName(currentUser);
-                    printContestantInfo(currentUser);
                 break;
             case 4: editCurrentContestantEmail(currentUser);
-                    printContestantInfo(currentUser);
                 break;
             case 5: editCurrentContestantType(currentUser);
-                    printContestantInfo(currentUser);
                 break;
             case 6: deleteCurrentContestant(currentUser);
-                    printContestantInfo(currentUser);
+                break;
+            case 7:printContestantInfo(currentUser);
                 break;
             default:
             }
@@ -90,19 +87,53 @@ public class ContestantController {
     }
 
         private void editCurrentContestantEmail(Contestant contestant) {
-//TODO metode
+
+            System.out.println("du har valgt at ændre email");
+            System.out.println("Skriv ny email:");
+            contestant.setContestantEmail(input.nextLine());
+            System.out.println("du har ændret din mail til:"+contestant.getContestantEmail());
     }
 
         private void editCurrentContestantName(Contestant contestant) {
-//TODO metode
+
+            System.out.println("Du har valgt at ændre dit navn:");
+            System.out.println("Skriv dit nye navn:");
+            contestant.setContestantEmail(input.nextLine());
+            System.out.println("du har ændret dit navn til:" + contestant.getContestantName());
     }
 
-        private void editCurrentContestantPassword(Contestant contestant) {
-//TODO metode
-    }
+        private void editCurrentContestantPassword(User contestant) {
 
-        private void editCurrentContestantUsername(Contestant contestant) {
-//TODO metode
+            boolean status;
+            String password;
+            String check;
+            input.nextLine();
+            do{
+            System.out.println("Du har valgt at ændre password");
+            System.out.println("Skriv nyt password:");
+
+            password = input.nextLine();
+            System.out.println("Skriv nyt password igen");
+            check = input.nextLine();
+
+
+                if (password.equals(check)) {
+                    contestant.setPassword(password);
+                    System.out.println("du har ændret dit password til" + contestant.getPassword());
+                    status = false;
+                } else {
+                    System.out.println("Fejl i indtastning");
+                    status = true;
+                }
+            } while (status);
+        }
+
+        private void editCurrentContestantUsername(User contestant) {
+            System.out.println("Du er ved at ændre brugernavn:");
+            System.out.println("Skriv dit nye brugernavn");
+            contestant.setUsername(input.nextLine());
+            System.out.println("Du har ændret brugernavn til:" +contestant.getUsername());
+
     }
 
     private void printContestantInfo(Contestant contestant){
