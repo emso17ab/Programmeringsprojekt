@@ -76,7 +76,7 @@ public class CompanyController {
         System.out.println("4) Information om en deltager (Kræver deltagerID)");
         System.out.println("5) Udskriv alle deltagere");
 
-        switch (input.nextInt()) {
+        switch (input.nextInt()) { //TODO DENNE SWITCH SKAL KALDE METODER I CASE'NE ISTEDET FOR AT INDEHOLDE METODEN
 
             case 1: {
                 int i = 0;
@@ -90,13 +90,13 @@ public class CompanyController {
                 }
                 System.out.println("");
             } break;
-            case 2: System.out.println("Denne funktion er ikke oprette endnu");
+            case 2: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 3: System.out.println("Denne funktion er ikke oprette endnu");
+            case 3: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 4: System.out.println("Denne funktion er ikke oprette endnu");
+            case 4: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 5: System.out.println("Denne funktion er ikke oprette endnu");
+            case 5: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
 
         }

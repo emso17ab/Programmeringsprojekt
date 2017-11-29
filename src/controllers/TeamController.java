@@ -29,8 +29,7 @@ public class TeamController {
         }
     } //Denne metode
 
-    public void teamRun(Team currentTeam)
-    {
+    public void teamRun(Team currentTeam) {
         boolean status = true;
 
         do {
@@ -53,53 +52,52 @@ public class TeamController {
                     displayData(currentTeam);
                     break;
                 case 3:
-                    if(currentContestant != null)
-                    goToCurrentContestant(currentContestant);
-                    else System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                    if(currentContestant != null) {
+                        ContestantController contestantController = new ContestantController(data);
+                        contestantController.contestantRun(currentContestant);
+                    } else System.out.println("\nFejl i indtastningen, prøv igen!\n");
                     break;
-                default:
-                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
         } while (status);
     }
 
-    private void goToCurrentContestant(Contestant currentContestant) {
-        ContestantController contestantController = new ContestantController(data);
-        contestantController.contestantRun(currentContestant);
-    }
-
     private void displayData(Team team) {
-        String currentCompanyId = team.getUserId().substring(0,2) + "0000";
         System.out.println("\nHvad vil du have vist?");
         System.out.println("1) Oversigt over alle hold i din organisation");
         System.out.println("2) Udskriv alle deltagere på dit hold");
-
         switch (input.nextInt()) {
-
-            case 1: {
-                System.out.println("**********************************************************************************");
-                System.out.println("Liste over alle hold der er oprettet under samme organisation som dig");
-                System.out.println("-----------------------------------------------------------------------");
-                System.out.printf("%-12s %-40s %-40s %5s", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
-                for (User user : data.getAllUsers())
-                    if (user.getUserId().equals(currentCompanyId) && user instanceof Company)
-                        for (Team team1 : ((Company) user).getTeams())
-                            System.out.printf("\n%-12s %-40s %-40s %5d", team1.getUserId(), team1.getTeamName(), team1.getTeamLeader(), team1.getContestants().size());
-                System.out.println("\n**********************************************************************************");
-                System.out.println("");
-            }
-            break;
-            case 2: {
-                System.out.println("**********************************************************************************");
-                System.out.println("Liste over alle deltagere på dit hold");
-                System.out.println("-----------------------------------------------------------------------");
-                System.out.printf("%-12s %-25s %-30s %-15s", "DeltagerID", "Navn", "Email", "Type");
-                for (Contestant contestant : team.getContestants())
-                    System.out.printf("\n%-12s %-25s %-30s %-15s", contestant.getUserId(), contestant.getContestantName(), contestant.getContestantEmail(), contestant.getContestantType());
-                System.out.println("\n**********************************************************************************");
-                System.out.println("");
-            } break;
+            case 1: displayAllTeams(team);
+                break;
+            case 2: displayAllContestants(team);
+                break;
+            default:
         }
+    }
+
+    private void displayAllTeams(Team team){
+        String currentCompanyId = team.getUserId().substring(0,2) + "0000";
+        System.out.println("**********************************************************************************");
+        System.out.println("Liste over alle hold der er oprettet under samme organisation som dig");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.printf("%-12s %-40s %-40s %5s", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+        for (User user : data.getAllUsers())
+            if (user.getUserId().equals(currentCompanyId) && user instanceof Company)
+                for (Team team1 : ((Company) user).getTeams())
+                    System.out.printf("\n%-12s %-40s %-40s %5d", team1.getUserId(), team1.getTeamName(), team1.getTeamLeader(), team1.getContestants().size());
+        System.out.println("\n**********************************************************************************");
+        System.out.println("");
+    }
+
+    private void displayAllContestants(Team team){
+        System.out.println("**********************************************************************************");
+        System.out.println("Liste over alle deltagere på dit hold");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.printf("%-12s %-25s %-30s %-15s", "DeltagerID", "Navn", "Email", "Type");
+        for (Contestant contestant : team.getContestants())
+            System.out.printf("\n%-12s %-25s %-30s %-15s", contestant.getUserId(), contestant.getContestantName(), contestant.getContestantEmail(), contestant.getContestantType());
+        System.out.println("\n**********************************************************************************");
+        System.out.println("");
     }
 
     private void createTeamToBeApproved() {
