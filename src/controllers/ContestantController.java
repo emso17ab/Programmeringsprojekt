@@ -98,7 +98,8 @@ public class ContestantController {
 
             System.out.println("Du har valgt at ændre dit navn:");
             System.out.println("Skriv dit nye navn:");
-            contestant.setContestantEmail(input.nextLine());
+            input.nextLine();
+            contestant.setContestantName(input.nextLine());
             System.out.println("du har ændret dit navn til:" + contestant.getContestantName());
     }
 
@@ -131,6 +132,7 @@ public class ContestantController {
         private void editCurrentContestantUsername(User contestant) {
             System.out.println("Du er ved at ændre brugernavn:");
             System.out.println("Skriv dit nye brugernavn");
+            input.nextLine();
             contestant.setUsername(input.nextLine());
             System.out.println("Du har ændret brugernavn til:" +contestant.getUsername());
 
