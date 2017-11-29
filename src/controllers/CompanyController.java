@@ -50,7 +50,7 @@ public class CompanyController {
                     break;
                 case 6: goToTeam(currentUser);
                     break;
-                default:
+                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
         }while(status);
     }

@@ -41,7 +41,7 @@ public class MainController {
                 case 3:
                     printDatabase();
                     break;
-                default:
+                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
         }while(runStatus);
     }

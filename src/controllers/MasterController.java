@@ -39,8 +39,7 @@ public class MasterController {
                 case 2:
                     printHelp();
                     break;
-                default:
-                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
         } while (status);
 

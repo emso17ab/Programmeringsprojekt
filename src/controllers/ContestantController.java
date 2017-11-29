@@ -14,11 +14,12 @@ public class ContestantController {
     MainController mainController = new MainController();
     Scanner input = new Scanner(System.in);
 
-
-
     public ContestantController(Data data) {
         this.data = data;
     }
+
+
+
 
     public void contestantRun(Contestant currentUser) {
         boolean status = true;
@@ -53,7 +54,7 @@ public class ContestantController {
                 break;
             case 7:printContestantInfo(currentUser);
                 break;
-            default:
+            default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
         }while(status);
     }
