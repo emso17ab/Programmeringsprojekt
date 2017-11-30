@@ -32,7 +32,7 @@ public class ContestantController {
         System.out.println("3) Ændr Navn");
         System.out.println("4) Ændr Email");
         System.out.println("5) Skift Cyklist type");
-        System.out.println("6) Afmeld din bruger");
+        System.out.println("6) Afmeld dig fra holdet");
         System.out.println("7) Se Fuld Profil");
         System.out.println("0) Tilbage til Holdmenu ");
         System.out.println("Valg: ");
@@ -60,6 +60,20 @@ public class ContestantController {
     }
 
     private void deleteCurrentContestant(Contestant contestant) {
+        System.out.println("OBS! Du er ved at slette din profil");
+        System.out.println("Alt data vil gå tabt\nEr du sikker på du vil fortsætte? ");
+        System.out.println("1) JA,  fortsæt og slet min profil");
+        System.out.println("2) NEJ, tilbage til Min Side");
+        switch (input.nextInt()){
+            case 1:
+                for (User userToDelete : data.getAllUsers()) {
+                    if(userToDelete==)
+                }
+                break;
+            case 2:
+                break;
+                default:
+        }
     }
 
     private void editCurrentContestantType(Contestant contestant) {
