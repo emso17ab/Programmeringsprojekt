@@ -75,8 +75,3 @@ public class Data {
     public void addTeamToList (Team team){
         this.teamsToBeApproved.add(team);
     }
-
-}
-
-
-

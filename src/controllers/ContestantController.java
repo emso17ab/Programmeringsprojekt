@@ -66,9 +66,8 @@ public class ContestantController {
         System.out.println("2) NEJ, tilbage til Min Side");
         switch (input.nextInt()){
             case 1:
-                for (User userToDelete : data.getAllUsers()) {
-                    if(userToDelete==)
-                }
+                //for (User userToDelete : data.getAllUsers()) {
+                    //if(userToDelete==);                }
                 break;
             case 2:
                 break;

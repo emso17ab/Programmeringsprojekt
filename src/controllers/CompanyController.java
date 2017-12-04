@@ -56,6 +56,22 @@ public class CompanyController {
     }
 
     private void createTeam() {
+        String name;
+        String holdkaptejn;
+
+        System.out.println("Du har valgt at opprette ett hold");
+        //bekreft dette
+        System.out.println("Indtast ønsket navn på holdet: ");
+        input.nextLine();
+        name= input.nextLine();
+        System.out.println("Indtast navn på holdkatpejn: ");
+        input.nextLine();
+        holdkaptejn=input.nextLine();
+
+        Team team = new Team (name, holdkaptejn,);
+        this.data.getTeam().add(team);
+
+        System.out.println("Dit hold navn er" );
         /*
         (denne metode skal oprette et nyt hold og derefter printe team ID'et som bruges til at logge ind med og tilføje deltagere til holdet
     Eksempel:  "Dit hold er blevet oprettet! [Navn: SuperCyklerne,  HoldKaptajn: Simon Hansen]"
