@@ -67,11 +67,13 @@ public class Data {
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
-
     public void addUserToList(User user) {
         this.allUsers.add(user);
     }
 
+    public ArrayList<Team> getTeamsToBeApproved(){
+        return teamsToBeApproved;
+    }
     public void addTeamToList(Team team) {
         this.teamsToBeApproved.add(team);
     }

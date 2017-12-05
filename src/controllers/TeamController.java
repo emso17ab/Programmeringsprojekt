@@ -99,13 +99,17 @@ public class TeamController {
     }
 
     private void createTeamToBeApproved() {
-        /*
         String teamName, teamLeader;
+        input.nextLine();
+
         System.out.println("Indtast navnet på det nye hold: ");
         teamName = input.nextLine();
         System.out.println("Indtast navnet på holdkaptajnen på det nye hold: ");
         teamLeader = input.nextLine();
-        Team team = new Team("")
-        */
+
+        Team team = new Team(null, null, "NONE", teamName, teamLeader);
+        data.addTeamToList(team);
+
+        System.out.println("Tillykke! Dit hold er oprettet og afventer godkendelse af administrator!");
     }
 }

@@ -65,84 +65,60 @@ public class CompanyController {
 
 
 
+
     private void createTeam() {
-        String teamName, teamLeader, username, userid, password;
+        String teamName, teamLeader, username, userId, password;
         boolean status = true;
+        input.nextLine();
 
         System.out.println("Du har valgt at opprette ett hold");
-        //bekreft dette
-        System.out.println("Indtast ønsket navn på holdet: ");
-        input.nextLine();
+        System.out.println("Indtast ønsket navn på holdet: "); //TODO Der bør checkes for ledighed så der ikke kan oprettes to hold med samme navn!
         teamName = input.nextLine();
         System.out.println("Indtast navn på holdkaptejn: ");
-        input.nextLine();
         teamLeader = input.nextLine();
-        System.out.println("Indtsat dit brugernavn");
-
-        //her er det mye fra MasterController: Kesia.
-        {
-            System.out.println("\nBrugernavnet skal bestå af mindst 6 karakterer ");
-            System.out.println("Hvis du ønsker at annullere oprettelsen TAST 0 som brugernavn");
-            System.out.println("\nIndtast dit ønsket brugernavn: ");
-            username = CompanyController.approveTeam(input.nextLine());
-
-            if (username != null && username.equals("0"))
-                status = false;
-
-            if (username != null && status) {
-                System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
-
-                System.out.println("\nIndtast ønsket kodeord: ");
-                password = validatePassword(input.nextLine());
-
-                if (password != null) {
-                    System.out.println("Bekræft kodeord: ");
-                    if (password.equals(input.nextLine())) {
-                        Company company = new Company(username, password, generateUserID(), teamName);
-                        data.addUserToList(company);
-                        System.out.println("Din bruger blev oprettet!\n");
-                        status = false;
-
-                    } else System.out.println("Din indtastning matchede ikke prøv igen");
-
-                } else System.out.println("Fejl i indtastning. Prøv igen");
-
-            } else {
-                if (status)
-                    System.out.println("Fejl i indtastning. Prøv igen");
-            }
-            input.nextLine();
-            username = input.nextLine();
-            System.out.println("Indtast din UserID");
-            input.nextLine();
-            userid = input.nextLine();
+        username = teamName + "123";
+        userId = generateTeamID();
 
 
-            Team team = new Team(teamName, password, userid, username, teamLeader);
-            this.data.getteamName().add(team);
+        System.out.println("Dit nye hold er oprettet med holdID: " + userId);
+        System.out.println("HUSK at gemme dit holdID!! Nye deltager til holdet skal bruge det til at registrere sig i systemet, første gang de logger ind");
+        System.out.println("\n-med holdnavn: " + teamName);
+        System.out.println("-med holdkaptajn: " + teamLeader);
+        System.out.println("-med brugernavn: " + username);
+        System.out.println("\nNu mangler du bare at vælge et kodeord der passer med brugernavnet, når du skal logge på med dit nye hold");
+        System.out.println("Indtast et ønsket kodeord på mindst 6 karakterer (bogstaver og tal skal indgå)");
+        System.out.println("Nyt kodeord: ");
+        password = validatePassword(input.nextLine());
 
-            System.out.println("Dit holdnavn er");
-        }
+        if (password != null) {
+            System.out.println("Bekræft kodeord: ");
+            if (password.equals(input.nextLine())) {
+                Team team = new Team(username, password,userId, teamName, teamLeader);
+                data.addUserToList(team);
+                currentUser.addTeamToCompany(team);
+                System.out.println("Din bruger blev oprettet!\n");
+            } else System.out.println("Din indtastning matchede ikke prøv igen");
+        } else System.out.println("Fejl i indtastning. Prøv igen");
     }
-
-    public String validatePassword(String password) {
+    private String validatePassword(String password) {
         if(password.length()>7 && password.matches(".*\\d.*"))
             return password;
-
         return null;
     }
+    private String generateTeamID() {
+        String companyId, userIdToString;
+        int userId;
 
-        /*
-        (denne metode skal oprette et nyt hold og derefter printe team ID'et som bruges til at logge ind med og tilføje deltagere til holdet
-    Eksempel:  "Dit hold er blevet oprettet! [Navn: SuperCyklerne,  HoldKaptajn: Simon Hansen]"
-                Holdets ID nummer er: [1030100] og nøgleordet er [hansensis]
-                HUSK AT GEMME ID OG NØGLEORD - Det skal bruges til at logge ind på holdets side
-         */
-//TODO metode
+        companyId = currentUser.getUserId().substring(0,2);
+        userId = currentUser.getTeams().size() + 1;
+        userIdToString = String.valueOf(userId);
 
+        if(userId < 10)
+            return companyId + "0" + userIdToString + "00";
+        else if(userId < 100)
+            return companyId + userIdToString + "00";
 
-    private String generateUserID() {
-        //TODO metode, se i mainController
+        return null;
     }
 
     private void editTeam() {
@@ -156,6 +132,19 @@ public class CompanyController {
 //TODO metode
     }
     private void approveTeam() {
+
+        System.out.println("Følgende hold afventer godkendelse:");
+
+        System.out.println("**********************************************************************************");
+        System.out.println("Liste over hold der afventer godkendelse af dig");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.printf("%-12s %-40s %-40s", "Index", "Holdnavn", "Holdkaptajn");
+        int i = 1;
+        for (Team team : data.getTeamsToBeApproved())
+            System.out.printf("\n%-12s %-40s %-40s", i++, team.getTeamName(), team.getTeamLeader());
+        System.out.println("\n**********************************************************************************");
+        System.out.println("");
+
     }
 
     private void displayData() {

@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class ContestantController {
     Data data;
-    MainController mainController = new MainController();
     Scanner input = new Scanner(System.in);
 
     public ContestantController(Data data) {
@@ -151,7 +150,6 @@ public class ContestantController {
             System.out.println("Skriv dit nye brugernavn");
             input.nextLine();
             newUsername=input.nextLine();
-            mainController.validateUsername(newUsername);
             contestant.setUsername(input.nextLine());
             System.out.println("Du har ændret brugernavn til:" +contestant.getUsername());
 
