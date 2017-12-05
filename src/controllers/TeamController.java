@@ -13,6 +13,7 @@ public class TeamController {
     Data data;
     Scanner input = new Scanner(System.in);
     Contestant currentContestant = null;
+    Team currentTeam = null;
 
     public TeamController(Data data){
         this.data = data;
@@ -30,6 +31,7 @@ public class TeamController {
 
     public void teamRun(Team currentTeam) {
         boolean status = true;
+        this.currentTeam = currentTeam;
 
         do {
             System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentTeam.getTeamName());
@@ -99,7 +101,8 @@ public class TeamController {
     }
 
     private void createTeamToBeApproved() {
-        String teamName, teamLeader;
+        String teamName, teamLeader, userId;
+        userId = currentTeam.getUserId().substring(0,2) + "0000x"; //X'et lægges til (Det var den første tanke, men man behøver faktisk ikke, da denne liste ikke har noget med allUsers at gøre, så der vil aldrig opstå dublikater i userID'et)
         input.nextLine();
 
         System.out.println("Indtast navnet på det nye hold: ");
@@ -107,7 +110,7 @@ public class TeamController {
         System.out.println("Indtast navnet på holdkaptajnen på det nye hold: ");
         teamLeader = input.nextLine();
 
-        Team team = new Team(null, null, "NONE", teamName, teamLeader);
+        Team team = new Team(null, null, userId, teamName, teamLeader);
         data.addTeamToList(team);
 
         System.out.println("Tillykke! Dit hold er oprettet og afventer godkendelse af administrator!");

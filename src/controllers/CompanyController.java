@@ -131,7 +131,7 @@ public class CompanyController {
          */
 //TODO metode
     }
-    private void approveTeam() {
+    private void approveTeam() { //TODO Man skal kunne vælge hvilke hold der skal godkendes
 
         System.out.println("Følgende hold afventer godkendelse:");
 
@@ -141,6 +141,7 @@ public class CompanyController {
         System.out.printf("%-12s %-40s %-40s", "Index", "Holdnavn", "Holdkaptajn");
         int i = 1;
         for (Team team : data.getTeamsToBeApproved())
+            if(team.getUserId().equals(currentUser.getUserId()+"x")) //Dette checker for hold der skal godkendes men kun dem som tilhører den current organisation
             System.out.printf("\n%-12s %-40s %-40s", i++, team.getTeamName(), team.getTeamLeader());
         System.out.println("\n**********************************************************************************");
         System.out.println("");
@@ -161,10 +162,10 @@ public class CompanyController {
             case 1: {
                 int i = 0;
                 System.out.println("Liste over alle virksomheder der deltager i kampagnen");
-                System.out.printf("%-5s %-40s %5s", "Nr", "Navn", "Antal Hold");
+                System.out.printf("%-5s %-40s %-6s %15s", "Nr", "Navn", "VirksomhedsID", "Antal Hold");
                 for (User user : data.getAllUsers()) {
                     if (user instanceof Company) {
-                        System.out.printf("\n%-5d %-40s %5d", i, ((Company) user).getCompanyName(), ((Company) user).getTeams().size());
+                        System.out.printf("\n%-5d %-40s %-6s %15d", i, ((Company) user).getCompanyName(), user.getUserId(), ((Company) user).getTeams().size());
                         i++;
                     }
                 }

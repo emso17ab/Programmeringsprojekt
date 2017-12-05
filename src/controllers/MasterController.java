@@ -97,14 +97,14 @@ public class MasterController {
     }
 
     private String generateCompanyId() {
-        int i = 0;
+        int i = 1;
         for (User user : data.getAllUsers())
             if (user instanceof Company)
                 i++;
         if (i < 10)
-            return String.valueOf(i + "0000");
-        else if (i < 100)
             return String.valueOf("0" + i + "0000");
+        else if (i < 100)
+            return String.valueOf(i + "0000");
 
         return "##0000";
     }
