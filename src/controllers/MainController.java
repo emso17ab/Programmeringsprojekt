@@ -7,7 +7,7 @@ import models.*;
 
 public class MainController {
     private User currentUser;
-    private Team currentTeam;
+    public Team currentTeam;
     private Data data;
     Scanner input = new Scanner(System.in);
 

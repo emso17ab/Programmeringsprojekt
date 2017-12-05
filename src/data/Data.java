@@ -8,16 +8,16 @@ public class Data {
     private ArrayList<Team> teamsToBeApproved;
 
 
-    public Data(){
+    public Data() {
         this.allUsers = new ArrayList<>();
         this.teamsToBeApproved = new ArrayList<>();
         generateData();
     }
 
-    public void generateData(){
+    public void generateData() {
 
         //Masteradministratoren oprettes af typen company. Denne er unik og der kan ikke oprettes andre mastere når programmet kører
-        Master adminMaster = new Master("admin","admin","000000","VCPA");
+        Master adminMaster = new Master("admin", "admin", "000000", "VCPA");
 
         //Seks testdeltagere bliver oprettet
         Contestant contestant1 = new Contestant("emil", "1234", "010101", "Emil Sørensen", "emil.soerensen@hotmail.com", "BEGYNDER");
@@ -28,7 +28,7 @@ public class Data {
         Contestant contestant6 = new Contestant("heino", "1234", "010203", "Heino Hansen", "emil.soerensen@hotmail.com", "PROFESSIONEL");
 
         //To testhold bliver oprettet og der lægges tre testdeltagere ind på hvert hold
-        Team team1 = new Team("team1", "0001", "010100","SuperCyklerne", "Rasmus Pold");
+        Team team1 = new Team("team1", "0001", "010100", "SuperCyklerne", "Rasmus Pold");
         Team team2 = new Team("team2", "0002", "010200", "PowerBikers", "Kesia Heiberg");
 
         team1.addContestantToTeam(contestant1);
@@ -68,10 +68,12 @@ public class Data {
         return allUsers;
     }
 
-    public void addUserToList(User user){
+    public void addUserToList(User user) {
         this.allUsers.add(user);
     }
 
-    public void addTeamToList (Team team){
+    public void addTeamToList(Team team) {
         this.teamsToBeApproved.add(team);
     }
+}
+

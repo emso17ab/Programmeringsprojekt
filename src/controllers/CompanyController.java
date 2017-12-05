@@ -13,7 +13,7 @@ public class CompanyController {
     Company currentUser;
     Scanner input = new Scanner(System.in);
 
-    public CompanyController(Data data){
+    public CompanyController(Data data) {
         this.data = data;
     }
 
@@ -23,7 +23,7 @@ public class CompanyController {
 
         System.out.println("\nDU ER LOGGET IND SOM ADMINISTRATOR\n");
 
-        do{
+        do {
             System.out.println("\n\tVelkommen til menuen for: " + currentUser.getCompanyName());
             System.out.println("ORGANISATIONENS MENU");
             System.out.println("1) Opret Hold");
@@ -35,43 +35,103 @@ public class CompanyController {
             System.out.println("0) Log af ");
             System.out.println("Valg: ");
 
-            switch (input.nextInt()){
-                case 0: status = false;
+            switch (input.nextInt()) {
+                case 0:
+                    status = false;
                     break;
-                case 1: createTeam();
+                case 1:
+                    createTeam();
                     break;
-                case 2: approveTeam();
+                case 2:
+                    approveTeam();
                     break;
-                case 3: editTeam();
+                case 3:
+                    editTeam();
                     break;
-                case 4: displayData();
+                case 4:
+                    displayData();
                     break;
-                case 5: deleteContestant();
+                case 5:
+                    deleteContestant();
                     break;
-                case 6: goToTeam(currentUser);
+                case 6:
+                    goToTeam(currentUser);
                     break;
-                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                default:
+                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
-        }while(status);
+        } while (status);
     }
 
+
+
     private void createTeam() {
-        String name;
-        String holdkaptejn;
+        String teamName, teamLeader, username, userid, password;
+        boolean status = true;
 
         System.out.println("Du har valgt at opprette ett hold");
         //bekreft dette
         System.out.println("Indtast ønsket navn på holdet: ");
         input.nextLine();
-        name= input.nextLine();
-        System.out.println("Indtast navn på holdkatpejn: ");
+        teamName = input.nextLine();
+        System.out.println("Indtast navn på holdkaptejn: ");
         input.nextLine();
-        holdkaptejn=input.nextLine();
+        teamLeader = input.nextLine();
+        System.out.println("Indtsat dit brugernavn");
 
-        Team team = new Team (name, holdkaptejn,);
-        this.data.getTeam().add(team);
+        //her er det mye fra MasterController: Kesia.
+        {
+            System.out.println("\nBrugernavnet skal bestå af mindst 6 karakterer ");
+            System.out.println("Hvis du ønsker at annullere oprettelsen TAST 0 som brugernavn");
+            System.out.println("\nIndtast dit ønsket brugernavn: ");
+            username = CompanyController.approveTeam(input.nextLine());
 
-        System.out.println("Dit hold navn er" );
+            if (username != null && username.equals("0"))
+                status = false;
+
+            if (username != null && status) {
+                System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
+
+                System.out.println("\nIndtast ønsket kodeord: ");
+                password = validatePassword(input.nextLine());
+
+                if (password != null) {
+                    System.out.println("Bekræft kodeord: ");
+                    if (password.equals(input.nextLine())) {
+                        Company company = new Company(username, password, generateUserID(), teamName);
+                        data.addUserToList(company);
+                        System.out.println("Din bruger blev oprettet!\n");
+                        status = false;
+
+                    } else System.out.println("Din indtastning matchede ikke prøv igen");
+
+                } else System.out.println("Fejl i indtastning. Prøv igen");
+
+            } else {
+                if (status)
+                    System.out.println("Fejl i indtastning. Prøv igen");
+            }
+            input.nextLine();
+            username = input.nextLine();
+            System.out.println("Indtast din UserID");
+            input.nextLine();
+            userid = input.nextLine();
+
+
+            Team team = new Team(teamName, password, userid, username, teamLeader);
+            this.data.getteamName().add(team);
+
+            System.out.println("Dit holdnavn er");
+        }
+    }
+
+    public String validatePassword(String password) {
+        if(password.length()>7 && password.matches(".*\\d.*"))
+            return password;
+
+        return null;
+    }
+
         /*
         (denne metode skal oprette et nyt hold og derefter printe team ID'et som bruges til at logge ind med og tilføje deltagere til holdet
     Eksempel:  "Dit hold er blevet oprettet! [Navn: SuperCyklerne,  HoldKaptajn: Simon Hansen]"
@@ -79,13 +139,14 @@ public class CompanyController {
                 HUSK AT GEMME ID OG NØGLEORD - Det skal bruges til at logge ind på holdets side
          */
 //TODO metode
-    }
 
-    private void approveTeam() {
-//TODO metode
+
+    private String generateUserID() {
+        //TODO metode, se i mainController
     }
 
     private void editTeam() {
+        System.out.println("Du har valgt at endre på dit hold");
         /*
         Switch()
         3.1 editTeamName
@@ -93,6 +154,8 @@ public class CompanyController {
         3.3 deleteTeam
          */
 //TODO metode
+    }
+    private void approveTeam() {
     }
 
     private void displayData() {
@@ -117,21 +180,26 @@ public class CompanyController {
                     }
                 }
                 System.out.println("");
-            } break;
-            case 2: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+            }
+            break;
+            case 2:
+                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 3: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+            case 3:
+                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 4: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+            case 4:
+                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
-            case 5: System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+            case 5:
+                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
                 break;
 
         }
     }
 
     private void deleteContestant() {
-//TODO metode
+
     }
 
     private void goToTeam(Company currentUser) {
@@ -140,8 +208,7 @@ public class CompanyController {
             System.out.println("Du har ingen tilmeldte hold endnu!\nGå tilbage til hovedmenuen og opret dit første hold");
             System.out.println("Tilbage til hovedmenu (TRYK ENTER)");
             input.nextLine(); //Dette input har ingen funktion andet end at gå tilbage til hovedmenuen når brugeren trykker enter
-        }
-        else {
+        } else {
             int i = 1, c = 1, valg;
             for (Team team : currentUser.getTeams()) {
                 System.out.println(i + ")" + team.getTeamName());
@@ -150,7 +217,7 @@ public class CompanyController {
             System.out.println("Gå tilbage (TAST 0)");
             System.out.println("\nVælg hold:");
             valg = input.nextInt();
-                        for (Team team : currentUser.getTeams()) {
+            for (Team team : currentUser.getTeams()) {
                 if (valg == c) {
                     TeamController teamController = new TeamController(data);
                     teamController.teamRun(team);
@@ -159,5 +226,7 @@ public class CompanyController {
             }
         }
     }
-}
 
+
+
+}
