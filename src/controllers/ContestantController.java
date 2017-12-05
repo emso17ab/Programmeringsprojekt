@@ -17,9 +17,6 @@ public class ContestantController {
         this.data = data;
     }
 
-
-
-
     public void contestantRun(Contestant currentUser) {
         boolean status = true;
 

@@ -17,8 +17,6 @@ public class MasterController {
     }
 
 
-
-
     public void masterRun(Master master) {
         boolean status = true;
 

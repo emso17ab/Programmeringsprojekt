@@ -63,9 +63,6 @@ public class CompanyController {
         } while (status);
     }
 
-
-
-
     private void createTeam() {
         String teamName, teamLeader, username, userId, password;
         boolean status = true;
@@ -131,6 +128,7 @@ public class CompanyController {
          */
 //TODO metode
     }
+
     private void approveTeam() { //TODO Man skal kunne vælge hvilke hold der skal godkendes
 
         System.out.println("Følgende hold afventer godkendelse:");
@@ -216,7 +214,4 @@ public class CompanyController {
             }
         }
     }
-
-
-
 }
