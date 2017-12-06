@@ -131,19 +131,70 @@ public class CompanyController {
     }
 
     private void approveTeam() { //TODO Man skal kunne vælge hvilke hold der skal godkendes
+        int k = 0;
+        boolean status = true;
 
-        System.out.println("Følgende hold afventer godkendelse:");
-
-        System.out.println("**********************************************************************************");
-        System.out.println("Liste over hold der afventer godkendelse af dig");
-        System.out.println("-----------------------------------------------------------------------");
-        System.out.printf("%-12s %-40s %-40s", "Index", "Holdnavn", "Holdkaptajn");
-        int i = 1;
+        //De første 3 linjer kode (137-139) i denne metode checker først om der er nogle hold på listen som afventer godkendelse
         for (Team team : data.getTeamsToBeApproved())
-            if(team.getUserId().equals(currentUser.getUserId()+"x")) //Dette checker for hold der skal godkendes men kun dem som tilhører den current organisation
-            System.out.printf("\n%-12s %-40s %-40s", i++, team.getTeamName(), team.getTeamLeader());
-        System.out.println("\n**********************************************************************************");
-        System.out.println("");
+            if (team.getUserId().equals(currentUser.getUserId() + "x"))
+                k++;
+
+        //Hvis der blev fundet hold på listen kører metoden videre nedenfor, hvis ikke afsluttes den med en besked (linje 156)
+        if(k > 0) {
+            do {
+                System.out.println("**********************************************************************************");
+                System.out.println("Liste over hold der afventer godkendelse af dig");
+                System.out.println("-----------------------------------------------------------------------");
+                System.out.printf("%-12s %-40s %-40s", "Index", "Holdnavn", "Holdkaptajn");
+
+                for (Team team : data.getTeamsToBeApproved())
+                    if (team.getUserId().equals(currentUser.getUserId() + "x"))  //Dette checker for hold der skal godkendes men kun dem som tilhører den current organisation
+                        System.out.printf("\n%-12s %-40s %-40s", data.getTeamsToBeApproved().indexOf(team), team.getTeamName(), team.getTeamLeader());
+
+                System.out.println("\n**********************************************************************************");
+                System.out.println("");
+
+                System.out.println("Hvad vil du foretage dig?\n");
+                System.out.println("1) GODKEND et hold via index nr.       3) AFVIS et hold via index nr.");
+                System.out.println("2) GODKEND alle hold på listen         4) AFVIS alle hold på listen");
+                System.out.println("\n0) Tilbage til hovedmenuen");
+
+                switch (input.nextInt()) {
+                    case 0:
+                        status = false;
+                        break;
+                    case 1:
+                        approveTeamFromIndex();
+                        break;
+                    case 2:
+                        approveTeamAll();
+                        break;
+                    case 3:
+                        rejectTeamFromIndex();
+                        break;
+                    case 4:
+                        rejectTeamAll();
+                        break;
+                    default:
+                }
+            } while (status);
+        }
+        else {
+            System.out.println("Du har ingen hold der afventer godkendelse");
+        }
+
+    }
+
+    private void rejectTeamAll() {
+    }
+
+    private void rejectTeamFromIndex() {
+    }
+
+    private void approveTeamAll() {
+    }
+
+    private void approveTeamFromIndex() {
 
     }
 
