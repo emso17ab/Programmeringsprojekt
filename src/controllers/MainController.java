@@ -28,8 +28,7 @@ public class MainController {
 
             switch (input.nextInt()) {
                 case 0:
-                    System.out.println("Programmet lukker ned...");
-                    runStatus = false;
+                    runStatus = runShutDown();
                     break;
                 case 1:
                     authUser();
@@ -259,5 +258,30 @@ public class MainController {
         for (User user : data.getAllUsers()) {
             user.displayData();
         }
+    }
+
+    private boolean runShutDown(){
+        int choice;
+        input.nextLine();
+        System.out.println("************************************************");
+        System.out.println("|                                              |");
+        System.out.println("|   Er du sikker på, du vil lukke programmet?  |");
+        System.out.println("|   ----------------     --------------        |");
+        System.out.println("|     (1)OK               (2)ANULLER           |");
+        System.out.println("|   ----------------     --------------        |");
+        System.out.println("|                                              |");
+        System.out.println("************************************************");
+        System.out.print("   Valg: ");
+        choice = input.nextInt();
+
+        if(choice == 1) {
+            System.out.println("Programmet lukker ned...");
+            return false;
+        }
+        else if (choice == 2){
+            System.out.println("Går tilbage til hovedmenuen...");
+            return true;
+        }
+        return true;
     }
 }
