@@ -1,6 +1,7 @@
 package controllers;
 import data.Data;
 import models.Company;
+import models.Contestant;
 import models.Team;
 import models.User;
 
@@ -150,43 +151,31 @@ public class CompanyController {
 
         System.out.println("\nHvad vil du have vist?");
         System.out.println("1) Oversigt over alle deltagende virksomheder");
-        System.out.println("2) Dine hold");
-        System.out.println("3) Information om et hold (Kræver holdID)");
-        System.out.println("4) Information om en deltager (Kræver deltagerID)");
-        System.out.println("5) Udskriv alle deltagere");
+        System.out.println("2) Information om et hold (Kræver holdID)");
+        System.out.println("3) Information om en deltager (Kræver deltagerID)");
+        System.out.println("4) Vis deltagere og hold");
 
         switch (input.nextInt()) { //TODO DENNE SWITCH SKAL KALDE METODER I CASE'NE ISTEDET FOR AT INDEHOLDE METODEN
 
-            case 1: {
-                int i = 0;
-                System.out.println("Liste over alle virksomheder der deltager i kampagnen");
-                System.out.printf("%-5s %-40s %-6s %15s", "Nr", "Navn", "VirksomhedsID", "Antal Hold");
-                for (User user : data.getAllUsers()) {
-                    if (user instanceof Company) {
-                        System.out.printf("\n%-5d %-40s %-6s %15d", i, ((Company) user).getCompanyName(), user.getUserId(), ((Company) user).getTeams().size());
-                        i++;
-                    }
-                }
-                System.out.println("");
-            }
+            case 1:
+                printAllCompanies();
             break;
             case 2:
-                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+                printTeamByID();
                 break;
             case 3:
-                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+                printContestantByID();
                 break;
             case 4:
-                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
-                break;
-            case 5:
-                System.out.println("Denne funktion er ikke oprette endnu"); //TODO
+                printAllContestants();
                 break;
 
         }
     }
 
+
     private void deleteContestant() {
+
 
     }
 
@@ -214,4 +203,75 @@ public class CompanyController {
             }
         }
     }
+
+    private String findTeamOfContestant(String contestantID){
+        String teamId = contestantID.substring(0,4) + "00";
+        for (User user : data.getAllUsers())
+            if(teamId.equals(user.getUserId()) && user instanceof Team)
+                return ((Team) user).getTeamName();
+        return null;
+    }
+
+    private void printAllCompanies(){
+        int i = 0;
+        System.out.println("Liste over alle virksomheder der deltager i kampagnen");
+        System.out.printf("%-5s %-40s %-6s %15s", "Nr", "Navn", "VirksomhedsID", "Antal Hold");
+        for (User user : data.getAllUsers()) {
+            if (user instanceof Company) {
+                System.out.printf("\n%-5d %-40s %-6s %15d", i, ((Company) user).getCompanyName(), user.getUserId(), ((Company) user).getTeams().size());
+                i++;
+            }
+        }
+        System.out.println("");
+    }
+
+    private void printContestantByID() {
+        User activeUser = null;
+        String contestantId, contestantPassword;
+        input.nextLine();
+
+        System.out.println("Indtast deltagerens ID: ");
+        contestantId = input.nextLine();
+        System.out.println("Indtast kodeord: ");
+        contestantPassword = input.nextLine();
+
+        for(User user : data.getAllUsers()) {
+            if (contestantId.equals(user.getUserId()) && contestantPassword.equals(user.getPassword()) && user instanceof Contestant) {
+                System.out.println("*****************************************************************************");
+                System.out.println("Viser information om bruger " + user.getUserId() + ": ");
+                System.out.println("------------------------------------------------");
+                System.out.println("Navn: " + ((Contestant) user).getContestantName());
+                System.out.println("Email: " + ((Contestant) user).getContestantEmail());
+                System.out.println("Type: " + ((Contestant) user).getContestantType());
+                System.out.println("Brugernavn: " + user.getUsername());
+                System.out.println("Kodeord: " + user.getPassword());
+                System.out.println("*****************************************************************************");
+                activeUser = user;
+            }
+        }
+        if(activeUser == null)
+            System.out.println("Fejl i indtastet ID eller kodeord!");
+    }
+
+    private void printTeamByID() {
+    }
+
+    private void printAllContestants(){
+        String companyID = currentUser.getUserId().substring(0,2);
+        System.out.println("**********************************************************************************");
+        System.out.println("Liste over alle deltagere med hold i din virksomhed");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.printf("%-12s %-20s %-25s %-30s %-15s", "DeltagerID", "Hold", "Navn", "Email", "Type");
+
+        for (User user : data.getAllUsers())
+            if(companyID.equals(user.getUserId().substring(0,2)) && user instanceof Contestant){
+                System.out.printf("\n%-12s %-20s %-25s %-30s %-15s", user.getUserId(), findTeamOfContestant(user.getUserId()),
+                        ((Contestant) user).getContestantName(), ((Contestant) user).getContestantEmail(),
+                        ((Contestant) user).getContestantType());
+            }
+        System.out.println("\n**********************************************************************************");
+        System.out.println("");
+    }
+
+
 }
