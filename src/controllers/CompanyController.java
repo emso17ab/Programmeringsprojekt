@@ -79,7 +79,7 @@ public class CompanyController {
 
 
         System.out.println("Dit nye hold er oprettet med holdID: " + userId);
-        System.out.println("HUSK at gemme dit holdID!! Nye deltager til holdet skal bruge det til at registrere sig i systemet, første gang de logger ind");
+        System.out.println("HUSK at gemme dit holdID!! Nye deltagere til holdet skal bruge det til at registrere sig i systemet, første gang de logger ind");
         System.out.println("\n-med holdnavn: " + teamName);
         System.out.println("-med holdkaptajn: " + teamLeader);
         System.out.println("-med brugernavn: " + username);
@@ -130,18 +130,19 @@ public class CompanyController {
 //TODO metode
     }
 
-    private void approveTeam() { //TODO Man skal kunne vælge hvilke hold der skal godkendes
+    private void approveTeam() {
         int k = 0;
         boolean status = true;
 
-        //De første 3 linjer kode (137-139) i denne metode checker først om der er nogle hold på listen som afventer godkendelse
-        for (Team team : data.getTeamsToBeApproved())
-            if (team.getUserId().equals(currentUser.getUserId() + "x"))
-                k++;
+        do {
+            //De første 3 linjer kode (137-139) i denne metode checker først om der er nogle hold på listen som afventer godkendelse
+            for (Team team : data.getTeamsToBeApproved())
+                if (team.getUserId().equals(currentUser.getUserId() + "x"))
+                    k++;
 
-        //Hvis der blev fundet hold på listen kører metoden videre nedenfor, hvis ikke afsluttes den med en besked (linje 156)
-        if(k > 0) {
-            do {
+            //Hvis der blev fundet hold på listen kører metoden videre nedenfor, hvis ikke afsluttes den med en besked (linje 156)
+            if(k > 0) {
+                k = 0; //Dette nulstiller tælleren
                 System.out.println("**********************************************************************************");
                 System.out.println("Liste over hold der afventer godkendelse af dig");
                 System.out.println("-----------------------------------------------------------------------");
@@ -170,32 +171,67 @@ public class CompanyController {
                         approveTeamAll();
                         break;
                     case 3:
-                        rejectTeamFromIndex();
+                        input.nextLine();
+                        System.out.println("Indtast index nr.: ");
+                        rejectTeamFromIndex(input.nextInt()); //Dette gør at metoden kan genbruges af approveTeamFromIndex metoden
                         break;
                     case 4:
                         rejectTeamAll();
                         break;
                     default:
                 }
-            } while (status);
-        }
-        else {
-            System.out.println("Du har ingen hold der afventer godkendelse");
-        }
-
+            } else {
+                System.out.println("**********************************************************************************");
+                System.out.println("Du har ingen hold der afventer godkendelse");
+                System.out.println("**********************************************************************************");
+                status = false;
+            }
+        } while (status);
     }
 
     private void rejectTeamAll() {
     }
 
-    private void rejectTeamFromIndex() {
+    private void rejectTeamFromIndex(int index) {
+        data.getTeamsToBeApproved().remove(index);
     }
 
-    private void approveTeamAll() {
+    private void approveTeamAll() {//TODO skal laves
+        int indexChoice;
+        input.nextLine();
+
+        System.out.println("Indtast index nr.: ");
+        indexChoice = input.nextInt();
+
     }
 
     private void approveTeamFromIndex() {
+        Team teamToBeApproved;
+        int indexChoice;
+        String username, password, teamId;
+        input.nextLine();
+        System.out.println("Indtast index nr.: ");
+        indexChoice = input.nextInt();
+        teamToBeApproved = data.getTeamsToBeApproved().get(indexChoice);
 
+        //OBS! Denne holdoprettelsesmetode tager ikke højde for kriterier for brugernavn og kodeord pga tidsbegrænsning!
+        input.nextLine();
+        System.out.println("Du har valgt at godkende hold: " + teamToBeApproved.getTeamName());
+        System.out.println("\nDu skal vælge et brugernavn og et kodeord til holdet");
+        System.out.println("\nVælg et brugernavn: ");
+        username = input.nextLine();
+        System.out.println("Vælg et kodeord: ");
+        password = input.nextLine();
+        teamId = generateTeamID();
+        Team team = new Team(username, password, teamId, teamToBeApproved.getTeamName(), teamToBeApproved.getTeamLeader());
+        data.addUserToList(team);
+        currentUser.addTeamToCompany(team);
+        System.out.println("Holdet blev oprettet med holdID: " + teamId);
+        System.out.println("HUSK at gemme dit holdID!! " +
+                "Nye deltagere til holdet skal bruge det til at registrere sig i systemet, første gang de logger ind");
+
+        //Efter holdet er blevet godkendt og tilføjet til virksomhedens holdliste fjernes holdet nu fra teamsToBeApproved listen
+        rejectTeamFromIndex(indexChoice);
     }
 
     private void displayData() {
