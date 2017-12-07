@@ -1,9 +1,6 @@
 package controllers;
 import data.Data;
-import models.Company;
-import models.Contestant;
-import models.Team;
-import models.User;
+import models.*;
 
 import java.util.Scanner;
 
