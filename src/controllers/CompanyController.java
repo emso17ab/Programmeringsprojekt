@@ -129,8 +129,7 @@ public class CompanyController {
             System.out.println("1) Ændr Holdnavn");
             System.out.println("2) Ændre Holdkaptajn");
             System.out.println("3) Slette Holdet");
-            System.out.println("4) Gå til Holdmenuen");
-            System.out.println("5) Log af");
+            System.out.println("0) Tilbage til Hovedmenu");
 
             switch (input.nextInt()) {
                 case 0:
@@ -143,10 +142,7 @@ public class CompanyController {
                     editTeamLeader();
                     break;
                 case 3:
-                    //deleteTeam();
-                    break;
-                case 4:
-                    goToTeam(currentUser);
+                    deleteTeam();
                     break;
                 default:
                     System.out.println("\nFejl i indtastningen, prøv igen!\n");
@@ -154,21 +150,37 @@ public class CompanyController {
         } while (status);
 
     }
-    private void editTeamName() {
-        String teamName;
-        System.out.println("Du er nu ved at ændre holdnavn:");
-        System.out.println("Skriv jeres nye holdnavn:");
-        input.nextLine();
-        teamName=input.nextLine();
-        System.out.println("Du har ændret holdnavnet til:" + teamName);
+
+    private void deleteTeam() {
+        Team currentTeam = selectTeam();
+        int indexChoice = currentUser.getTeams().indexOf(currentTeam); //Fanger indexnummeret af det valgte hold
+        System.out.println("Er du sikker på du vil slette hold: " + currentTeam.getTeamName() + " ?");
+        System.out.println("1) JA                 2) NEJ");
+        if(input.nextInt() == 1) {
+            data.getAllUsers().remove(data.getAllUsers().indexOf(currentTeam));
+            currentUser.getTeams().remove(indexChoice);
+            System.out.println("Hold '" + currentTeam.getTeamName() + "' er nu slettet fra programmet");
+        }
     }
-    private void editTeamLeader() {
-        String teamLeader;
-        System.out.println("Du er ved at ændre jeres Holdkaptajn:");
-        System.out.println("Hvem er jeres nye Holdkaptajn?");
+
+    private void editTeamName() {
+        Team currentTeam = selectTeam();
         input.nextLine();
-        teamLeader=input.nextLine();
-        System.out.println("Du har ændret jeres holdkaptajn til:" + teamLeader);
+        System.out.println("\nDu er nu ved at ændre holdnavn på holdet: " + currentTeam.getTeamName());
+        System.out.println("Skriv jeres nye holdnavn:");
+        currentTeam.setTeamName(input.nextLine());
+        System.out.println("\nDu har ændret holdnavnet til: " + currentTeam.getTeamName());
+        System.out.println("");
+    }
+
+    private void editTeamLeader() {
+        Team currentTeam = selectTeam();
+        input.nextLine();
+        System.out.println("\nDu er ved at ændre jeres Holdkaptajn: " + currentTeam.getTeamLeader());
+        System.out.println("Hvem er jeres nye Holdkaptajn?");
+        currentTeam.setTeamLeader(input.nextLine());
+        System.out.println("Du har ændret jeres holdkaptajn til:" + currentTeam.getTeamLeader());
+        System.out.println("");
     }
 
     private void approveTeam() {
@@ -283,11 +295,11 @@ public class CompanyController {
         System.out.println("3) Information om en deltager (Kræver deltagerID)");
         System.out.println("4) Vis deltagere og hold");
 
-        switch (input.nextInt()) { //TODO DENNE SWITCH SKAL KALDE METODER I CASE'NE ISTEDET FOR AT INDEHOLDE METODEN
+        switch (input.nextInt()) {
 
             case 1:
                 printAllCompanies();
-            break;
+                break;
             case 2:
                 printTeamByID();
                 break;
@@ -302,6 +314,16 @@ public class CompanyController {
     }
 
     private void printTeamByID() {
+
+    }
+
+    private Team selectTeam() {
+        //Denne metode printer listen over alle hold Virksomheden har og returnerer det valgte hold
+        System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+        for (Team team : currentUser.getTeams())
+                System.out.printf("%-10s %-12s %-40s %-40s %5s\n", currentUser.getTeams().indexOf(team), team.getUserId(), team.getTeamName(), team.getTeamLeader(), currentUser.getTeams().size());
+        System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
+        return currentUser.getTeams().get(input.nextInt());
     }
 
     private void deleteContestant() {
