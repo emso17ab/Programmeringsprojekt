@@ -305,7 +305,7 @@ public class MainController {
         System.out.println("|                                              |");
         System.out.println("|   Er du sikker på, du vil lukke programmet?  |");
         System.out.println("|   ----------------     --------------        |");
-        System.out.println("|     (1)OK               (2)ANULLER           |");
+        System.out.println("|     (1)OK               (2)ANNULLER          |");
         System.out.println("|   ----------------     --------------        |");
         System.out.println("|                                              |");
         System.out.println("************************************************");

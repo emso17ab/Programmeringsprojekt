@@ -361,9 +361,45 @@ public class CompanyController {
     }
 
     private void deleteContestant() {
+        boolean status = false;
+        Contestant selectedContestant = null;
+        String contestantId;
+        int choice;
+        input.nextLine();
 
+        printAllContestants();
+        do {
+            System.out.println("Vælg deltager som skal afmeldes kampagnen  < ANNULLER - TAST 0 >");
+            System.out.println("Indtat deltagerID: ");
+            contestantId = input.nextLine();
+            for (User user : data.getAllUsers())
+                if (user.getUserId().equals(contestantId) && user instanceof Contestant)
+                    selectedContestant = (Contestant) user;
 
-    }
+            if (selectedContestant != null) {
+                System.out.println("Er du sikker på, at du vil afmelde " + selectedContestant.getContestantName() + " permanent fra kampagnen?");
+                System.out.println("1) JA       2)ANNULLER");
+                choice = input.nextInt();
+                if (choice == 1) {
+                    data.getAllUsers().remove(data.getAllUsers().indexOf(selectedContestant));
+                    System.out.println(selectedContestant.getContestantName() + " er afmeldt 'Vi Cykler Til Arbejde' kampagnen");
+                } else if (choice == 2)
+                    System.out.println("Afmelding annulleret...");
+                else {
+                    System.out.println("Fejl i indtastningen, prøv igen");
+                    status = true;
+                }
+            }
+            else if(contestantId.equals("0")) {
+                status = false;
+            }
+            else {
+                System.out.println("Fejl i indtastningen, prøv igen");
+                status = true;
+            }
+
+        }while(status);
+    } //TODO Mangler kun at slette fra Holdets Arrayliste nu!
 
     private void goToTeam(Company currentUser) {
         input.nextLine();
