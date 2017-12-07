@@ -6,6 +6,4 @@ public class Main {
         MainController mainController = new MainController();
         mainController.run();
     }
-
-    //TODO Try Catch implementering i noget af koden, Resten skal checkes for fejlmeldinger og opsættes i IF statements
 }

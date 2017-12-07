@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class CompanyController {
     Data data;
     Company currentUser;
+    Team currentTeam;
     Scanner input = new Scanner(System.in);
 
     public CompanyController(Data data) {
@@ -121,11 +122,10 @@ public class CompanyController {
 
     private void editTeam() {
         boolean status = true;
-        System.out.println("Du har valgt at endre på dit hold");
-
+        System.out.println("Vælg et hold du ønsker at ændre");
+        currentTeam = selectTeam();
         do {
-            System.out.println("\n\tVelkommen til menuen for: " + currentUser.getCompanyName());
-            System.out.println("ÆNDR HOLD");
+            System.out.println("\n\tÆNDR HOLD");
             System.out.println("1) Ændr Holdnavn");
             System.out.println("2) Ændre Holdkaptajn");
             System.out.println("3) Slette Holdet");
@@ -152,7 +152,6 @@ public class CompanyController {
     }
 
     private void deleteTeam() {
-        Team currentTeam = selectTeam();
         int indexChoice = currentUser.getTeams().indexOf(currentTeam); //Fanger indexnummeret af det valgte hold
         System.out.println("Er du sikker på du vil slette hold: " + currentTeam.getTeamName() + " ?");
         System.out.println("1) JA                 2) NEJ");
@@ -164,7 +163,6 @@ public class CompanyController {
     }
 
     private void editTeamName() {
-        Team currentTeam = selectTeam();
         input.nextLine();
         System.out.println("\nDu er nu ved at ændre holdnavn på holdet: " + currentTeam.getTeamName());
         System.out.println("Skriv jeres nye holdnavn:");
@@ -174,7 +172,6 @@ public class CompanyController {
     }
 
     private void editTeamLeader() {
-        Team currentTeam = selectTeam();
         input.nextLine();
         System.out.println("\nDu er ved at ændre jeres Holdkaptajn: " + currentTeam.getTeamLeader());
         System.out.println("Hvem er jeres nye Holdkaptajn?");
@@ -188,7 +185,7 @@ public class CompanyController {
         boolean status = true;
 
         do {
-            //De første 3 linjer kode (137-139) i denne metode checker først om der er nogle hold på listen som afventer godkendelse
+            //De første 3 linjer kode i denne metode checker først om der er nogle hold på listen som afventer godkendelse
             for (Team team : data.getTeamsToBeApproved())
                 if (team.getUserId().equals(currentUser.getUserId() + "x"))
                     k++;
@@ -291,9 +288,8 @@ public class CompanyController {
 
         System.out.println("\nHvad vil du have vist?");
         System.out.println("1) Oversigt over alle deltagende virksomheder");
-        System.out.println("2) Information om et hold (Kræver holdID)");
-        System.out.println("3) Information om en deltager (Kræver deltagerID)");
-        System.out.println("4) Vis deltagere og hold");
+        System.out.println("2) Information om en deltager (Kræver deltagerID)");
+        System.out.println("3) Vis deltagere og hold");
 
         switch (input.nextInt()) {
 
@@ -301,29 +297,37 @@ public class CompanyController {
                 printAllCompanies();
                 break;
             case 2:
-                printTeamByID();
-                break;
-            case 3:
                 printContestantByID();
                 break;
-            case 4:
+            case 3:
                 printAllContestants();
                 break;
-
+            default:
+                System.out.println("Fejl i indtastning");
         }
     }
 
-    private void printTeamByID() {
-
-    }
-
     private Team selectTeam() {
-        //Denne metode printer listen over alle hold Virksomheden har og returnerer det valgte hold
-        System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
-        for (Team team : currentUser.getTeams())
+        /*
+        Der checkes først om der er nogle hold på listen som afventer godkendelse
+        Hvis der ikke findes nogle hold for virksomheden returnerer metoden null og en besked til brugeren om dette.
+        */
+        int k = 0;
+        for (Team teamCount : currentUser.getTeams())
+            k++;
+        //Printer en liste over alle hold Virksomheden har og returnerer det valgte hold
+        if (k > 0) {
+            System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+            for (Team team : currentUser.getTeams())
                 System.out.printf("%-10s %-12s %-40s %-40s %5s\n", currentUser.getTeams().indexOf(team), team.getUserId(), team.getTeamName(), team.getTeamLeader(), currentUser.getTeams().size());
-        System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
-        return currentUser.getTeams().get(input.nextInt());
+            System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
+            return currentUser.getTeams().get(input.nextInt());
+        } else{
+            System.out.println("**********************************************************************************");
+            System.out.println("Du har ingen hold endnu!");
+            System.out.println("**********************************************************************************");
+            return null;
+        }
     }
 
     private void deleteContestant() {
@@ -365,16 +369,21 @@ public class CompanyController {
     }
 
     private void printAllCompanies(){
-        int i = 0;
-        System.out.println("Liste over alle virksomheder der deltager i kampagnen");
+        int i = 0, teamTotal = 0;
+        System.out.println("\n******************************************************************************");
+        System.out.println("HOLDFORDELING  /  Liste over alle virksomheder der deltager i kampagnen");
+        System.out.println("******************************************************************************\n");
         System.out.printf("%-5s %-40s %-6s %15s", "Nr", "Navn", "VirksomhedsID", "Antal Hold");
         for (User user : data.getAllUsers()) {
             if (user instanceof Company) {
                 System.out.printf("\n%-5d %-40s %-6s %15d", i, ((Company) user).getCompanyName(), user.getUserId(), ((Company) user).getTeams().size());
                 i++;
+                teamTotal = teamTotal + ((Company) user).getTeams().size();
             }
         }
-        System.out.println("");
+        System.out.println("\n------------------------------------------------------------------------------");
+        System.out.println("TOTAL                                                               " + teamTotal);
+        System.out.println("******************************************************************************\n");
     }
 
     private void printContestantByID() {

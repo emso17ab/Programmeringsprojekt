@@ -23,7 +23,6 @@ public class MasterController {
         do {
             System.out.println("\n\tADMINISTRATOR MENU");
             System.out.println("\t1) Tilmeld din organisation");
-            System.out.println("\t2) Hjælp");
             System.out.println("\t0) Log af");
             System.out.print("\n\tValg: ");
 try {
@@ -33,9 +32,6 @@ try {
             break;
         case 1:
             createCompany();
-            break;
-        case 2:
-            printHelp();
             break;
         default:
             System.out.println("\nFejl i indtastningen, prøv igen!\n");
@@ -111,26 +107,4 @@ try {
 
         return "##0000";
     }
-
-    private void printHelp(){
-        System.out.println("***********************************************************************************************************");
-        System.out.println("-----------------------------------------------    HJÆLP    -----------------------------------------------");
-        System.out.println("***********************************************************************************************************");
-            System.out.println("Du er logget ind som 'master'. Det er her du kan tilmelde din organisation til programmet" +
-                    "\nStart med at vælge 'Tilmeld din organisation' fra hovedmenuen. " +
-                    "\n\nNår du har tilmeldt din organisation er det tid til at oprette dit første hold. \nStart " +
-                    "med at logge ud af 'masteren' som du er inde på nu. \nHerefter logger du ind igen, men denne gang med " +
-                    "dit nye virksomhedslogin. \n\nDu kommer nu til en menu hvor du kan vælge at oprette nye hold." +
-                    "\nNår du har oprettet de hold dine medarbejdere har ønsket at deltage med og gemt de tilhørende holdID-numre " +
-                    "\nkan dine medarbejdere begynde at oprette sig selv som deltager på deres respektive hold. \n\nDette gør de " +
-                    "fra hovedmenuen ved at vælge 'Ny deltager' hvorefter de skal indtaste det holdId \nderes hold har fået tildelt." +
-                    " Derefter er det nemt at oprette sig som deltager, og dine medarbejdere er nu \nmed i kampagnen!" +
-                    "\n\nDer er også mulighed for at logge ind som et helt hold. Dette giver adgang til de samme ting som " +
-                    "\nhvis man loggede ind som deltager, på nær menupunktet 'Min Side' som er personligt for hver deltager." +
-                    "\n\nPå 'Min Side' kan man ændre i sine personlige oplysninger samt vise forskellige data over andre hold " +
-                    "\neller deltagere der er med i kampagnen. \n\nRigtig god fornøjelse! ");
-        System.out.println("\n************************************************************************************************************");
-    }
-
-
 }
