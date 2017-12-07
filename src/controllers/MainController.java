@@ -26,21 +26,31 @@ public class MainController {
             System.out.println("0) Luk program");
             System.out.println("Valg: ");
 
-            switch (input.nextInt()) {
-                case 0:
-                    runStatus = runShutDown();
-                    break;
-                case 1:
-                    authUser();
-                    openUserMenu(currentUser);
-                    break;
-                case 2:
-                    authTeam();
-                    break;
-                case 3:
-                    printDatabase();
-                    break;
-                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
+            try {
+                switch (input.nextInt()) {
+                    case 0:
+                        runStatus = runShutDown();
+                        break;
+                    case 1:
+                        authUser();
+                        openUserMenu(currentUser);
+                        break;
+                    case 2:
+                        authTeam();
+                        break;
+                    case 3:
+                        printDatabase();
+                        break;
+                    default:
+                        System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                }
+            }
+            catch (Exception eObjekt){
+                input.nextLine();
+                System.out.println("\nFEJL I INDTASTNING PRØV IGEN");
+                System.out.printf("Systemets fejlmeddelelse: %s\n", eObjekt);
+                System.out.println("");
+                runStatus = true;
             }
         }while(runStatus);
     }

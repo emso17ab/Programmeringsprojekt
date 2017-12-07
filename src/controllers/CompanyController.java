@@ -120,14 +120,55 @@ public class CompanyController {
     }
 
     private void editTeam() {
+        boolean status = true;
         System.out.println("Du har valgt at endre på dit hold");
-        /*
-        Switch()
-        3.1 editTeamName
-        3.2 editTeamLeader
-        3.3 deleteTeam
-         */
-//TODO metode
+
+        do {
+            System.out.println("\n\tVelkommen til menuen for: " + currentUser.getCompanyName());
+            System.out.println("ÆNDR HOLD");
+            System.out.println("1) Ændr Holdnavn");
+            System.out.println("2) Ændre Holdkaptajn");
+            System.out.println("3) Slette Holdet");
+            System.out.println("4) Gå til Holdmenuen");
+            System.out.println("5) Log af");
+
+            switch (input.nextInt()) {
+                case 0:
+                    status = false;
+                    break;
+                case 1:
+                    editTeamName();
+                    break;
+                case 2:
+                    editTeamLeader();
+                    break;
+                case 3:
+                    //deleteTeam();
+                    break;
+                case 4:
+                    goToTeam(currentUser);
+                    break;
+                default:
+                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
+            }
+        } while (status);
+
+    }
+    private void editTeamName() {
+        String teamName;
+        System.out.println("Du er nu ved at ændre holdnavn:");
+        System.out.println("Skriv jeres nye holdnavn:");
+        input.nextLine();
+        teamName=input.nextLine();
+        System.out.println("Du har ændret holdnavnet til:" + teamName);
+    }
+    private void editTeamLeader() {
+        String teamLeader;
+        System.out.println("Du er ved at ændre jeres Holdkaptajn:");
+        System.out.println("Hvem er jeres nye Holdkaptajn?");
+        input.nextLine();
+        teamLeader=input.nextLine();
+        System.out.println("Du har ændret jeres holdkaptajn til:" + teamLeader);
     }
 
     private void approveTeam() {
@@ -260,6 +301,9 @@ public class CompanyController {
         }
     }
 
+    private void printTeamByID() {
+    }
+
     private void deleteContestant() {
 
 
@@ -337,9 +381,6 @@ public class CompanyController {
         }
         if(activeUser == null)
             System.out.println("Fejl i indtastet ID eller kodeord!");
-    }
-
-    private void printTeamByID() {
     }
 
     private void printAllContestants(){
