@@ -223,7 +223,7 @@ public class CompanyController {
 
                 System.out.println("Hvad vil du foretage dig?\n");
                 System.out.println("1) GODKEND et hold via index nr.");
-                System.out.println("\n2) AFVIS et hold via index nr.");
+                System.out.println("2) AFVIS et hold via index nr.");
                 System.out.println("3) AFVIS alle hold på listen");
                 System.out.println("\n0) Tilbage til hovedmenuen");
 
@@ -237,14 +237,11 @@ public class CompanyController {
                         approveTeamFromIndex(input.nextInt()); //Dette gør at metoden kan genbruges af approveTeamAll metoden
                         break;
                     case 2:
-                        approveTeamAll();
-                        break;
-                    case 3:
                         input.nextLine();
                         System.out.println("Indtast index nr.: ");
                         rejectTeamFromIndex(input.nextInt()); //Dette gør at metoden kan genbruges af approveTeamFromIndex metoden
                         break;
-                    case 4:
+                    case 3:
                         rejectTeamAll();
                         break;
                     default:
@@ -260,22 +257,16 @@ public class CompanyController {
 
     private void rejectTeamAll() {
         //Sletter alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
-        for (Team team : data.getTeamsToBeApproved())
-            if (team.getUserId().equals(currentUser.getUserId() + "x"))
+        for (Team team : data.getTeamsToBeApproved()) {
+            if (team.getUserId().equals(currentUser.getUserId() + "x")) {
                 data.getTeamsToBeApproved().remove(data.getTeamsToBeApproved().indexOf(team));
+                System.out.println("CHECK");
+            }
+        }
     }
 
     private void rejectTeamFromIndex(int index) {
         data.getTeamsToBeApproved().remove(index);
-    }
-
-    private void approveTeamAll() {//TODO skal laves
-        int indexChoice;
-        input.nextLine();
-
-        System.out.println("Indtast index nr.: ");
-        indexChoice = input.nextInt();
-
     }
 
     private void approveTeamFromIndex(int indexChoice) {

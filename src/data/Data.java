@@ -59,6 +59,16 @@ public class Data {
         allUsers.add(contestant5);
         allUsers.add(contestant6);
 
+        //Tre testTeams bliver oprettet under virksomheden "Copenhagen Business School"
+        Team testTeam1 = new Team(null, null, "010000x", "Cykkelmyggene", "Louise Nielsen");
+        Team testTeam2 = new Team(null, null, "010000x", "Kanldperlerne", "Lone Larsen");
+        Team testTeam3 = new Team(null, null, "010000x", "VæltepeterBikers", "Kasper Jørgensen");
+
+        //De tre testTeams bliver lagt på listen over hold der skal godkendes
+        addTeamToList(testTeam1);
+        addTeamToList(testTeam2);
+        addTeamToList(testTeam3);
+
     }
 
 
