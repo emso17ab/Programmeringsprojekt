@@ -24,6 +24,7 @@ public class MainController {
             System.out.println("1) Log ind");
             System.out.println("2) Jeg er ny deltager");
             System.out.println("3) PRINT DATABASE");
+            System.out.println("4) HJÆLP");
             System.out.println("0) Luk program");
             System.out.println("Valg: ");
 

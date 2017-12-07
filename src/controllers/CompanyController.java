@@ -124,31 +124,36 @@ public class CompanyController {
         boolean status = true;
         System.out.println("Vælg et hold du ønsker at ændre");
         currentTeam = selectTeam();
-        do {
-            System.out.println("\n\tÆNDR HOLD");
-            System.out.println("1) Ændr Holdnavn");
-            System.out.println("2) Ændre Holdkaptajn");
-            System.out.println("3) Slette Holdet");
-            System.out.println("0) Tilbage til Hovedmenu");
+        if (currentTeam != null) {
+            do {
+                System.out.println("\n\tÆNDR HOLD  >>" + currentTeam.getTeamName() + "<<");
+                System.out.println("1) Ændr Holdnavn");
+                System.out.println("2) Ændre Holdkaptajn");
+                System.out.println("3) Vis Holdprofil");
+                System.out.println("4) Slette Holdet");
+                System.out.println("0) Tilbage til Hovedmenu");
 
-            switch (input.nextInt()) {
-                case 0:
-                    status = false;
-                    break;
-                case 1:
-                    editTeamName();
-                    break;
-                case 2:
-                    editTeamLeader();
-                    break;
-                case 3:
-                    deleteTeam();
-                    break;
-                default:
-                    System.out.println("\nFejl i indtastningen, prøv igen!\n");
-            }
-        } while (status);
-
+                switch (input.nextInt()) {
+                    case 0:
+                        status = false;
+                        break;
+                    case 1:
+                        editTeamName();
+                        break;
+                    case 2:
+                        editTeamLeader();
+                        break;
+                    case 3:
+                        printTeamInfo(currentTeam);
+                        break;
+                    case 4:
+                        deleteTeam();
+                        break;
+                    default:
+                        System.out.println("\nFejl i indtastningen, prøv igen!\n");
+                }
+            } while (status && currentTeam != null);
+        }
     }
 
     private void deleteTeam() {
@@ -159,13 +164,14 @@ public class CompanyController {
             data.getAllUsers().remove(data.getAllUsers().indexOf(currentTeam));
             currentUser.getTeams().remove(indexChoice);
             System.out.println("Hold '" + currentTeam.getTeamName() + "' er nu slettet fra programmet");
+            currentTeam = null;
         }
     }
 
     private void editTeamName() {
         input.nextLine();
-        System.out.println("\nDu er nu ved at ændre holdnavn på holdet: " + currentTeam.getTeamName());
-        System.out.println("Skriv jeres nye holdnavn:");
+        System.out.println("\nDet nuværende holdnavn er : " + currentTeam.getTeamName());
+        System.out.println("\nSkriv jeres nye holdnavn: ");
         currentTeam.setTeamName(input.nextLine());
         System.out.println("\nDu har ændret holdnavnet til: " + currentTeam.getTeamName());
         System.out.println("");
@@ -178,6 +184,17 @@ public class CompanyController {
         currentTeam.setTeamLeader(input.nextLine());
         System.out.println("Du har ændret jeres holdkaptajn til:" + currentTeam.getTeamLeader());
         System.out.println("");
+    }
+
+    private void printTeamInfo(Team team){
+        System.out.println("*****************************************************************************");
+        System.out.println("Viser information om hold " + team.getUserId() + ": ");
+        System.out.println("------------------------------------------------");
+        System.out.println("Holdnavn: " + team.getTeamName());
+        System.out.println("Holdkaptajn: " + team.getTeamLeader());
+        System.out.println("Brugernavn: " + team.getUsername());
+        System.out.println("Kodeord: " + team.getPassword());
+        System.out.println("*****************************************************************************");
     }
 
     private void approveTeam() {
@@ -312,22 +329,35 @@ public class CompanyController {
         Der checkes først om der er nogle hold på listen som afventer godkendelse
         Hvis der ikke findes nogle hold for virksomheden returnerer metoden null og en besked til brugeren om dette.
         */
-        int k = 0;
-        for (Team teamCount : currentUser.getTeams())
-            k++;
-        //Printer en liste over alle hold Virksomheden har og returnerer det valgte hold
-        if (k > 0) {
-            System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
-            for (Team team : currentUser.getTeams())
-                System.out.printf("%-10s %-12s %-40s %-40s %5s\n", currentUser.getTeams().indexOf(team), team.getUserId(), team.getTeamName(), team.getTeamLeader(), currentUser.getTeams().size());
-            System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
-            return currentUser.getTeams().get(input.nextInt());
-        } else{
-            System.out.println("**********************************************************************************");
-            System.out.println("Du har ingen hold endnu!");
-            System.out.println("**********************************************************************************");
-            return null;
-        }
+        boolean status = true;
+        int choice;
+        int k = currentUser.getTeams().size();
+
+            //Printer en liste over alle hold Virksomheden har og returnerer det valgte hold
+            if (k > 0) {
+                System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+                for (Team team : currentUser.getTeams())
+                    System.out.printf("%-10s %-12s %-40s %-40s %5s\n", currentUser.getTeams().indexOf(team), team.getUserId(), team.getTeamName(), team.getTeamLeader(), currentUser.getTeams().size());
+
+                do {
+                    System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
+                    choice = input.nextInt();
+
+                    //Checker om brugeren har tastet et korrekt index ind, hvis ikke får brugeren en fejlmeddelelse
+                    if (choice > k-1 || choice < 0) {
+                        System.out.println("Et hold med index " + choice + " eksisterer ikke, prøv igen");
+                        status = true;
+                    } else {
+                        status = false;
+                    }
+                }while(status);
+                return currentUser.getTeams().get(choice);
+            } else {
+                System.out.println("**********************************************************************************");
+                System.out.println("Du har ingen hold endnu!");
+                System.out.println("**********************************************************************************");
+                return null;
+            }
     }
 
     private void deleteContestant() {
