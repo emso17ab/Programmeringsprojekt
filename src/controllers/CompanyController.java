@@ -156,8 +156,9 @@ public class CompanyController {
                 System.out.println("");
 
                 System.out.println("Hvad vil du foretage dig?\n");
-                System.out.println("1) GODKEND et hold via index nr.       3) AFVIS et hold via index nr.");
-                System.out.println("2) GODKEND alle hold på listen         4) AFVIS alle hold på listen");
+                System.out.println("1) GODKEND et hold via index nr.");
+                System.out.println("\n2) AFVIS et hold via index nr.");
+                System.out.println("3) AFVIS alle hold på listen");
                 System.out.println("\n0) Tilbage til hovedmenuen");
 
                 switch (input.nextInt()) {
@@ -165,7 +166,9 @@ public class CompanyController {
                         status = false;
                         break;
                     case 1:
-                        approveTeamFromIndex();
+                        input.nextLine();
+                        System.out.println("Indtast index nr.: ");
+                        approveTeamFromIndex(input.nextInt()); //Dette gør at metoden kan genbruges af approveTeamAll metoden
                         break;
                     case 2:
                         approveTeamAll();
@@ -205,13 +208,10 @@ public class CompanyController {
 
     }
 
-    private void approveTeamFromIndex() {
+    private void approveTeamFromIndex(int indexChoice) {
         Team teamToBeApproved;
-        int indexChoice;
         String username, password, teamId;
-        input.nextLine();
-        System.out.println("Indtast index nr.: ");
-        indexChoice = input.nextInt();
+
         teamToBeApproved = data.getTeamsToBeApproved().get(indexChoice);
 
         //OBS! Denne holdoprettelsesmetode tager ikke højde for kriterier for brugernavn og kodeord pga tidsbegrænsning!
@@ -259,7 +259,6 @@ public class CompanyController {
 
         }
     }
-
 
     private void deleteContestant() {
 
@@ -359,6 +358,5 @@ public class CompanyController {
         System.out.println("\n**********************************************************************************");
         System.out.println("");
     }
-
 
 }
