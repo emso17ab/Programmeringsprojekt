@@ -157,7 +157,7 @@ public class MainController {
         System.out.println("1) DEBUTANT");
         System.out.println("2) CRUISER");
         System.out.println("3) MESTER");
-        System.out.println("4) Enthusiast");
+        System.out.println("4) ENTUSIAST");
 
 
         switch (input.nextInt()) {
@@ -170,7 +170,9 @@ public class MainController {
             case 3:
                 contestantType = "MESTER";
                 break;
-            case 4:contestantType ="Entusiast";
+            case 4:
+                contestantType = "ENTUSIAST";
+                break;
             default:
                 contestantType = "DEBUTANT";
         }

@@ -91,7 +91,7 @@ try{
         System.out.println("1) DEBUTANT");
         System.out.println("2) CRUISER");
         System.out.println("3) MESTER");
-        System.out.println("3) ENTHUSIAST");
+        System.out.println("4) ENTUSIAST");
         switch (input.nextInt()) {
             case 1:
                  newType = "DEBUTANT";
@@ -102,8 +102,8 @@ try{
             case 3:
                 newType = "MESTER";
                 break;
-            case 4: newType = "ENTHUSIAST";
-            break;
+            case 4: newType = "ENTUSIAST";
+                break;
             default: newType = contestant.getContestantType();
         }
         contestant.setContestantType(newType);
