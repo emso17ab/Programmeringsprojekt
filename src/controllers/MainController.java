@@ -20,6 +20,7 @@ public class MainController {
         boolean runStatus = true;
         System.out.println("Velkommen til --> VI CYKLER PÅ ARBEJDE <--- programmet!\n");
         do {
+
             System.out.println("1) Log ind");
             System.out.println("2) Jeg er ny deltager");
             System.out.println("3) PRINT DATABASE");
@@ -47,9 +48,7 @@ public class MainController {
             }
             catch (Exception eObjekt){
                 input.nextLine();
-                System.out.println("\nFEJL I INDTASTNING PRØV IGEN");
-                System.out.printf("Systemets fejlmeddelelse: %s\n", eObjekt);
-                System.out.println("");
+                System.out.println("\nFejl i Indtastningen");
                 runStatus = true;
             }
         }while(runStatus);
@@ -155,22 +154,25 @@ public class MainController {
         contestantEmail = input.nextLine();
 
         System.out.println("Vælg hvilken cykeltype der passer bedst til dig!");
-        System.out.println("1) BEGYNDER");
-        System.out.println("2) ØVET");
-        System.out.println("3) PROFESSIONEL");
+        System.out.println("1) DEBUTANT");
+        System.out.println("2) CRUISER");
+        System.out.println("3) MESTER");
+        System.out.println("4) Enthusiast");
+
 
         switch (input.nextInt()) {
             case 1:
-                contestantType = "BEGYNDER";
+                contestantType = "DEBUTANT";
                 break;
             case 2:
-                contestantType = "ØVET";
+                contestantType = "CRUISER";
                 break;
             case 3:
-                contestantType = "PROFESSIONEL";
+                contestantType = "MESTER";
                 break;
+            case 4:contestantType ="Entusiast";
             default:
-                contestantType = "BEGYNDER";
+                contestantType = "DEBUTANT";
         }
         input.nextLine();
 

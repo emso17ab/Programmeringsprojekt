@@ -20,12 +20,12 @@ public class Data {
         Master adminMaster = new Master("admin", "admin", "000000", "VCPA");
 
         //Seks testdeltagere bliver oprettet
-        Contestant contestant1 = new Contestant("emil", "1234", "010101", "Emil Sørensen", "emil.soerensen@hotmail.com", "BEGYNDER");
-        Contestant contestant2 = new Contestant("rasmus", "1234", "010102", "Rasmus Pold", "emil.soerensen@hotmail.com", "BEGYNDER");
-        Contestant contestant3 = new Contestant("william", "1234", "010103", "William Sørensen", "emil.soerensen@hotmail.com", "ØVET");
-        Contestant contestant4 = new Contestant("kesia", "1234", "010201", "Kesia Heiberg", "emil.soerensen@hotmail.com", "ØVET");
-        Contestant contestant5 = new Contestant("donald", "1234", "010202", "Donald Trump", "emil.soerensen@hotmail.com", "PROFESSIONEL");
-        Contestant contestant6 = new Contestant("heino", "1234", "010203", "Heino Hansen", "emil.soerensen@hotmail.com", "PROFESSIONEL");
+        Contestant contestant1 = new Contestant("emil", "1234", "010101", "Emil Sørensen", "emil.soerensen@hotmail.com", "DEBUTANT");
+        Contestant contestant2 = new Contestant("rasmus", "1234", "010102", "Rasmus Pold", "emil.soerensen@hotmail.com", "DEBUTANT");
+        Contestant contestant3 = new Contestant("william", "1234", "010103", "William Sørensen", "emil.soerensen@hotmail.com", "CRUISER");
+        Contestant contestant4 = new Contestant("kesia", "1234", "010201", "Kesia Heiberg", "emil.soerensen@hotmail.com", "CRUISER");
+        Contestant contestant5 = new Contestant("donald", "1234", "010202", "Donald Trump", "emil.soerensen@hotmail.com", "MESTER");
+        Contestant contestant6 = new Contestant("heino", "1234", "010203", "Heino Hansen", "emil.soerensen@hotmail.com", "MESTER");
 
         //To testhold bliver oprettet og der lægges tre testdeltagere ind på hvert hold
         Team team1 = new Team("team1", "0001", "010100", "SuperCyklerne", "Rasmus Pold");

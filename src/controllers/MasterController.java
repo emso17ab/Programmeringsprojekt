@@ -26,19 +26,24 @@ public class MasterController {
             System.out.println("\t2) Hjælp");
             System.out.println("\t0) Log af");
             System.out.print("\n\tValg: ");
+try {
+    switch (input.nextInt()) {
+        case 0:
+            status = false;
+            break;
+        case 1:
+            createCompany();
+            break;
+        case 2:
+            printHelp();
+            break;
+        default:
+            System.out.println("\nFejl i indtastningen, prøv igen!\n");
+    }
+}catch(Exception eObject){input.nextLine();
+    System.out.println("Fejl i indtastningen");}
 
-            switch (input.nextInt()) {
-                case 0:
-                    status = false;
-                    break;
-                case 1:
-                    createCompany();
-                    break;
-                case 2:
-                    printHelp();
-                    break;
-                default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
-            }
+
         } while (status);
 
     }

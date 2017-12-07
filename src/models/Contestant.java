@@ -2,14 +2,14 @@ package models;
 
 public class Contestant extends User {
     protected String contestantName;
-    protected String contestantEmail;
+    protected String contestantEmail; // Opretter attributtor for "Contestant"
     protected String contestantType;
     protected String contestantTeamId;
 
     public Contestant(String username, String password, String userId, String contestantName, String contestantEmail, String contestantType){
         super (username, password, userId);
         this.contestantName = contestantName;
-        this.contestantEmail = contestantEmail;
+        this.contestantEmail = contestantEmail;    //kalder attributter i constructoren.
         this.contestantType = contestantType;
         this.contestantTeamId = userId.substring(0,4) + "00";
     }

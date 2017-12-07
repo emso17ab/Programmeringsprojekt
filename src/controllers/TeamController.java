@@ -41,7 +41,7 @@ public class TeamController {
             System.out.println("\t3) Min side");
             System.out.println("\t0) Log af");
             System.out.print("\n\tValg: ");
-
+try{
             switch (input.nextInt()) {
                 case 0:
                     status = false;
@@ -60,8 +60,11 @@ public class TeamController {
                     break;
                 default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
-        } while (status);
-    }
+    } catch(Exception oObject){
+    input.nextLine();
+    System.out.println("Fejl i Indtastningen");}
+        } while (status);}
+
 
     private void displayData(Team team) {
         System.out.println("\nHvad vil du have vist?");

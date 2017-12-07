@@ -32,26 +32,38 @@ public class ContestantController {
         System.out.println("7) Se Fuld Profil");
         System.out.println("0) Tilbage til Holdmenu ");
         System.out.println("Valg: ");
+try{
+    switch (input.nextInt()) {
+        case 0:
+            status = false;
+            break;
+        case 1:
+            editCurrentContestantUsername(currentUser);
+            break;
+        case 2:
+            editCurrentContestantPassword(currentUser);
+            break;
+        case 3:
+            editCurrentContestantName(currentUser);
+            break;
+        case 4:
+            editCurrentContestantEmail(currentUser);
+            break;
+        case 5:
+            editCurrentContestantType(currentUser);
+            break;
+        case 6:
+            deleteCurrentContestant(currentUser);
+            break;
+        case 7:
+            printContestantInfo(currentUser);
+            break;
+        default:
+            System.out.println("\nFejl i indtastningen, prøv igen!\n");
+    }}
+    catch(Exception oObject){input.nextLine();
+        System.out.println("Fejl i Indtastningen!");}
 
-        switch (input.nextInt()){
-            case 0: status = false;
-                break;
-            case 1: editCurrentContestantUsername(currentUser);
-                break;
-            case 2: editCurrentContestantPassword(currentUser);
-                break;
-            case 3: editCurrentContestantName(currentUser);
-                break;
-            case 4: editCurrentContestantEmail(currentUser);
-                break;
-            case 5: editCurrentContestantType(currentUser);
-                break;
-            case 6: deleteCurrentContestant(currentUser);
-                break;
-            case 7:printContestantInfo(currentUser);
-                break;
-            default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
-            }
         }while(status);
     }
 
@@ -76,19 +88,22 @@ public class ContestantController {
         System.out.println("Du har valgt at ænder deltagetype");
         System.out.println("Din nuværende type er: " + contestant.getContestantType());
         System.out.println("Vælg ny type fra listen:\n");
-        System.out.println("1) BEGYNDER");
-        System.out.println("2) ØVET");
-        System.out.println("3) PROFESSIONEL");
+        System.out.println("1) DEBUTANT");
+        System.out.println("2) CRUISER");
+        System.out.println("3) MESTER");
+        System.out.println("3) ENTHUSIAST");
         switch (input.nextInt()) {
             case 1:
-                 newType = "BEGYNDER";
+                 newType = "DEBUTANT";
                 break;
             case 2:
-                newType = "ØVET";
+                newType = "CRUISER";
                 break;
             case 3:
-                newType = "PROFESSIONEL";
+                newType = "MESTER";
                 break;
+            case 4: newType = "ENTHUSIAST";
+            break;
             default: newType = contestant.getContestantType();
         }
         contestant.setContestantType(newType);
