@@ -20,7 +20,7 @@ public class Team extends User {
 //Abstract Method
     @Override
     public void displayData() {
-        System.out.println("# " + userId + "_************************************************************************");
+        System.out.println("#" + userId + "_************************************************************************");
         System.out.println("<---------------HOLD--------------->");
         System.out.println("Holdnavn: " + teamName);
         System.out.println("Holdkaptajn: " + teamLeader);

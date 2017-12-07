@@ -372,18 +372,22 @@ public class CompanyController {
             System.out.println("Vælg deltager som skal afmeldes kampagnen  < ANNULLER - TAST 0 >");
             System.out.println("Indtat deltagerID: ");
             contestantId = input.nextLine();
-            for (User user : data.getAllUsers())
-                if (user.getUserId().equals(contestantId) && user instanceof Contestant)
+            for (User user : data.getAllUsers()) {
+                if (user.getUserId().equals(contestantId) && user instanceof Contestant) {
                     selectedContestant = (Contestant) user;
-
+                    currentTeam = findTeamOfContestant(contestantId);
+                }
+            }
             if (selectedContestant != null) {
                 System.out.println("Er du sikker på, at du vil afmelde " + selectedContestant.getContestantName() + " permanent fra kampagnen?");
                 System.out.println("1) JA       2)ANNULLER");
                 choice = input.nextInt();
                 if (choice == 1) {
-                    data.getAllUsers().remove(data.getAllUsers().indexOf(selectedContestant));
+                    currentTeam.getContestants().remove(currentTeam.getContestants().indexOf(selectedContestant)); //Sletter den valgte deltager fra Hold-listen
+                    data.getAllUsers().remove(data.getAllUsers().indexOf(selectedContestant)); // Sletter den valgte deltager fra Master-listen
                     System.out.println(selectedContestant.getContestantName() + " er afmeldt 'Vi Cykler Til Arbejde' kampagnen");
-                } else if (choice == 2)
+                }
+                else if (choice == 2)
                     System.out.println("Afmelding annulleret...");
                 else {
                     System.out.println("Fejl i indtastningen, prøv igen");
@@ -397,9 +401,8 @@ public class CompanyController {
                 System.out.println("Fejl i indtastningen, prøv igen");
                 status = true;
             }
-
         }while(status);
-    } //TODO Mangler kun at slette fra Holdets Arrayliste nu!
+    }
 
     private void goToTeam(Company currentUser) {
         input.nextLine();
@@ -426,11 +429,19 @@ public class CompanyController {
         }
     }
 
-    private String findTeamOfContestant(String contestantID){
-        String teamId = contestantID.substring(0,4) + "00";
+    private String findTeamNameOfContestant(String contestantId){
+        String teamId = contestantId.substring(0,4) + "00";
         for (User user : data.getAllUsers())
             if(teamId.equals(user.getUserId()) && user instanceof Team)
                 return ((Team) user).getTeamName();
+        return null;
+    }
+
+    private Team findTeamOfContestant(String contestantId){
+        String teamId = contestantId.substring(0,4) + "00";
+        for (User user : data.getAllUsers())
+            if(teamId.equals(user.getUserId()) && user instanceof Team)
+                return (Team) user;
         return null;
     }
 
@@ -489,7 +500,7 @@ public class CompanyController {
 
         for (User user : data.getAllUsers())
             if(companyID.equals(user.getUserId().substring(0,2)) && user instanceof Contestant){
-                System.out.printf("\n%-12s %-20s %-25s %-30s %-15s", user.getUserId(), findTeamOfContestant(user.getUserId()),
+                System.out.printf("\n%-12s %-20s %-25s %-30s %-15s", user.getUserId(), findTeamNameOfContestant(user.getUserId()),
                         ((Contestant) user).getContestantName(), ((Contestant) user).getContestantEmail(),
                         ((Contestant) user).getContestantType());
             }
