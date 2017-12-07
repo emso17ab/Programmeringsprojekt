@@ -174,12 +174,13 @@ public class CompanyController {
     }
 
     private void editTeamLeader() {
-        String teamLeader;
-        System.out.println("Du er ved at ændre jeres Holdkaptajn:");
-        System.out.println("Hvem er jeres nye Holdkaptajn?");
+        Team currentTeam = selectTeam();
         input.nextLine();
-        teamLeader=input.nextLine();
-        System.out.println("Du har ændret jeres holdkaptajn til:" + teamLeader);
+        System.out.println("\nDu er ved at ændre jeres Holdkaptajn: " + currentTeam.getTeamLeader());
+        System.out.println("Hvem er jeres nye Holdkaptajn?");
+        currentTeam.setTeamLeader(input.nextLine());
+        System.out.println("Du har ændret jeres holdkaptajn til:" + currentTeam.getTeamLeader());
+        System.out.println("");
     }
 
     private void approveTeam() {
