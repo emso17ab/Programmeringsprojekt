@@ -165,7 +165,7 @@ try{
 
     }
 
-    private void printContestantInfo(Contestant contestant){
+    private void printContestantInfo(Contestant contestant) {
         System.out.println("*****************************************************************************");
         System.out.println("Viser information om bruger " + contestant.getUserId() + ": ");
         System.out.println("------------------------------------------------");

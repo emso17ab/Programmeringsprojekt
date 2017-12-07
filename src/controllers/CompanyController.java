@@ -96,11 +96,13 @@ public class CompanyController {
             } else System.out.println("Din indtastning matchede ikke prøv igen");
         } else System.out.println("Fejl i indtastning. Prøv igen");
     }
+
     private String validatePassword(String password) {
         if(password.length()>7 && password.matches(".*\\d.*"))
             return password;
         return null;
     }
+
     private String generateTeamID() {
         String companyId, userIdToString;
         int userId;
@@ -213,7 +215,7 @@ public class CompanyController {
                 System.out.printf("%-12s %-40s %-40s", "Index", "Holdnavn", "Holdkaptajn");
 
                 for (Team team : data.getTeamsToBeApproved())
-                    if (team.getUserId().equals(currentUser.getUserId() + "x"))  //Dette checker for hold der skal godkendes men kun dem som tilhører den current organisation
+                    if (team.getUserId().equals(currentUser.getUserId() + "x"))  //Dette checker for hold der skal godkendes men kun dem som tilhører den pågældende organisation
                         System.out.printf("\n%-12s %-40s %-40s", data.getTeamsToBeApproved().indexOf(team), team.getTeamName(), team.getTeamLeader());
 
                 System.out.println("\n**********************************************************************************");
@@ -257,6 +259,10 @@ public class CompanyController {
     }
 
     private void rejectTeamAll() {
+        //Sletter alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
+        for (Team team : data.getTeamsToBeApproved())
+            if (team.getUserId().equals(currentUser.getUserId() + "x"))
+                data.getTeamsToBeApproved().remove(data.getTeamsToBeApproved().indexOf(team));
     }
 
     private void rejectTeamFromIndex(int index) {
@@ -504,5 +510,4 @@ public class CompanyController {
         System.out.println("\n**********************************************************************************");
         System.out.println("");
     }
-
 }
