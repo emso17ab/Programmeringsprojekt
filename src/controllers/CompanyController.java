@@ -294,11 +294,11 @@ public class CompanyController {
         System.out.println("3) Information om en deltager (Kræver deltagerID)");
         System.out.println("4) Vis deltagere og hold");
 
-        switch (input.nextInt()) { //TODO DENNE SWITCH SKAL KALDE METODER I CASE'NE ISTEDET FOR AT INDEHOLDE METODEN
+        switch (input.nextInt()) {
 
             case 1:
                 printAllCompanies();
-            break;
+                break;
             case 2:
                 printTeamByID();
                 break;
