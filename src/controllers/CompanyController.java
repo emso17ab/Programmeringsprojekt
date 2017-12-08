@@ -256,13 +256,13 @@ public class CompanyController {
     }
 
     private void rejectTeamAll() {
+        int index;
         //Sletter alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
         for (Team team : data.getTeamsToBeApproved()) {
             if (team.getUserId().equals(currentUser.getUserId() + "x")) {
-                data.getTeamsToBeApproved().remove(data.getTeamsToBeApproved().indexOf(team));
-                System.out.println("CHECK");
+                data.getTeamsToBeApproved().remove(team);
             }
-        }
+        }//TODO Denne metode skal rettes så det kører ordentligt!
     }
 
     private void rejectTeamFromIndex(int index) {
