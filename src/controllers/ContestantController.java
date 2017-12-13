@@ -1,8 +1,10 @@
 package controllers;
 import data.Data;
 import models.Contestant;
+import models.Team;
 import models.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //Contestantcontrolleren styrer menuerne for deltageren
@@ -10,12 +12,14 @@ import java.util.Scanner;
 public class ContestantController {
     Data data;
     Scanner input = new Scanner(System.in);
+    Contestant currentUser;
 
     public ContestantController(Data data) {
         this.data = data;
     }
 
     public void contestantRun(Contestant currentUser) {
+        this.currentUser = currentUser;
         boolean status = true;
 
         do{
@@ -34,6 +38,7 @@ try{
     switch (input.nextInt()) {
         case 0:
             status = false;
+            currentUser = null;
             break;
         case 1:
             editCurrentContestantUsername(currentUser);
@@ -51,7 +56,7 @@ try{
             editCurrentContestantType(currentUser);
             break;
         case 6:
-            deleteCurrentContestant(currentUser);
+            status = deleteCurrentContestant(currentUser);
             break;
         case 7:
             printContestantInfo(currentUser);
@@ -65,20 +70,28 @@ try{
         }while(status);
     }
 
-    private void deleteCurrentContestant(Contestant contestant) {
+    private boolean deleteCurrentContestant(User contestant) {
+        int choice;
+        String teamId = contestant.getUserId().substring(0,4) + "00";
+        ArrayList<Contestant> teamContestants = null;
+
         System.out.println("OBS! Du er ved at slette din profil");
         System.out.println("Alt data vil gå tabt\nEr du sikker på du vil fortsætte? ");
         System.out.println("1) JA,  fortsæt og slet min profil");
         System.out.println("2) NEJ, tilbage til Min Side");
-        switch (input.nextInt()){
-            case 1:
-                //for (User userToDelete : data.getAllUsers()) {
-                    //if(userToDelete==);                }
-                break;
-            case 2:
-                break;
-                default:
+        choice = input.nextInt();
+        if (choice == 1) {
+            for (User user : data.getAllUsers())
+                if(teamId.equals(user.getUserId()) && user instanceof Team)
+                    ((Team) user).removeContestantFromTeam((Contestant) contestant);
+            data.getAllUsers().remove(contestant);
+            currentUser = null;
+            return false;
         }
+        else if (choice == 2){
+            System.out.println("Går tilbage til Min side...");
+        }
+        return true;
     }
 
     private void editCurrentContestantType(Contestant contestant) {
@@ -116,16 +129,14 @@ try{
             System.out.println("du har valgt at ændre email");
             System.out.println("Skriv ny email:");
             contestant.setContestantEmail(input.nextLine());
-            System.out.println("du har ændret din mail til:"+contestant.getContestantEmail());
+            System.out.println("du har ændret din mail til: "+contestant.getContestantEmail());
     }
 
     private void editCurrentContestantName(Contestant contestant) {
-
-            System.out.println("Du har valgt at ændre dit navn:");
-            System.out.println("Skriv dit nye navn:");
-            input.nextLine();
-            contestant.setContestantName(input.nextLine());
-            System.out.println("du har ændret dit navn til:" + contestant.getContestantName());
+        input.nextLine();
+        System.out.println("Skriv det nye navn: ");
+        contestant.setContestantName(input.nextLine());
+        System.out.println("Du har ændret dit navn til : " + contestant.getContestantName());
     }
 
     private void editCurrentContestantPassword(User contestant) {
@@ -145,7 +156,7 @@ try{
 
                 if (password.equals(check)) {
                     contestant.setPassword(password);
-                    System.out.println("du har ændret dit password til" + contestant.getPassword());
+                    System.out.println("du har ændret dit password til: " + contestant.getPassword());
                     status = false;
                 } else {
                     System.out.println("Fejl i indtastning");
@@ -155,14 +166,11 @@ try{
         }
 
     private void editCurrentContestantUsername(User contestant) {
-            String newUsername;
-            System.out.println("Du er ved at ændre brugernavn:");
-            System.out.println("Skriv dit nye brugernavn");
-            input.nextLine();
-            newUsername=input.nextLine();
-            contestant.setUsername(input.nextLine());
-            System.out.println("Du har ændret brugernavn til:" +contestant.getUsername());
-
+        input.nextLine();
+        System.out.println("Du er ved at ændre brugernavn:");
+        System.out.println("Skriv dit nye brugernavn");
+        contestant.setUsername(input.nextLine());
+        System.out.println("Du har ændret brugernavn til: " + contestant.getUsername());
     }
 
     private void printContestantInfo(Contestant contestant) {
@@ -177,4 +185,9 @@ try{
         System.out.println("*****************************************************************************");
     }
 
+    public Contestant checkIfDeleted() {
+        if (currentUser == null)
+            return null;
+        return currentUser;
     }
+}

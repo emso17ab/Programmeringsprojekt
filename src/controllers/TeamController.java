@@ -41,6 +41,7 @@ try{
             switch (input.nextInt()) {
                 case 0:
                     status = false;
+                    System.out.println("Logger af...");
                     break;
                 case 1:
                     createTeamToBeApproved();
@@ -52,14 +53,16 @@ try{
                     if(currentContestant != null) {
                         ContestantController contestantController = new ContestantController(data);
                         contestantController.contestantRun(currentContestant);
+                        currentContestant = contestantController.checkIfDeleted();
                     } else System.out.println("\nFejl i indtastningen, prøv igen!\n");
                     break;
                 default: System.out.println("\nFejl i indtastningen, prøv igen!\n");
             }
     } catch(Exception oObject){
     input.nextLine();
-    System.out.println("Fejl i Indtastningen");}
-        } while (status);}
+    System.out.println("Fejl i Indtastningen"); }
+        } while (status);
+    }
 
 
     private void displayData(Team team) {

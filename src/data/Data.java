@@ -59,7 +59,7 @@ public class Data {
 
         //Testvirksomheder bliver oprettet og de to hold bliver lagt ind på denne
         Company company1 = new Company("company1", "001", "010000", "Copenhagen Business School");
-        Company company2 = new Company("company2", "001", "020000", "DØKDØK17");
+        Company company2 = new Company("company2", "002", "020000", "DØKDØK17");
 
         company1.addTeamToCompany(team1);
         company1.addTeamToCompany(team2);

@@ -32,6 +32,9 @@ public class Team extends User {
     public void addContestantToTeam(Contestant newContestant){
         this.contestants.add(newContestant);
     }
+    public void removeContestantFromTeam(Contestant contestant){
+        this.contestants.remove(contestant);
+    }
 
 //Getter and Setter Methods
     public String getTeamName() {
