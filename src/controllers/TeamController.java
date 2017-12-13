@@ -53,7 +53,9 @@ try{
                     if(currentContestant != null) {
                         ContestantController contestantController = new ContestantController(data);
                         contestantController.contestantRun(currentContestant);
-                        currentContestant = contestantController.checkIfDeleted();
+                        status = contestantController.checkIfDeleted();
+                        if(!status)
+                            System.out.println("Du bliver nu sendt tilbage til Start...");
                     } else System.out.println("\nFejl i indtastningen, prøv igen!\n");
                     break;
                 default: System.out.println("\nFejl i indtastningen, prøv igen!\n");

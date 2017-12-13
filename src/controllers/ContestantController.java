@@ -66,14 +66,12 @@ try{
     }}
     catch(Exception oObject){input.nextLine();
         System.out.println("Fejl i Indtastningen!");}
-
         }while(status);
     }
 
     private boolean deleteCurrentContestant(User contestant) {
         int choice;
         String teamId = contestant.getUserId().substring(0,4) + "00";
-        ArrayList<Contestant> teamContestants = null;
 
         System.out.println("OBS! Du er ved at slette din profil");
         System.out.println("Alt data vil gå tabt\nEr du sikker på du vil fortsætte? ");
@@ -81,10 +79,10 @@ try{
         System.out.println("2) NEJ, tilbage til Min Side");
         choice = input.nextInt();
         if (choice == 1) {
+            data.getAllUsers().remove(contestant); //Først slettes deltageren fra hovedlisten
             for (User user : data.getAllUsers())
                 if(teamId.equals(user.getUserId()) && user instanceof Team)
-                    ((Team) user).removeContestantFromTeam((Contestant) contestant);
-            data.getAllUsers().remove(contestant);
+                    ((Team) user).removeContestantFromTeam((Contestant) contestant); //Herefter bliver deltageren slettet fra Holdlisten
             currentUser = null;
             return false;
         }
@@ -185,9 +183,7 @@ try{
         System.out.println("*****************************************************************************");
     }
 
-    public Contestant checkIfDeleted() {
-        if (currentUser == null)
-            return null;
-        return currentUser;
+    public boolean checkIfDeleted() {
+        return currentUser != null;
     }
 }
