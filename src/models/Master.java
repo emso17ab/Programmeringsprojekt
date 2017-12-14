@@ -1,4 +1,7 @@
 package models;
+/*
+Ansvarlig: Rasmus
+ */
 
 public class Master extends User {
     protected String masterName;

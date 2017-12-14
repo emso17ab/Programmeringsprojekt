@@ -3,7 +3,10 @@ import java.util.Scanner;
 import data.Data;
 import models.*;
 
-//Denne controllerklasse skal styre Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
+/*
+Ansvarlige: William og Kesia
+Denne controllerklasse skal styre Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
+ */
 
 public class MainController {
     private User currentUser;

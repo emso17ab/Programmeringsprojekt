@@ -1,4 +1,7 @@
 package models;
+/*
+Ansvarlig: William
+ */
 
 public class Contestant extends User {
     protected String contestantName;

@@ -1,7 +1,8 @@
 package models;
-import data.Data;
-
 import java.util.ArrayList;
+/*
+Ansvarlig: Rasmus
+ */
 
 public class Team extends User {
     protected String teamName;

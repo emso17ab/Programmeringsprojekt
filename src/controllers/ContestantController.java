@@ -6,8 +6,10 @@ import models.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-//Contestantcontrolleren styrer menuerne for deltageren
+/*
+Ansvarlige: Rasmus og Emil
+Contestantcontrolleren styrer menuerne for deltageren
+*/
 
 public class ContestantController {
     Data data;

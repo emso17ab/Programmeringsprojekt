@@ -3,6 +3,9 @@ import data.Data;
 import models.*;
 
 import java.util.Scanner;
+/*
+Ansvarlig: William og Rasmus
+ */
 
 public class MasterController {
     //Denne controller skal styre funktioner som kun admin login kan udføre

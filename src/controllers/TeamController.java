@@ -3,7 +3,10 @@ import data.Data;
 import models.*;
 import java.util.Scanner;
 
-//Team controlleren styrer menuerne for holdene
+/*
+Ansvarlig: Emil
+Team controlleren styrer menuerne for holdene
+ */
 
 public class TeamController {
     Data data;
@@ -65,7 +68,6 @@ try{
     System.out.println("Fejl i Indtastningen"); }
         } while (status);
     }
-
 
     private void displayData(Team team) {
         System.out.println("\nHvad vil du have vist?");

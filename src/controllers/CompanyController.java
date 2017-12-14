@@ -3,8 +3,10 @@ import data.Data;
 import models.*;
 
 import java.util.Scanner;
-
-//Admincontrolleren styrer menuer for Virksomhederne, som agerer som administrator for deres hold og holdenes deltagere
+/*
+Ansvarlige: Emil og Kesia
+CompanyControlleren styrer menuer for Virksomhederne, som agerer som administrator for deres hold og holdenes deltagere
+*/
 
 public class CompanyController {
     Data data;
@@ -62,7 +64,7 @@ public class CompanyController {
         } while (status);
     }
 
-    private void createTeam() {
+    private void createTeam() { //Ansvarlig: Kesia
         String teamName, teamLeader, username, userId, password;
         boolean status = true;
         input.nextLine();
