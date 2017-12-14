@@ -64,7 +64,10 @@ public class CompanyController {
         } while (status);
     }
 
-    private void createTeam() { //Ansvarlig: Kesia
+    private void createTeam() {
+        /*
+        Metoden er udarbejdet af Kesia.
+         */
         String teamName, teamLeader, username, userId, password;
         boolean status = true;
         input.nextLine();
@@ -100,12 +103,18 @@ public class CompanyController {
     }
 
     private String validatePassword(String password) {
+        //Metoden returnerer brugerens indtastede ønsket kodeord såfremt kriterierne er opfyldt.
         if(password.length()>7 && password.matches(".*\\d.*"))
             return password;
-        return null;
+        return null; //Hvis kriteriet ikke er opfyldt returnerer metoden null.
     }
 
     private String generateTeamID() {
+        /*
+        Metoden er udarbejdet af Emil.
+        Metoden kaldes af "createTeam" og "approveTeamFromIndex" og genererer et unikt holdId.
+        Metodens design er nærmere beskrevet i rapporten.
+         */
         String companyId, userIdToString;
         int userId;
 
@@ -122,12 +131,16 @@ public class CompanyController {
     }
 
     private void editTeam() {
+        /*
+        Metoden anvender først en anden metode (selectTeam) til at gemme et holdobjektet af det hold brugeren ønsker at ændre.
+        Herefter vises en menu over forskellige funktioner til at ændre eller vise data om det valgte hold.
+         */
         boolean status = true;
         System.out.println("Vælg et hold du ønsker at ændre");
-        currentTeam = selectTeam();
+        currentTeam = selectTeam(); //Brugeren vælger et hold i "selectTeam" som bliver gemt som en attribut af klassen.
         if (currentTeam != null) {
             do {
-                System.out.println("\n\tÆNDR HOLD  >>" + currentTeam.getTeamName() + "<<");
+                System.out.println("\n\tÆNDR HOLD  >>" + currentTeam.getTeamName() + "<<"); //Brugeren for vist hvilket hold han/hun er igang med at ændre.
                 System.out.println("1) Ændr Holdnavn");
                 System.out.println("2) Ændre Holdkaptajn");
                 System.out.println("3) Vis Holdprofil");
@@ -158,6 +171,7 @@ public class CompanyController {
     }
 
     private void deleteTeam() {
+        //Metoden sletter et hold fra virksomheden
         int indexChoice = currentUser.getTeams().indexOf(currentTeam); //Fanger indexnummeret af det valgte hold
         System.out.println("Er du sikker på du vil slette hold: " + currentTeam.getTeamName() + " ?");
         System.out.println("1) JA                 2) NEJ");
@@ -170,6 +184,7 @@ public class CompanyController {
     }
 
     private void editTeamName() {
+        //Metoden ændrer det af brugeren valgte holds holdnavn
         input.nextLine();
         System.out.println("\nDet nuværende holdnavn er : " + currentTeam.getTeamName());
         System.out.println("\nSkriv jeres nye holdnavn: ");
@@ -179,6 +194,7 @@ public class CompanyController {
     }
 
     private void editTeamLeader() {
+        //Metoden ændrer det af brugeren valgte holds holdleder
         input.nextLine();
         System.out.println("\nDu er ved at ændre jeres Holdkaptajn: " + currentTeam.getTeamLeader());
         System.out.println("Hvem er jeres nye Holdkaptajn?");
@@ -188,6 +204,7 @@ public class CompanyController {
     }
 
     private void printTeamInfo(Team team){
+        //Metoden printer informationer om det valgte hold. Denne funktion kan bruges af brugeren til fx. at se de ændrede hold oplysninger.
         System.out.println("*****************************************************************************");
         System.out.println("Viser information om hold " + team.getUserId() + ": ");
         System.out.println("------------------------------------------------");
@@ -199,6 +216,11 @@ public class CompanyController {
     }
 
     private void approveTeam() {
+        /*
+        Metoden er udarbejdet af Emil.
+        Metoden tager brugeren igennem processen for godkendelse af hold der afventer på listen TeamsToBeApproved.
+        Metoden er nærmere beskrevet i rapporten.
+         */
         int k = 0;
         boolean status = true;
 
@@ -258,8 +280,12 @@ public class CompanyController {
     }
 
     private void rejectTeamAll() {
+        /*
+        Metoden er tænkt til at skulle slette/afvise alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
+        Metoden er ikke ordentligt implementeret i programmet. Dette er nærmere beskrevet i rapporten.
+         */
         int index;
-        //Sletter alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
+
         for (Team team : data.getTeamsToBeApproved()) {
             if (team.getUserId().equals(currentUser.getUserId() + "x")) {
                 data.getTeamsToBeApproved().remove(team);
@@ -268,10 +294,17 @@ public class CompanyController {
     }
 
     private void rejectTeamFromIndex(int index) {
+        //En simpel metode der sletter et hold fra TeamsToBeApproved-listen via et indeks indtastet af brugeren i "approveTeam" metoden.
         data.getTeamsToBeApproved().remove(index);
     }
 
     private void approveTeamFromIndex(int indexChoice) {
+        /*
+        Metoden er udarbejdet af Emil.
+        Metoden godkender et hold fra TeamsToBeApproved-listen via et indeks indtastet af brugeren i "approveTeam" metoden.
+        Metoden opretter holdet med det allerede valgte holdnavn og holdkaptajn og lader brugeren vælge et brugernavn samt kodeord,
+        før holdet efterfølgende bliver gemt på både AllUsers-listen og virksomhedens liste over aktive hold.
+         */
         Team teamToBeApproved;
         String username, password, teamId;
 
@@ -287,18 +320,21 @@ public class CompanyController {
         password = input.nextLine();
         teamId = generateTeamID();
         Team team = new Team(username, password, teamId, teamToBeApproved.getTeamName(), teamToBeApproved.getTeamLeader());
-        data.addUserToList(team);
-        currentUser.addTeamToCompany(team);
+        data.addUserToList(team); //Holdet gemmes på listen over alle brugere.
+        currentUser.addTeamToCompany(team); //Holdet gemmes på virksomhedens liste over aktive hold.
         System.out.println("Holdet blev oprettet med holdID: " + teamId);
         System.out.println("HUSK at gemme dit holdID!! " +
                 "Nye deltagere til holdet skal bruge det til at registrere sig i systemet, første gang de logger ind");
 
-        //Efter holdet er blevet godkendt og tilføjet til virksomhedens holdliste fjernes holdet nu fra teamsToBeApproved listen
+        //Efter holdet er blevet godkendt og tilføjet til virksomhedens holdliste fjernes holdet fra teamsToBeApproved-listen
         rejectTeamFromIndex(indexChoice);
     }
 
     private void displayData() {
-
+        /*
+        Metoden giver brugeren en menu over forskellige typer data der kan vises.
+        Herfra kaldes alle printmetoderne.
+         */
         System.out.println("\nHvad vil du have vist?");
         System.out.println("1) Oversigt over alle deltagende virksomheder");
         System.out.println("2) Information om en deltager (Kræver deltagerID)");
@@ -322,10 +358,12 @@ public class CompanyController {
 
     private Team selectTeam() {
         /*
+        Metoden er udarbejdet af Emil.
         Der checkes først om der er nogle hold på listen som afventer godkendelse
         Hvis der ikke findes nogle hold for virksomheden returnerer metoden null og en besked til brugeren om dette.
+        Metodens design er yderligere beskrevet i rapporten.
         */
-        boolean status = true;
+        boolean status;
         int choice;
         int k = currentUser.getTeams().size();
 
@@ -357,6 +395,11 @@ public class CompanyController {
     }
 
     private void deleteContestant() {
+        /*
+        Metoden er udarbejdet af Emil og William
+        Metoden lader brugeren (virksomheden) slette/afmelde en deltager fra kampagnen.
+        Metodens design er nærmere beskrevet i rapporten.
+         */
         boolean status = false;
         Contestant selectedContestant = null;
         String contestantId;
@@ -401,6 +444,9 @@ public class CompanyController {
     }
 
     private void goToTeam(Company currentUser) {
+        /*
+        Metoden er udarbejdet af Kesia
+         */
         input.nextLine();
         if (currentUser.getTeams().size() < 1) {
             System.out.println("Du har ingen tilmeldte hold endnu!\nGå tilbage til hovedmenuen og opret dit første hold");
@@ -426,6 +472,7 @@ public class CompanyController {
     }
 
     private String findTeamNameOfContestant(String contestantId){
+        //Metoden returnerer et holdnavn ud fra modtaget deltagerId
         String teamId = contestantId.substring(0,4) + "00";
         for (User user : data.getAllUsers())
             if(teamId.equals(user.getUserId()) && user instanceof Team)
@@ -434,6 +481,7 @@ public class CompanyController {
     }
 
     private Team findTeamOfContestant(String contestantId){
+        //Metoden returnerer et holdobjekt ud fra modtaget deltagerId
         String teamId = contestantId.substring(0,4) + "00";
         for (User user : data.getAllUsers())
             if(teamId.equals(user.getUserId()) && user instanceof Team)
@@ -442,6 +490,7 @@ public class CompanyController {
     }
 
     private void printAllCompanies(){
+        //Metoden printer en liste over alle virksomheder der deltager i kampagnen og viser samtidig en holdfordeling ud på alle virksomhederne.
         int i = 0, teamTotal = 0;
         System.out.println("\n******************************************************************************");
         System.out.println("HOLDFORDELING  /  Liste over alle virksomheder der deltager i kampagnen");
@@ -451,7 +500,7 @@ public class CompanyController {
             if (user instanceof Company) {
                 System.out.printf("\n%-5d %-40s %-6s %15d", i, ((Company) user).getCompanyName(), user.getUserId(), ((Company) user).getTeams().size());
                 i++;
-                teamTotal = teamTotal + ((Company) user).getTeams().size();
+                teamTotal = teamTotal + ((Company) user).getTeams().size(); //Totale antal hold udregnes
             }
         }
         System.out.println("\n------------------------------------------------------------------------------");
@@ -460,6 +509,7 @@ public class CompanyController {
     }
 
     private void printContestantByID() {
+        //Metoden udskriver oplysninger på specifik deltager såfremt brugeren kender deltagerens id og kodeord
         User activeUser = null;
         String contestantId, contestantPassword;
         input.nextLine();
@@ -471,6 +521,7 @@ public class CompanyController {
 
         for(User user : data.getAllUsers()) {
             if (contestantId.equals(user.getUserId()) && contestantPassword.equals(user.getPassword()) && user instanceof Contestant) {
+                //"instance of.." kunne egentlig udelades, men er med alligevel for ekstra kontrol.
                 System.out.println("*****************************************************************************");
                 System.out.println("Viser information om bruger " + user.getUserId() + ": ");
                 System.out.println("------------------------------------------------");
@@ -480,14 +531,16 @@ public class CompanyController {
                 System.out.println("Brugernavn: " + user.getUsername());
                 System.out.println("Kodeord: " + user.getPassword());
                 System.out.println("*****************************************************************************");
-                activeUser = user;
+                activeUser = user; //Den valgte deltager gemmes i et Userobjekt for at omgå fejlbesked til brugeren længere nede i koden.
             }
         }
+        //Her bruges værdien i Userobjektet "activeUser" som condition til at udskrive fejlmeddelelse i tilfældet at de indtastede oplysninger ikke matchede.
         if(activeUser == null)
             System.out.println("Fejl i indtastet ID eller kodeord!");
     }
 
     private void printAllContestants(){
+        //Metoden udskriver en liste over alle deltagere og hold for den indloggede bruger (virksomhed).
         String companyID = currentUser.getUserId().substring(0,2);
         System.out.println("**********************************************************************************");
         System.out.println("Liste over alle deltagere med hold i din virksomhed");
