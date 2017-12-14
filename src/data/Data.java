@@ -2,6 +2,9 @@ package data;
 import models.*;
 
 import java.util.ArrayList;
+/*
+Ansvarlige: Kesia og Rasmus
+ */
 
 public class Data {
     private ArrayList<User> allUsers;
