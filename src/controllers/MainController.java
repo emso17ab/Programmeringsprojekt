@@ -5,7 +5,7 @@ import models.*;
 
 /*
 Ansvarlige: William og Kesia
-Denne controllerklasse skal styre Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
+Denne controllerklasse styrer Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
  */
 
 public class MainController {
@@ -20,6 +20,10 @@ public class MainController {
 
     //METHODS
     public void run() {
+        /*
+        Denne metode kører hovedmenuen i programmet, hvorfra brugeren kan logge ind, oprette sig som ny bruger,
+        printe alt data om alle brugere i programmet eller printe en kort hjælpetekst om programmet.
+         */
         boolean runStatus = true;
         System.out.println("Velkommen til --> VI CYKLER PÅ ARBEJDE <--- programmet!\n");
         do {
@@ -31,7 +35,7 @@ public class MainController {
             System.out.println("0) Luk program");
             System.out.println("Valg: ");
 
-            try {
+            try { //En Try-Catch metode bliver brugt til at "fange" et muligt ugyldigt input fra brugeren, så programmet ikke lukker uventet.
                 switch (input.nextInt()) {
                     case 0:
                         runStatus = runShutDown();
@@ -62,6 +66,10 @@ public class MainController {
     }
 
     public void authUser() {
+        /*
+        Metoden authUser er udarbejdet af Emil.
+        Denne metode kører login-siden for brugeren.
+         */
         String username;
         String password;
         boolean status = true;
@@ -96,9 +104,14 @@ public class MainController {
             else status = false;
         }while(status);
 
-    }  //Login siden
+    }
 
     public void openUserMenu(User currentUser) {
+        /*
+        Metoden openUserMenu er udarbejdet af Emil.
+        Metoden sender brugeren videre til den korrekte brugermenu alt efter logintype.
+        Dette bestemmes ved hjælp af IF statements som checker currentUser-objektets instans af superklassen User.
+         */
 
         if (currentUser instanceof Contestant) {
             System.out.println("Velkommen til programmet " + ((Contestant) currentUser).getContestantName() + "!");
@@ -119,9 +132,14 @@ public class MainController {
             MasterController masterController = new MasterController(data);
             masterController.masterRun((Master) currentUser);
         }
-    }  //Sender brugeren videre til den korrekte hovedmenu alt efter logintype
+    }
 
     private void authTeam() {
+        /*
+        Metoden authTeam er udarbejdet af Emil.
+        Metoden validerer via metoden (validateTeam) om brugerens input stemmer med et hold der eksisterer i systemet.
+        Herefter sendes brugeren videre til generateUser eller hvis holdet ikke eksisterede får brugeren en fejlmeddelese.
+         */
         String teamId, teamPassword;
         boolean validationStatus;
         boolean authTeamStatus = true;
@@ -134,9 +152,9 @@ public class MainController {
             teamId = input.next();
             System.out.println("Indtast nøgleord: ");
             teamPassword = input.next();
-            validationStatus = validateTeam(teamId, teamPassword);
+            validationStatus = validateTeam(teamId, teamPassword); //Valideringen bliver gemt som en boolean
 
-            if (validationStatus) {
+            if (validationStatus) { //Her testes for valideringens resultat (True/false)
                 System.out.println("Velkommen til hold " + currentTeam.getTeamName());
                 generateUser();
                 authTeamStatus = false;
@@ -148,6 +166,10 @@ public class MainController {
     }
 
     public void generateUser() {
+        /*
+        Denne metode tager brugeren igennem hele registreringsprocessen og opretter brugeren i systemet,
+        såfremt alt indtata fra brugeren er blevet valideret og godkendt af systemet.
+         */
         String username, password;
         String contestantName, contestantEmail, contestantType;
         boolean status = true;
@@ -191,9 +213,9 @@ public class MainController {
             System.out.println("\nBrugernavnet skal bestå af mindst 6 karakterer og indeholde bogstaver og tal ");
             System.out.println("Hvis du ønsker at annullere oprettelsen TAST 0 som brugernavn");
             System.out.println("\nIndtast dit ønsket brugernavn: ");
-            username = validateUsername(input.nextLine());
+            username = validateUsername(input.nextLine()); //validateUsername metoden benyttes til validering af det indtastet brugernavn.
 
-                if(username != null && username.equals("0"))
+                if(username != null && username.equals("0"))//Brugeren kan annullere oprettelsen ved at taste 0
                     status = false;
 
                 if (username != null && status)
@@ -201,7 +223,7 @@ public class MainController {
                     System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
 
                         System.out.println("\nIndtast ønsket kodeord: ");
-                        password = validatePassword(input.nextLine());
+                        password = validatePassword(input.nextLine()); //validatePassword metoden benyttes til validering af det indtastet kodeord.
 
                         if (password != null) {
                             System.out.println("Bekræft kodeord: ");
@@ -226,6 +248,12 @@ public class MainController {
     }
 
     private boolean validateTeam(String teamId, String teamPassword) {
+        /*
+        Metoden validateTeam er udarbejdet af Emil.
+        Metoden bruges af authTeam til at validere om et hold eksisterer i systemet.
+        Konkret tager denne metode imod et holdId og et kodeord indtastet af brugeren i authTeam metoden
+        og tester det med de eksisterende hold via et enhanced for-loop.
+         */
         for (User user : data.getAllUsers()){
             if (teamId.equals(user.getUserId()) && teamPassword.equals(user.getPassword())){
                 if(user instanceof Team) {
@@ -237,6 +265,11 @@ public class MainController {
     }
 
     private String generateUserId(Team currentTeam) {
+        /*
+        Metoden generateUserId er udarbejdet af Emil.
+        Metoden genererer et unikt UserId til brugeren.
+        Designet af denne metode er nærmere beskrevet i rapporten.
+         */
         int newContestant;
         String contestantNo = "##";
 
@@ -250,42 +283,44 @@ public class MainController {
 
         //Genererer userID'et, printer og returnerer.
         return currentTeam.getUserId().substring(0,4) + contestantNo;
-
-
-    } //Genererer et unikt UserId til brugeren
+    }
 
     public String validatePassword(String password) {
-        if(password.length()>7 && password.matches(".*\\d.*"))
+        //Metoden returnerer brugerens indtastede ønsket kodeord såfremt kriterierne er opfyldt.
+        if(password.length()>7 && password.matches(".*\\d.*")) //Kodeordet skal indeholde bogstaver og bestå af mindst 8 tegn.
             return password;
 
-        return null;
+        return null; //Hvis kriteriet ikke er opfyldt returnerer metoden null.
     }
 
     public String validateUsername(String username) {
+        //Metoden returnerer brugerens indtastede ønsket brugernavn såfremt kriterierne er opfyldt.
         boolean status = true;
 
-        for (User user : data.getAllUsers()) {
+        for (User user : data.getAllUsers()) { //Der testes om brugernavnet eksisterer i systemet i forvejen
             if (username.equals(user.getUsername()))
                 status = false;
         }
             if (status && username.length() > 5 && username.matches(".*\\d.*") || status && username.equals("0"))
-                return username;
+                return username; //Brugernavnet "0" godkendes som undtagelse, da det betyder at brugeren annullerer sin oprettelse
             else System.out.println("Brugernavn er ikke ledigt, prøv igen!");
 
         return null;
     }
 
     private void printDatabase() {
+        //Dette er en metode der kalder abstraktmetoden "displayData" for alle Userobjekter
         for (User user : data.getAllUsers()) {
             user.displayData();
         }
     }
 
     private void printHelp(){
+        //Metoden printer en kort hjælpetekst til brug af programmet
         System.out.println("***********************************************************************************************************");
         System.out.println("-----------------------------------------------    HJÆLP    -----------------------------------------------");
         System.out.println("***********************************************************************************************************");
-        System.out.println("Du er logget ind som 'master'. Det er her du kan tilmelde din organisation til programmet" +
+        System.out.println("Du starter med at logge ind som 'master'. Det er her du kan tilmelde din organisation til programmet" +
                 "\nStart med at vælge 'Tilmeld din organisation' fra hovedmenuen. " +
                 "\n\nNår du har tilmeldt din organisation er det tid til at oprette dit første hold. \nStart " +
                 "med at logge ud af 'masteren' som du er inde på nu. \nHerefter logger du ind igen, men denne gang med " +
@@ -302,6 +337,7 @@ public class MainController {
     }
 
     private boolean runShutDown(){
+        //Metoden kører nedlukningsprocessen hvor brugeren skal svare om han/hun er sikker på at programmet skal lukkes
         int choice;
         input.nextLine();
         System.out.println("************************************************");
