@@ -4,7 +4,7 @@ import data.Data;
 import models.*;
 
 /*
-Ansvarlige: William og Kesia
+Ansvarlige: William og Emil
 Denne controllerklasse styrer Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
  */
 
