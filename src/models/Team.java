@@ -6,7 +6,7 @@ Ansvarlig: Rasmus
 
 public class Team extends User {
     protected String teamName;
-    protected String teamLeader;
+    protected String teamLeader; //attributter
     protected ArrayList<Contestant> contestants;
     protected String teamCompanyId;
 
