@@ -39,7 +39,7 @@ public class Data {
         //Testhold bliver oprettet og der lægges testdeltagere ind på hvert hold
         Team team1 = new Team("team1", "0001", "010100", "SuperCyklerne", "Rasmus Pold");
         Team team2 = new Team("team2", "0002", "010200", "PowerBikers", "Kesia Heiberg");
-        Team team3 = new Team("team1", "0003", "020100", "DreamTeamNorway", "Ola Nordmann");
+        Team team3 = new Team("team3", "0003", "020100", "DreamTeamNorway", "Ola Nordmann");
 
         team1.addContestantToTeam(contestant1);
         team1.addContestantToTeam(contestant2);
