@@ -58,7 +58,7 @@ public class TeamController {
                     if(currentContestant != null) {
                         ContestantController contestantController = new ContestantController(data);
                         contestantController.contestantRun(currentContestant);
-                        status = contestantController.checkIfDeleted();
+                        status = contestantController.checkIfDeleted(); //Stopper do-while lykken for hele menuen, hvis brugeren har slettet sin profil fra systemet
                         if(!status)
                             System.out.println("Du bliver nu sendt tilbage til Start...");
                     } else System.out.println("\nFejl i indtastningen, prøv igen!\n");

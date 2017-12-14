@@ -20,6 +20,7 @@ public class ContestantController {
         this.data = data;
     }
 
+    //METHODS
     public void contestantRun(Contestant currentUser) {
         this.currentUser = currentUser;
         boolean status = true;
@@ -72,6 +73,10 @@ try{
     }
 
     private boolean deleteCurrentContestant(User contestant) {
+        /*
+        Metoden er udarbejdet af Emil.
+        Metoden sletter den indloggede bruger fra systemet
+         */
         int choice;
         String teamId = contestant.getUserId().substring(0,4) + "00";
 
@@ -81,10 +86,10 @@ try{
         System.out.println("2) NEJ, tilbage til Min Side");
         choice = input.nextInt();
         if (choice == 1) {
-            data.getAllUsers().remove(contestant); //Først slettes deltageren fra hovedlisten
+            data.getAllUsers().remove(contestant); //Først slettes deltageren fra hovedlisten...
             for (User user : data.getAllUsers())
                 if(teamId.equals(user.getUserId()) && user instanceof Team)
-                    ((Team) user).removeContestantFromTeam((Contestant) contestant); //Herefter bliver deltageren slettet fra Holdlisten
+                    ((Team) user).removeContestantFromTeam((Contestant) contestant); //-herefter bliver deltageren slettet fra Holdlisten
             currentUser = null;
             return false;
         }
@@ -95,6 +100,7 @@ try{
     }
 
     private void editCurrentContestantType(Contestant contestant) {
+        //Metoden er udarbejdet af Rasmus.
         String newType;
         System.out.println("Du har valgt at ændre deltagertype");
         System.out.println("Din nuværende type er: " + contestant.getContestantType());
@@ -125,7 +131,7 @@ try{
     }
 
     private void editCurrentContestantEmail(Contestant contestant) {
-
+        //Metoden er udarbejdet af Rasmus.
             System.out.println("du har valgt at ændre email");
             System.out.println("Skriv ny email:");
             contestant.setContestantEmail(input.nextLine()); // anvender set-metode til at ændre variablen.
@@ -133,6 +139,7 @@ try{
     }
 
     private void editCurrentContestantName(Contestant contestant) {
+        //Metoden er udarbejdet af Rasmus.
         input.nextLine();
         System.out.println("Skriv det nye navn: ");
         contestant.setContestantName(input.nextLine());
@@ -140,7 +147,7 @@ try{
     }
 
     private void editCurrentContestantPassword(User contestant) {
-
+        //Metoden er udarbejdet af Rasmus.
             boolean status;
             String password;
             String check;
@@ -166,6 +173,7 @@ try{
         }
 
     private void editCurrentContestantUsername(User contestant) {
+        //Metoden er udarbejdet af Rasmus.
         input.nextLine();
         System.out.println("Du er ved at ændre brugernavn:");
         System.out.println("Skriv dit nye brugernavn");
@@ -174,6 +182,10 @@ try{
     }
 
     private void printContestantInfo(Contestant contestant) {
+        /*
+        Metoden er udarbejdet af Rasmus.
+        Metoden printer information om den indloggede bruger
+         */
         System.out.println("*****************************************************************************");
         System.out.println("Viser information om bruger " + contestant.getUserId() + ": ");
         System.out.println("------------------------------------------------");
@@ -186,6 +198,10 @@ try{
     }
 
     public boolean checkIfDeleted() {
+        /*
+        Metoden bruges af MainControlleren til at stoppe do-while lykken og dermed til at logge ud a programmet
+        Metoden kaldes kun hvis den indloggede bruger har valgt at afmelde sig kampagnen og dermed slette sin profil fra systemet
+         */
         return currentUser != null;
     }
 }

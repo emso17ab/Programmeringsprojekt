@@ -19,7 +19,7 @@ public class MasterController {
         this.mainController = new MainController();
     }
 
-
+    //METHODS
     public void masterRun(Master master) {
         boolean status = true;
 
@@ -47,7 +47,6 @@ try {
 
     }
 
-    //METHODS
     public void createCompany(){
         //Metoden opretter en ny virksomhed og tildeler denne et login. Derefter sendes man tilbage til Hovedmenuern og logger ind med de nye oplysninger
         String companyName, username, password;
