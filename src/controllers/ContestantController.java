@@ -30,7 +30,7 @@ public class ContestantController {
         System.out.println("1) Ændr Brugernavn");
         System.out.println("2) Ændr Kodeord");
         System.out.println("3) Ændr Navn");
-        System.out.println("4) Ændr Email");
+        System.out.println("4) Ændr Email");   // menu
         System.out.println("5) Skift Cyklist type");
         System.out.println("6) Afmeld dig fra holdet");
         System.out.println("7) Se Fuld Profil");
@@ -40,7 +40,7 @@ try{
     switch (input.nextInt()) {
         case 0:
             status = false;
-            currentUser = null;
+            currentUser = null; //programmet køres så længe status er true
             break;
         case 1:
             editCurrentContestantUsername(currentUser);
@@ -52,7 +52,7 @@ try{
             editCurrentContestantName(currentUser);
             break;
         case 4:
-            editCurrentContestantEmail(currentUser);
+            editCurrentContestantEmail(currentUser);      // metoder kaldes
             break;
         case 5:
             editCurrentContestantType(currentUser);
@@ -66,7 +66,7 @@ try{
         default:
             System.out.println("\nFejl i indtastningen, prøv igen!\n");
     }}
-    catch(Exception oObject){input.nextLine();
+    catch(Exception oObject){input.nextLine(); //sikrer fejl i input
         System.out.println("Fejl i Indtastningen!");}
         }while(status);
     }
@@ -96,7 +96,7 @@ try{
 
     private void editCurrentContestantType(Contestant contestant) {
         String newType;
-        System.out.println("Du har valgt at ænder deltagetype");
+        System.out.println("Du har valgt at ændre deltagertype");
         System.out.println("Din nuværende type er: " + contestant.getContestantType());
         System.out.println("Vælg ny type fra listen:\n");
         System.out.println("1) DEBUTANT");
@@ -108,7 +108,7 @@ try{
                  newType = "DEBUTANT";
                 break;
             case 2:
-                newType = "CRUISER";
+                newType = "CRUISER"; // ny type vælges
                 break;
             case 3:
                 newType = "MESTER";
@@ -128,7 +128,7 @@ try{
 
             System.out.println("du har valgt at ændre email");
             System.out.println("Skriv ny email:");
-            contestant.setContestantEmail(input.nextLine());
+            contestant.setContestantEmail(input.nextLine()); // anvender set-metode til at ændre variablen.
             System.out.println("du har ændret din mail til: "+contestant.getContestantEmail());
     }
 
@@ -154,7 +154,7 @@ try{
             check = input.nextLine();
 
 
-                if (password.equals(check)) {
+                if (password.equals(check)) { //her er et fejlcheck, der sørger for nye password trykkes korrekt.
                     contestant.setPassword(password);
                     System.out.println("du har ændret dit password til: " + contestant.getPassword());
                     status = false;
