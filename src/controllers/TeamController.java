@@ -2,12 +2,10 @@ package controllers;
 import data.Data;
 import models.*;
 import java.util.Scanner;
-
 /*
 Ansvarlig: Emil
 Team controlleren styrer menuerne for holdene
  */
-
 public class TeamController {
     Data data;
     Scanner input = new Scanner(System.in);
@@ -19,6 +17,7 @@ public class TeamController {
 
     }
 
+    //METHODS
     public void contestantRun(Contestant contestant){
         //Metoden kalder teamRun metoden ud fra det modtaget deltagerobjekt.
         currentContestant = contestant; //Gemmer deltageren som en attribut af klassen så andre metoder kan bruge ham/hende til noget

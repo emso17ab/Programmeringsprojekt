@@ -21,6 +21,7 @@ public class Team extends User {
 //Abstract Method
     @Override
     public void displayData() {
+        //Metoden er nærmere beskrevet i rapporten
         System.out.println("#" + userId + "_************************************************************************");
         System.out.println("<---------------HOLD--------------->");
         System.out.println("Holdnavn: " + teamName);

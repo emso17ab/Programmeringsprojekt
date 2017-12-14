@@ -7,7 +7,6 @@ import java.util.Scanner;
 Ansvarlige: Emil og Kesia
 CompanyControlleren styrer menuer for Virksomhederne, som agerer som administrator for deres hold og holdenes deltagere
 */
-
 public class CompanyController {
     Data data;
     Company currentUser;
@@ -18,6 +17,7 @@ public class CompanyController {
         this.data = data;
     }
 
+    //METHODS
     public void adminRun(Company currentUser) {
         boolean status = true;
         this.currentUser = currentUser;

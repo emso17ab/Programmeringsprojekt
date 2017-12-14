@@ -5,11 +5,9 @@ import java.util.ArrayList;
 /*
 Ansvarlige: Kesia og Rasmus
  */
-
 public class Data {
     private ArrayList<User> allUsers;
     private ArrayList<Team> teamsToBeApproved;
-
 
     public Data() {
         this.allUsers = new ArrayList<>();
@@ -17,6 +15,7 @@ public class Data {
         generateData();
     }
 
+    //METHODS
     public void generateData() {
 
         //Masteradministratoren oprettes af typen company. Denne er unik og der kan ikke oprettes andre mastere når programmet kører
@@ -106,12 +105,10 @@ public class Data {
 
     }
 
-
-//Methods
-
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
+
     public void addUserToList(User user) {
         this.allUsers.add(user);
     }
@@ -119,6 +116,7 @@ public class Data {
     public ArrayList<Team> getTeamsToBeApproved(){
         return teamsToBeApproved;
     }
+
     public void addTeamToList(Team team) {
         this.teamsToBeApproved.add(team);
     }

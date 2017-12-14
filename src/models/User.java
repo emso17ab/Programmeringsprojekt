@@ -6,8 +6,11 @@ Ansvarlig: Emil
 public abstract class User {
     protected String username;
     protected String password;
-    protected String userId; //Et userId består af syv cifre. ####### Det første indikerer user typen. De to næste representerer Virksomheden, De to næste, Holdet, og de to sidste, deltageren.
-
+    protected String userId;
+    /*
+    Et userId består af seks cifre. ###### De to første representerer Virksomheden, De to næste, Holdet, og de to sidste, deltageren.
+    Dette userId er nærmere beskrevet i rapporten.
+    */
 
     public User(String username, String password, String userId){
         this.username = username;
@@ -16,7 +19,11 @@ public abstract class User {
     }
 
 //Abstract Method
-    public abstract void displayData(); //Det er User-klassens krav at denne metode kaldes i alle sub-klasserne som arver fra denne superklasse.
+    public abstract void displayData();
+    /*
+    Det er User-klassens krav at denne metode kaldes i alle sub-klasserne som arver fra denne superklasse.
+    Metoden er nærmere beskrevet i rapporten
+    */
 
 //Methods
     public Team findTeamFromUser(User user){

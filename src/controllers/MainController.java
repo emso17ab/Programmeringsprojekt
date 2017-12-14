@@ -2,12 +2,10 @@ package controllers;
 import java.util.Scanner;
 import data.Data;
 import models.*;
-
 /*
 Ansvarlige: William og Emil
 Denne controllerklasse styrer Hovedmenuen som har alle login funktioner og viderestiller til de andre controllere
  */
-
 public class MainController {
     private User currentUser;
     private Team currentTeam;

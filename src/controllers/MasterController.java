@@ -5,10 +5,10 @@ import models.*;
 import java.util.Scanner;
 /*
 Ansvarlig: William og Rasmus
+Denne controller styrer funktioner som kun masteren med adminlogin kan udføre.
  */
-
 public class MasterController {
-    //Denne controller skal styre funktioner som kun admin login kan udføre
+    //D
     Data data;
     Scanner input = new Scanner(System.in);
     MainController mainController;

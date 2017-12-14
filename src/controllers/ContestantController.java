@@ -10,7 +10,6 @@ import java.util.Scanner;
 Ansvarlige: Rasmus og Emil
 Contestantcontrolleren styrer menuerne for deltageren
 */
-
 public class ContestantController {
     Data data;
     Scanner input = new Scanner(System.in);

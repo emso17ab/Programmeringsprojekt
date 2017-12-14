@@ -20,6 +20,7 @@ public class Contestant extends User {
 //Abstract Method
     @Override
     public void displayData() {
+        //Metoden er nærmere beskrevet i rapporten
         System.out.println("#" + userId + "_************************************************************************");
         System.out.println("<---------------DELTAGER--------------->");
         System.out.println("Navn: " + contestantName);
