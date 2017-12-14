@@ -14,7 +14,7 @@ public class Contestant extends User {
         this.contestantName = contestantName;
         this.contestantEmail = contestantEmail;    //kalder attributter i constructoren.
         this.contestantType = contestantType;
-        this.contestantTeamId = userId.substring(0,4) + "00";
+        this.contestantTeamId = userId.substring(0,4) + "00"; //Finder deltagerens holdId. Dette bruges bl.a. af TeamController
     }
 
 //Abstract Method

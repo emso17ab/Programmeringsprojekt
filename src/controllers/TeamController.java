@@ -20,7 +20,8 @@ public class TeamController {
     }
 
     public void contestantRun(Contestant contestant){
-        currentContestant = contestant;
+        //Metoden kalder teamRun metoden ud fra det modtaget deltagerobjekt.
+        currentContestant = contestant; //Gemmer deltageren som en attribut af klassen så andre metoder kan bruge ham/hende til noget
         for (User user : data.getAllUsers()) {
             String userTest = (user.getUserId());
             if(userTest.equals(contestant.getContestantTeamId()))
@@ -29,8 +30,9 @@ public class TeamController {
     }
 
     public void teamRun(Team currentTeam) {
+        //Metoden printer holdmenuen og henviser til de forskellige metoder med menufunktioner
         boolean status = true;
-        this.currentTeam = currentTeam;
+        this.currentTeam = currentTeam; //Gemmer holdet som en attribut af klassen så metoderne til menufunktionerne kan bruge holdet
 
         do {
             System.out.println("\n\tVELKOMMEN TIL HOLDSIDEN FOR: " + currentTeam.getTeamName());
@@ -40,7 +42,7 @@ public class TeamController {
             System.out.println("\t3) Min side");
             System.out.println("\t0) Log af");
             System.out.print("\n\tValg: ");
-try{
+        try{ //Her anvendes også en try-catch for at sikre at programmet ikke lukker hvis brugeren taster forkert inddata
             switch (input.nextInt()) {
                 case 0:
                     status = false;
@@ -70,6 +72,7 @@ try{
     }
 
     private void displayData(Team team) {
+        //Metoden printer en ny menu med brugerens muligheder for at få vist forskellige informationer
         System.out.println("\nHvad vil du have vist?");
         System.out.println("1) Oversigt over alle hold i din organisation");
         System.out.println("2) Udskriv alle deltagere på dit hold");
@@ -83,6 +86,7 @@ try{
     }
 
     private void displayAllTeams(Team team){
+        //Metoden bliver kaldt af "displayData" metoden og printer en liste over alle hold tilmeldt til samme virksomhed som holdet der er logget ind
         System.out.println("**********************************************************************************");
         System.out.println("Liste over alle hold der er oprettet under samme organisation som dig");
         System.out.println("-----------------------------------------------------------------------");
@@ -96,6 +100,7 @@ try{
     }
 
     private void displayAllContestants(Team team){
+        //Metoden bliver kaldt af "displayData" metoden og printer en liste over deltagere på holdet der er logget ind
         System.out.println("**********************************************************************************");
         System.out.println("Liste over alle deltagere på dit hold");
         System.out.println("-----------------------------------------------------------------------");
@@ -107,6 +112,7 @@ try{
     }
 
     private void createTeamToBeApproved() {
+        //Metoden lader brugeren oprette et hold til godkendelse af virksomheden
         String teamName, teamLeader, userId;
         userId = currentTeam.getUserId().substring(0,2) + "0000x"; //X'et lægges til (Det var den første tanke, men man behøver faktisk ikke, da denne liste ikke har noget med allUsers at gøre, så der vil aldrig opstå dublikater i userID'et)
         input.nextLine();
@@ -117,7 +123,7 @@ try{
         teamLeader = input.nextLine();
 
         Team team = new Team(null, null, userId, teamName, teamLeader);
-        data.addTeamToList(team);
+        data.addTeamToList(team); //Holdet gemmes via "addTeamToList" metoden på listen over hold der skal godkendes af virksomheden
 
         System.out.println("Tillykke! Dit hold er oprettet og afventer godkendelse af administrator!");
     }

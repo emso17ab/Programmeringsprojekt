@@ -309,7 +309,7 @@ public class MainController {
     }
 
     private void printDatabase() {
-        //Dette er en metode der kalder abstraktmetoden "displayData" for alle Userobjekter
+        //Dette er en metode der kalder abstraktmetoden "displayData" for alle objekter i "models"-pakken som arver fra "User" superklassen.
         for (User user : data.getAllUsers()) {
             user.displayData();
         }
