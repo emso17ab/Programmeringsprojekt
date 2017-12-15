@@ -450,8 +450,8 @@ public class CompanyController {
          */
         input.nextLine();
         if (currentUser.getTeams().size() < 1) {
-            System.out.println("Du har ingen tilmeldte hold endnu!\nGå tilbage til hovedmenuen og opret dit første hold");
-            System.out.println("Tilbage til hovedmenu (TRYK ENTER)");
+            System.out.println("Du har ingen tilmeldte hold enda!\nGå tilbake til hovedmenuen og oprett ditt første hold");
+            System.out.println("Tilbage til hovedmenyen (TRYK ENTER)");
             input.nextLine(); //Dette input har ingen funktion andet end at gå tilbage til hovedmenuen når brugeren trykker enter
         } else {
             int i = 1, c = 1, valg;
@@ -460,7 +460,7 @@ public class CompanyController {
                 i++;
             }
             System.out.println("Gå tilbage (TAST 0)");
-            System.out.println("\nVælg hold:");
+            System.out.println("\nVelg hold:");
             valg = input.nextInt();
             for (Team team : currentUser.getTeams()) {
                 if (valg == c) {
