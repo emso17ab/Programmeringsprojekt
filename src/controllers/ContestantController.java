@@ -124,7 +124,7 @@ try{
         }
         contestant.setContestantType(newType);
         System.out.println("Din type er blevet ændret!\nNy type: " + contestant.getContestantType());
-        System.out.println("Tilbage til Min Side (TAST ENTER)");
+        System.out.println("Tilbage til Min Side (TAST ENTER)"); //anvender set metode til at ændre Type.
         input.nextLine();
         input.nextLine(); //Denne linje kode er så ovenstående besked passer og brugeren skal trykke ENTER
     }
@@ -141,7 +141,7 @@ try{
         //Metoden er udarbejdet af Rasmus.
         input.nextLine();
         System.out.println("Skriv det nye navn: ");
-        contestant.setContestantName(input.nextLine());
+        contestant.setContestantName(input.nextLine()); //anvender set metode til at ændre navn.
         System.out.println("Du har ændret dit navn til : " + contestant.getContestantName());
     }
 
@@ -155,7 +155,7 @@ try{
             System.out.println("Du har valgt at ændre password");
             System.out.println("Skriv nyt password:");
 
-            password = input.nextLine();
+            password = input.nextLine(); //anvender set metode til at ændre password.
             System.out.println("Skriv nyt password igen");
             check = input.nextLine();
 
@@ -175,7 +175,7 @@ try{
         //Metoden er udarbejdet af Rasmus.
         input.nextLine();
         System.out.println("Du er ved at ændre brugernavn:");
-        System.out.println("Skriv dit nye brugernavn");
+        System.out.println("Skriv dit nye brugernavn"); // anvender set metode til at ændre brugernavn.
         contestant.setUsername(input.nextLine());
         System.out.println("Du har ændret brugernavn til: " + contestant.getUsername());
     }
