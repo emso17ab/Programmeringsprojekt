@@ -426,6 +426,7 @@ public class CompanyController {
                     currentTeam.getContestants().remove(currentTeam.getContestants().indexOf(selectedContestant)); //Sletter den valgte deltager fra Hold-listen
                     data.getAllUsers().remove(data.getAllUsers().indexOf(selectedContestant)); // Sletter den valgte deltager fra Master-listen
                     System.out.println(selectedContestant.getContestantName() + " er afmeldt 'Vi Cykler Til Arbejde' kampagnen");
+                    status = false;
                 }
                 else if (choice == 2)
                     System.out.println("Afmelding annulleret...");
