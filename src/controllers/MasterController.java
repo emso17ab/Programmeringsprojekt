@@ -98,6 +98,7 @@ try {
     }
 
     private String generateCompanyId() {
+        //Metoden genererer et unikt virksomhedsID.
         int i = 1;
         for (User user : data.getAllUsers())
             if (user instanceof Company)
