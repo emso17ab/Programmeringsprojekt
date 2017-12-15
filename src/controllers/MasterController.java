@@ -22,7 +22,7 @@ public class MasterController {
     //METHODS
     public void masterRun(Master master) {
         boolean status = true;
-
+//mastermenu
         do {
             System.out.println("\n\tADMINISTRATOR MENU");
             System.out.println("\t1) Tilmeld din organisation");
@@ -34,12 +34,12 @@ try {
             status = false;
             break;
         case 1:
-            createCompany();
+            createCompany(); // kalder createCompany metoden
             break;
         default:
             System.out.println("\nFejl i indtastningen, prøv igen!\n");
     }
-}catch(Exception eObject){input.nextLine();
+}catch(Exception eObject){input.nextLine(); // fanger fejl i input
     System.out.println("Fejl i indtastningen");}
 
 
@@ -69,7 +69,7 @@ try {
             if(username != null && username.equals("0"))
                 status = false;
 
-            if (username != null && status)
+            if (username != null && status) //fortsætter hvis brugeren ikke vil lukke program
             {
                 System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
 
@@ -77,14 +77,14 @@ try {
                 password = mainController.validatePassword(input.nextLine());
 
                 if (password != null) {
-                    System.out.println("Bekræft kodeord: ");
+                    System.out.println("Bekræft kodeord: "); //tjekker password
                     if (password.equals(input.nextLine())) {
                      Company company = new Company(username, password, generateCompanyId(), companyName);
                         data.addUserToList(company);
                         System.out.println("Din bruger blev oprettet!\n");
                         status = false;
 
-                    } else System.out.println("Din indtastning matchede ikke prøv igen");
+                    } else System.out.println("Din indtastning matchede ikke prøv igen"); //fejlmelding hvis ustemmighed
 
                 } else System.out.println("Fejl i indtastning. Prøv igen");
 
@@ -93,7 +93,7 @@ try {
                     System.out.println("Fejl i indtastning. Prøv igen");
             }
 
-        } while (status);
+        } while (status); //præmissen for at programmet bliver ved med at køre
 
     }
 
