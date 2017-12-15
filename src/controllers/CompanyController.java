@@ -78,7 +78,7 @@ public class CompanyController {
         System.out.println("Indtast navn på holdkaptejn: ");
         teamLeader = input.nextLine();
         username = teamName + "123";
-        userId = generateUserID();
+        userId = generateUserId();
 
 
         System.out.println("Dit nye hold er oprettet med holdID: " + userId);
@@ -109,7 +109,7 @@ public class CompanyController {
         return null; //Hvis kriteriet ikke er opfyldt returnerer metoden null.
     }
 
-    private String generateUserID() {
+    private String generateUserId() {
         /*
         Metoden er udarbejdet af Emil.
         Metoden kaldes af "createTeam" og "approveTeamFromIndex" og genererer et unikt holdId.
@@ -319,7 +319,7 @@ public class CompanyController {
         username = input.nextLine();
         System.out.println("Vælg et kodeord: ");
         password = input.nextLine();
-        teamId = generateUserID();
+        teamId = generateUserId();
         Team team = new Team(username, password, teamId, teamToBeApproved.getTeamName(), teamToBeApproved.getTeamLeader());
         data.addUserToList(team); //Holdet gemmes på listen over alle brugere.
         currentUser.addTeamToCompany(team); //Holdet gemmes på virksomhedens liste over aktive hold.
