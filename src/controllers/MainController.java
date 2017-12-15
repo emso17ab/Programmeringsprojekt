@@ -187,7 +187,7 @@ public class MainController {
         System.out.println("4) ENTUSIAST");
 
 
-        switch (input.nextInt()) {
+        switch (input.nextInt()) { //Der bruges Switch statement til at sætte deltagerens type
             case 1:
                 contestantType = "DEBUTANT";
                 break;
@@ -214,23 +214,23 @@ public class MainController {
             username = validateUsername(input.nextLine()); //validateUsername metoden benyttes til validering af det indtastet brugernavn.
 
                 if(username != null && username.equals("0"))//Brugeren kan annullere oprettelsen ved at taste 0
-                    status = false;
+                    status = false; //status ændres til 'false' hvis brugeren har tastet 0, så løkken stopper.
 
-                if (username != null && status)
+                if (username != null && status) //hvis status stadigvæk er 'true' fortsættes koden
                 {
                     System.out.println("Du skal nu vælge et kodeord\nKodeordet skal bestå af mindst 8 karakterer og indeholde bogstaver og tal ");
 
                         System.out.println("\nIndtast ønsket kodeord: ");
                         password = validatePassword(input.nextLine()); //validatePassword metoden benyttes til validering af det indtastet kodeord.
 
-                        if (password != null) {
+                        if (password != null) { //Hvis valideringen er godkendt er 'password' ikke null, og condition "true" og koden nedenfor køres
                             System.out.println("Bekræft kodeord: ");
                             if (password.equals(input.nextLine())) {
                                 Contestant contestant = new Contestant(username, password, generateUserId(currentTeam), contestantName, contestantEmail, contestantType);
-                                currentTeam.addContestantToTeam(contestant);
-                                data.addUserToList(contestant);
+                                currentTeam.addContestantToTeam(contestant); //Deltageren gemmes på holdlisten
+                                data.addUserToList(contestant); //Deltageren gemmes på listen over alle brugere (AllUsers)
                                 System.out.println("Din bruger blev oprettet! - Dit personlige ID-nummer er: " + contestant.getUserId() + "\n");
-                                status = false;
+                                status = false; //Løkken stoppes efter brugeren er blevet oprettet
 
                             } else System.out.println("Din indtastning matchede ikke prøv igen");
 
