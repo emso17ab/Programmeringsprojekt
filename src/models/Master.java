@@ -1,6 +1,6 @@
 package models;
 /*
-Ansvarlig: Rasmus
+Ansvarlig: Rasmus og Kesia
  */
 
 public class Master extends User {

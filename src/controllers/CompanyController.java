@@ -4,7 +4,7 @@ import models.*;
 
 import java.util.Scanner;
 /*
-Ansvarlige: Emil og Kesia
+Ansvarlige: Emil og William
 CompanyControlleren styrer menuer for Virksomhederne, som agerer som administrator for deres hold og holdenes deltagere
 */
 public class CompanyController {
@@ -132,7 +132,8 @@ public class CompanyController {
 
     private void editTeam() {
         /*
-        Metoden anvender først en anden metode (selectTeam) til at gemme et holdobjektet af det hold brugeren ønsker at ændre.
+        Metoden editTeam samt edit-metoderne editTeamName, editTeamLeader, printTeamInfo og deleteTeam er udarbejdet af William.
+        Denne metode anvender først en anden metode (selectTeam) til at gemme et holdobjektet af det hold brugeren ønsker at ændre.
         Herefter vises en menu over forskellige funktioner til at ændre eller vise data om det valgte hold.
          */
         boolean status = true;
