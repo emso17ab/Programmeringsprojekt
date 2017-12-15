@@ -79,7 +79,7 @@ try {
                 if (password != null) {
                     System.out.println("Bekræft kodeord: "); //tjekker password
                     if (password.equals(input.nextLine())) {
-                     Company company = new Company(username, password, generateCompanyId(), companyName);
+                     Company company = new Company(username, password, generateUserId(), companyName);
                         data.addUserToList(company);
                         System.out.println("Din bruger blev oprettet!\n");
                         status = false;
@@ -97,7 +97,7 @@ try {
 
     }
 
-    private String generateCompanyId() {
+    private String generateUserId() {
         //Metoden genererer et unikt virksomhedsID.
         int i = 1;
         for (User user : data.getAllUsers())
