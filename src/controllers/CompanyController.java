@@ -419,13 +419,15 @@ public class CompanyController {
                 }
             }
             if (selectedContestant != null) {
-                System.out.println("Er du sikker på, at du vil afmelde " + selectedContestant.getContestantName() + " permanent fra kampagnen?");
+                System.out.println("Er du sikker på, at du vil afmelde " + selectedContestant.getContestantName() +
+                        " permanent fra kampagnen?");
                 System.out.println("1) JA       2)ANNULLER");
                 choice = input.nextInt();
                 if (choice == 1) {
-                    currentTeam.getContestants().remove(currentTeam.getContestants().indexOf(selectedContestant)); //Sletter den valgte deltager fra Hold-listen
-                    data.getAllUsers().remove(data.getAllUsers().indexOf(selectedContestant)); // Sletter den valgte deltager fra Master-listen
-                    System.out.println(selectedContestant.getContestantName() + " er afmeldt 'Vi Cykler Til Arbejde' kampagnen");
+                    currentTeam.getContestants().remove(selectedContestant); //Sletter den valgte deltager fra Hold-listen                .kkkkkk
+                    data.getAllUsers().remove(selectedContestant); // Sletter den valgte deltager fra Master-listen
+                    System.out.println(selectedContestant.getContestantName() +
+                            " er afmeldt 'Vi Cykler Til Arbejde' kampagnen");
                     status = false;
                 }
                 else if (choice == 2)
