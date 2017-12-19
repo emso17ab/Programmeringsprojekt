@@ -25,7 +25,7 @@ public class Data {
         Contestant contestant1 = new Contestant("emil", "1234", "010101", "Emil Sørensen", "emil@hotmail.com", "DEBUTANT");
         Contestant contestant2 = new Contestant("rasmus", "1234", "010102", "Rasmus Pold", "rasmus@hotmail.com", "DEBUTANT");
         Contestant contestant3 = new Contestant("william", "1234", "010103", "William Sørensen", "william@hotmail.com", "CRUISER");
-        Contestant contestant4 = new Contestant("inge-lise", "1234", "010104", "Inge-Lise Salomon", "inge-lise@hotmail.com", "CRUISER");
+        Contestant contestant4 = new Contestant("marie", "1234", "010104", "Marie Mortensen", "mar-ie@hotmail.com", "CRUISER");
         Contestant contestant5 = new Contestant("per", "1234", "010105", "Per Monsen", "per@hotmail.com", "CRUISER");
         Contestant contestant6 = new Contestant("kesia", "1234", "010201", "Kesia Heiberg", "kesia@hotmail.com", "CRUISER");
         Contestant contestant7 = new Contestant("donald", "1234", "010202", "Donald Trump", "donald@duck.com", "DEBUTAT");

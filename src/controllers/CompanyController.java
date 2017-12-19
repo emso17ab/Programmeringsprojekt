@@ -173,12 +173,11 @@ public class CompanyController {
 
     private void deleteTeam() {
         //Metoden sletter et hold fra virksomheden
-        int indexChoice = currentUser.getTeams().indexOf(currentTeam); //Fanger indexnummeret af det valgte hold
         System.out.println("Er du sikker på du vil slette hold: " + currentTeam.getTeamName() + " ?");
         System.out.println("1) JA                 2) NEJ");
         if(input.nextInt() == 1) {
-            data.getAllUsers().remove(data.getAllUsers().indexOf(currentTeam));
-            currentUser.getTeams().remove(indexChoice);
+            data.getAllUsers().remove(currentTeam);
+            currentUser.getTeams().remove(currentTeam);
             System.out.println("Hold '" + currentTeam.getTeamName() + "' er nu slettet fra programmet");
             currentTeam = null;
         }
@@ -249,7 +248,6 @@ public class CompanyController {
                 System.out.println("Hvad vil du foretage dig?\n");
                 System.out.println("1) GODKEND et hold via index nr.");
                 System.out.println("2) AFVIS et hold via index nr.");
-                System.out.println("3) AFVIS alle hold på listen");
                 System.out.println("\n0) Tilbage til hovedmenuen");
 
                 switch (input.nextInt()) {
@@ -266,9 +264,6 @@ public class CompanyController {
                         System.out.println("Indtast index nr.: ");
                         rejectTeamFromIndex(input.nextInt()); //Dette gør at metoden kan genbruges af approveTeamFromIndex metoden
                         break;
-                    case 3:
-                        rejectTeamAll();
-                        break;
                     default:
                 }
             } else {
@@ -278,20 +273,6 @@ public class CompanyController {
                 status = false;
             }
         } while (status);
-    }
-
-    private void rejectTeamAll() {
-        /*
-        Metoden er tænkt til at skulle slette/afvise alle hold på den pågældende virksomheds liste over "Hold der afventer godkendelse"
-        Metoden er ikke ordentligt implementeret i programmet. Dette er nærmere beskrevet i rapporten.
-         */
-        int index;
-
-        for (Team team : data.getTeamsToBeApproved()) {
-            if (team.getUserId().equals(currentUser.getUserId() + "x")) {
-                data.getTeamsToBeApproved().remove(team);
-            }
-        }//TODO Denne metode skal rettes så det kører ordentligt!
     }
 
     private void rejectTeamFromIndex(int index) {
@@ -361,26 +342,36 @@ public class CompanyController {
         /*
         Metoden er udarbejdet af Emil.
         Der checkes først om der er nogle hold på listen som afventer godkendelse
-        Hvis der ikke findes nogle hold for virksomheden returnerer metoden null og en besked til brugeren om dette.
+        Hvis der ikke findes nogle hold for virksomheden returnerer metoden null og
+        en besked til brugeren om dette.
         Metodens design er yderligere beskrevet i rapporten.
         */
         boolean status;
         int choice;
         int k = currentUser.getTeams().size();
 
-            //Printer en liste over alle hold Virksomheden har og returnerer det valgte hold
+            /*Printer en liste over alle hold Virksomheden har og returnerer
+         det valgte hold*/
             if (k > 0) {
-                System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID", "Holdnavn", "Holdkaptajn", "Antal Deltagere");
+                System.out.printf("\n%-10s %-12s %-40s %-40s %5s\n", "Index", "HoldID",
+                        "Holdnavn", "Holdkaptajn", "Antal Deltagere");
                 for (Team team : currentUser.getTeams())
-                    System.out.printf("%-10s %-12s %-40s %-40s %5s\n", currentUser.getTeams().indexOf(team), team.getUserId(), team.getTeamName(), team.getTeamLeader(), currentUser.getTeams().size());
+                    System.out.printf("%-10s %-12s %-40s %-40s %5s\n",
+                            currentUser.getTeams().indexOf(team),
+                            team.getUserId(), team.getTeamName(), team.getTeamLeader(),
+                            team.getContestants().size());
 
                 do {
                     System.out.print("\nVælg hold ved at indtaste holdets index nr.: ");
                     choice = input.nextInt();
 
-                    //Checker om brugeren har tastet et korrekt index ind, hvis ikke får brugeren en fejlmeddelelse
+                    /*
+                    Checker om brugeren har tastet et korrekt index ind,
+                    hvis ikke får brugeren en fejlmeddelelse
+                     */
                     if (choice > k-1 || choice < 0) {
-                        System.out.println("Et hold med index " + choice + " eksisterer ikke, prøv igen");
+                        System.out.println("Et hold med index " + choice +
+                                " eksisterer ikke, prøv igen");
                         status = true;
                     } else {
                         status = false;

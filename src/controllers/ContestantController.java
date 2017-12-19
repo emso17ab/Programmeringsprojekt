@@ -65,7 +65,8 @@ try{
             break;
         default:
             System.out.println("\nFejl i indtastningen, prøv igen!\n");
-    }}
+    }
+}
     catch(Exception oObject){input.nextLine(); //sikrer fejl i input
         System.out.println("Fejl i Indtastningen!");}
         }while(status);
