@@ -3,7 +3,7 @@ import data.Data;
 import models.*;
 import java.util.Scanner;
 /*
-Ansvarlig: Emil
+Ansvarlig: Emil og Kesia
 Team controlleren styrer menuerne for holdene
  */
 public class TeamController {
